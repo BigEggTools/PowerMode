@@ -6,11 +6,11 @@ using System.Runtime.InteropServices;
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
 [assembly: AssemblyTitle("PowerMode")]
-[assembly: AssemblyDescription("")]
+[assembly: AssemblyDescription("The PowerMode extension for Visual Studio.")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("PowerMode")]
-[assembly: AssemblyCopyright("")]
+[assembly: AssemblyCompany("BigEgg")]
+[assembly: AssemblyProduct("BigEgg Tools")]
+[assembly: AssemblyCopyright("Copyright © 2017 BigEgg")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
