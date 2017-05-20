@@ -1,6 +1,6 @@
-﻿namespace BigEgg.Tools.PowerMode.Options
+﻿namespace BigEgg.Tools.PowerMode.Settings
 {
-    public class GeneralOptionPageSettings : Model
+    public class GeneralSettings : Model
     {
         private bool isEnablePowerMode = true;
         private bool isEnableComboMode = true;
