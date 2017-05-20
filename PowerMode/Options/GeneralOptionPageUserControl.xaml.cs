@@ -1,17 +1,17 @@
-﻿using System.Windows.Controls;
-
-namespace BigEgg.Tools.PowerMode.Options
+﻿namespace BigEgg.Tools.PowerMode.Options
 {
+    using System.Windows.Controls;
+
     /// <summary>
     /// Interaction logic for GeneralOptionPageUserControl.xaml
     /// </summary>
     public partial class GeneralOptionPageUserControl : UserControl
     {
-        public GeneralOptionPageUserControl(GeneralOptionPageSettings generalOptionPageSettings)
+        public GeneralOptionPageUserControl(GeneralOptionPage page)
         {
             InitializeComponent();
 
-            DataContext = generalOptionPageSettings;
+            DataContext = page.Settings;
         }
     }
 }

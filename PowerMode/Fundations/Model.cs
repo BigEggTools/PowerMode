@@ -1,12 +1,10 @@
-﻿namespace BigEgg.Tools.PowerMode.Options
+﻿namespace BigEgg.Tools.PowerMode
 {
     using System;
     using System.ComponentModel;
     using System.Runtime.CompilerServices;
 
-    using Microsoft.VisualStudio.Shell;
-
-    public abstract class OptionPageSettingsBase : UIElementDialogPage, INotifyPropertyChanged
+    public abstract class Model : INotifyPropertyChanged
     {
         /// <summary>
         /// Occurs when a property value changes.

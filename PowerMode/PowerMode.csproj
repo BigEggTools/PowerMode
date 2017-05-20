@@ -51,15 +51,14 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="Options\GeneralOptionPageSettings.cs">
+    <Compile Include="Options\GeneralOptionPage.cs">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="Options\GeneralOptionPageSettings.cs" />
     <Compile Include="Options\GeneralOptionPageUserControl.xaml.cs">
       <DependentUpon>GeneralOptionPageUserControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Options\OptionPageSettingsBase.cs">
-      <SubType>Component</SubType>
-    </Compile>
+    <Compile Include="Fundations\Model.cs" />
     <Compile Include="PowerModePackage.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
