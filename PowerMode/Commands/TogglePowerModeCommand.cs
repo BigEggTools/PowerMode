@@ -41,11 +41,27 @@
             settings.IsEnableScreenShake = settings.IsEnablePowerMode;
             SettingsService.SaveToStorage(settings, serviceProvider);
 
-            var command = sender as MenuCommand;
-            var menuCommandService = serviceProvider.GetService(typeof(IMenuCommandService)) as OleMenuCommandService;
-            var newCmdID = new CommandID(CommandData.CommandSet, command.CommandID.ID);
-            var menuCommand = menuCommandService.FindCommand(newCmdID);
             menuCommand.Checked = settings.IsEnablePowerMode;
+
+            var menuCommandService = serviceProvider.GetService(typeof(IMenuCommandService)) as OleMenuCommandService;
+            var newCmdID = new CommandID(CommandData.CommandSet, CommandData.ToggleComboModeCommandId);
+            var otherMenuCommand = menuCommandService.FindCommand(newCmdID);
+            otherMenuCommand.Enabled = settings.IsEnablePowerMode;
+
+            menuCommandService = serviceProvider.GetService(typeof(IMenuCommandService)) as OleMenuCommandService;
+            newCmdID = new CommandID(CommandData.CommandSet, CommandData.ToggleParticlesCommandId);
+            otherMenuCommand = menuCommandService.FindCommand(newCmdID);
+            otherMenuCommand.Enabled = settings.IsEnablePowerMode;
+
+            menuCommandService = serviceProvider.GetService(typeof(IMenuCommandService)) as OleMenuCommandService;
+            newCmdID = new CommandID(CommandData.CommandSet, CommandData.ToggleScreenShakeCommandId);
+            otherMenuCommand = menuCommandService.FindCommand(newCmdID);
+            otherMenuCommand.Enabled = settings.IsEnablePowerMode;
+
+            menuCommandService = serviceProvider.GetService(typeof(IMenuCommandService)) as OleMenuCommandService;
+            newCmdID = new CommandID(CommandData.CommandSet, CommandData.ToggleAudioCommandId);
+            otherMenuCommand = menuCommandService.FindCommand(newCmdID);
+            otherMenuCommand.Enabled = settings.IsEnablePowerMode;
         }
     }
 }

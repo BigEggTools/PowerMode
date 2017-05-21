@@ -61,6 +61,10 @@
         {
             base.Initialize();
             TogglePowerModeCommand.Initialize(this);
+            ToggleComboModeCommand.Initialize(this);
+            ToggleParticlesCommand.Initialize(this);
+            ToggleScreenShakeCommand.Initialize(this);
+            ToggleAudioCommand.Initialize(this);
         }
 
         #endregion

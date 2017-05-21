@@ -53,6 +53,10 @@
   <ItemGroup>
     <Compile Include="Commands\CommandData.cs" />
     <Compile Include="Commands\CommandHandler.cs" />
+    <Compile Include="Commands\ToggleAudioCommand.cs" />
+    <Compile Include="Commands\ToggleScreenShakeCommand.cs" />
+    <Compile Include="Commands\ToggleParticlesCommand.cs" />
+    <Compile Include="Commands\ToggleComboModeCommand.cs" />
     <Compile Include="Options\GeneralOptionPage.cs">
       <SubType>Component</SubType>
     </Compile>
