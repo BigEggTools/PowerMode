@@ -16,11 +16,11 @@
     </UserControl.Resources>
     <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
         <StackPanel Orientation="Vertical">
-            <CheckBox Content="Enable Power Model" Name="EnablePowerModel" IsChecked="{Binding DataContext.IsEnablePowerMode, ElementName=userControl}" Style="{DynamicResource ToggleCheckBox}"/>
-            <CheckBox Content="Enable Combo Mode" Name="EnableComboMode" IsEnabled="{Binding DataContext.IsEnablePowerMode, ElementName=userControl}" IsChecked="{Binding DataContext.IsEnableComboMode, ElementName=userControl}" Style="{DynamicResource ToggleCheckBox}"/>
-            <CheckBox Content="Enable Particles" Name="EnableParticles" IsEnabled="{Binding DataContext.IsEnablePowerMode, ElementName=userControl}" IsChecked="{Binding DataContext.IsEnableParticles, ElementName=userControl}" Style="{DynamicResource ToggleCheckBox}"/>
-            <CheckBox Content="Enable Screen Shake" Name="EnableScreenShake" IsEnabled="{Binding DataContext.IsEnablePowerMode, ElementName=userControl}" IsChecked="{Binding DataContext.IsEnableScreenShake, ElementName=userControl}" Style="{DynamicResource ToggleCheckBox}"/>
-            <CheckBox Content="Enable Audio" Name="EnableAudio" IsEnabled="False" IsChecked="{Binding DataContext.IsEnableAudio, ElementName=userControl}" Style="{DynamicResource ToggleCheckBox}"/>
+            <CheckBox Content="Enable Power Model" Name="EnablePowerModel" ToolTip="Toggle on start." IsChecked="{Binding DataContext.IsEnablePowerMode, ElementName=userControl}" Style="{DynamicResource ToggleCheckBox}"/>
+            <CheckBox Content="Enable Combo Mode" Name="EnableComboMode" ToolTip="When enabled effects won't appear until reach the activation threshold." IsEnabled="{Binding DataContext.IsEnablePowerMode, ElementName=userControl}" IsChecked="{Binding DataContext.IsEnableComboMode, ElementName=userControl}" Style="{DynamicResource ToggleCheckBox}"/>
+            <CheckBox Content="Enable Particles" Name="EnableParticles" ToolTip="Turn the particles on/off." IsEnabled="{Binding DataContext.IsEnablePowerMode, ElementName=userControl}" IsChecked="{Binding DataContext.IsEnableParticles, ElementName=userControl}" Style="{DynamicResource ToggleCheckBox}"/>
+            <CheckBox Content="Enable Screen Shake" Name="EnableScreenShake" ToolTip="Turn the shaking on/off." IsEnabled="{Binding DataContext.IsEnablePowerMode, ElementName=userControl}" IsChecked="{Binding DataContext.IsEnableScreenShake, ElementName=userControl}" Style="{DynamicResource ToggleCheckBox}"/>
+            <CheckBox Content="Enable Audio" Name="EnableAudio" ToolTip="Play audio clip on/off." IsEnabled="False" IsChecked="{Binding DataContext.IsEnableAudio, ElementName=userControl}" Style="{DynamicResource ToggleCheckBox}"/>
         </StackPanel>
     </ScrollViewer>
 </UserControl>
