@@ -10,7 +10,7 @@
         private static readonly string COLLECTION_PATH = "PowerMode";
 
 
-        public static GeneralSettings GetFromStorages(this GeneralSettings settings, IServiceProvider serviceProvider)
+        public static void GetFromStorages(ref GeneralSettings settings, IServiceProvider serviceProvider)
         {
             if (serviceProvider == null) { throw new ArgumentNullException("serviceProvider"); }
 
@@ -24,10 +24,11 @@
             result.IsEnableComboMode = GetBoolOption(store, nameof(GeneralSettings.IsEnableComboMode)).GetValueOrDefault(result.IsEnableComboMode);
             result.IsEnableAudio = GetBoolOption(store, nameof(GeneralSettings.IsEnableAudio)).GetValueOrDefault(result.IsEnableAudio);
 
-            return result;
+            if (settings == null) { settings = new GeneralSettings(); }
+            settings.CloneFrom(result);
         }
 
-        public static void SaveToStorage(this GeneralSettings settings, IServiceProvider serviceProvider)
+        public static void SaveToStorage(GeneralSettings settings, IServiceProvider serviceProvider)
         {
             if (serviceProvider == null) { throw new ArgumentNullException("serviceProvider"); }
             if (settings == null) { throw new ArgumentNullException("settings"); }

@@ -26,7 +26,7 @@
             {
                 if (settings == null)
                 {
-                    settings = settings.GetFromStorages(Site);
+                    SettingsService.GetFromStorages(ref settings, Site);
                     PropertyChangedEventManager.AddHandler(settings, SettingModelPropertyChanged, "");
                 }
 
@@ -40,6 +40,17 @@
             get { return new GeneralOptionPageUserControl(this); }
         }
 
+        protected override void SaveSetting(PropertyDescriptor property)
+        {
+            SettingsService.SaveToStorage(settings, Site);
+        }
+
+        protected override void OnClosed(EventArgs e)
+        {
+            base.OnClosed(e);
+            SettingsService.GetFromStorages(ref settings, Site);
+        }
+
 
         private void SettingModelPropertyChanged(object sender, PropertyChangedEventArgs e)
         {
@@ -49,8 +60,6 @@
                 settings.IsEnableParticles = settings.IsEnablePowerMode;
                 settings.IsEnableScreenShake = settings.IsEnablePowerMode;
             }
-
-            settings.SaveToStorage(Site);
         }
     }
 }

@@ -38,5 +38,15 @@
             get { return isEnableAudio; }
             set { SetProperty(ref isEnableAudio, value); }
         }
+
+
+        public void CloneFrom(GeneralSettings other)
+        {
+            this.IsEnablePowerMode = other.IsEnablePowerMode;
+            this.IsEnableComboMode = other.IsEnableComboMode;
+            this.IsEnableParticles = other.IsEnableParticles;
+            this.IsEnableScreenShake = other.IsEnableScreenShake;
+            this.IsEnableAudio = other.IsEnableAudio;
+        }
     }
 }
