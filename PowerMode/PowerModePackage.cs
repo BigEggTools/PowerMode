@@ -30,6 +30,7 @@
     [Guid(PowerModePackage.PackageGuidString)]
     [SuppressMessage("StyleCop.CSharp.DocumentationRules", "SA1650:ElementDocumentationMustBeSpelledCorrectly", Justification = "pkgdef, VS and vsixmanifest are valid VS terms")]
     [ProvideOptionPage(typeof(GeneralOptionPage), "Power Mode", "General", 0, 0, true)]
+    [ProvideMenuResource("Menus.ctmenu", 1)]
     public sealed class PowerModePackage : Package
     {
         /// <summary>
@@ -57,6 +58,7 @@
         protected override void Initialize()
         {
             base.Initialize();
+            BigEgg.Tools.PowerMode.TogglePowerModeCommand.Initialize(this);
         }
 
         #endregion
