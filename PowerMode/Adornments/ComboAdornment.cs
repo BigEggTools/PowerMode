@@ -64,7 +64,10 @@
             if (ComboService.ShowExclamation(comboHit))
             {
                 adornmentLayer.RemoveAdornment(exclamationImage);
+                exclamationImage.BeginAnimation(Canvas.TopProperty, null);
+                exclamationImage.BeginAnimation(UIElement.OpacityProperty, null);
                 exclamationImage.Visibility = Visibility.Visible;
+
                 exclamationImage.Source = UpdateExclamationImage(comboHit);
                 Canvas.SetLeft(exclamationImage, view.ViewportRight - RightMargin - ADORNMENT_WIDTH);
                 double exclamationImageTop = view.ViewportTop + TopMargin + ADORNMENT_TITLE_HEIGHT + comboNumberImageTuple.Item2.Height + 5;

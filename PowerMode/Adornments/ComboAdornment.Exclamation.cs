@@ -62,7 +62,6 @@
             };
         }
 
-
         private DoubleAnimation GetExclamationOpacityAnimation()
         {
             var iterations = EXCLAMATION_START_ALPHA / Constants.ALPHA_REMOVE_AMOUNT;
