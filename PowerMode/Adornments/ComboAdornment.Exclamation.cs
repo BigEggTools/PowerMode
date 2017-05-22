@@ -1,15 +1,20 @@
 ﻿namespace BigEgg.Tools.PowerMode.Adornments
 {
+    using System;
     using System.Drawing;
     using System.Drawing.Drawing2D;
     using System.Drawing.Imaging;
     using System.IO;
+    using System.Windows.Media.Animation;
     using System.Windows.Media.Imaging;
 
     using BigEgg.Tools.PowerMode.Services;
 
     public partial class ComboAdornment
     {
+        private readonly static double EXCLAMATION_START_ALPHA = 0.9;
+
+
         private BitmapImage UpdateExclamationImage(int comboHit)
         {
             var font = new Font("Tahoma", ComboService.GetPowerLevelExclamationFontSize(comboHit));
@@ -43,5 +48,32 @@
             return bitmapImage;
         }
 
+
+        private DoubleAnimation GetExclamationTopAnimation(double top)
+        {
+            var iterations = EXCLAMATION_START_ALPHA / Constants.ALPHA_REMOVE_AMOUNT;
+            var timeSpan = TimeSpan.FromMilliseconds(Constants.FRAME_DELAY_MILLISECOND * iterations);
+
+            return new DoubleAnimation()
+            {
+                From = top,
+                To = top + 10,
+                Duration = timeSpan
+            };
+        }
+
+
+        private DoubleAnimation GetExclamationOpacityAnimation()
+        {
+            var iterations = EXCLAMATION_START_ALPHA / Constants.ALPHA_REMOVE_AMOUNT;
+            var timeSpan = TimeSpan.FromMilliseconds(Constants.FRAME_DELAY_MILLISECOND * iterations);
+
+            return new DoubleAnimation()
+            {
+                From = EXCLAMATION_START_ALPHA,
+                To = 0,
+                Duration = timeSpan
+            };
+        }
     }
 }

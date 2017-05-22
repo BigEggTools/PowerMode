@@ -1,6 +1,7 @@
 ﻿namespace BigEgg.Tools.PowerMode.Adornments
 {
     using System.Collections.Generic;
+    using System.Windows;
     using System.Windows.Controls;
 
     using Microsoft.VisualStudio.Text.Editor;
@@ -63,10 +64,17 @@
             if (ComboService.ShowExclamation(comboHit))
             {
                 adornmentLayer.RemoveAdornment(exclamationImage);
+                exclamationImage.Visibility = Visibility.Visible;
                 exclamationImage.Source = UpdateExclamationImage(comboHit);
                 Canvas.SetLeft(exclamationImage, view.ViewportRight - RightMargin - ADORNMENT_WIDTH);
-                Canvas.SetTop(exclamationImage, view.ViewportTop + TopMargin + ADORNMENT_TITLE_HEIGHT + comboNumberImageTuple.Item2.Height + 5);
+                double exclamationImageTop = view.ViewportTop + TopMargin + ADORNMENT_TITLE_HEIGHT + comboNumberImageTuple.Item2.Height + 5;
+                Canvas.SetTop(exclamationImage, exclamationImageTop);
                 adornmentLayer.AddAdornment(AdornmentPositioningBehavior.ViewportRelative, null, null, exclamationImage, null);
+
+                exclamationImage.BeginAnimation(Canvas.TopProperty, GetExclamationTopAnimation(exclamationImageTop));
+                var opacityAnimation = GetExclamationOpacityAnimation();
+                opacityAnimation.Completed += (sender, e) => exclamationImage.Visibility = Visibility.Hidden;
+                exclamationImage.BeginAnimation(UIElement.OpacityProperty, opacityAnimation);
             }
         }
     }
