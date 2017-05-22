@@ -48,7 +48,7 @@
 
         public static bool ShowExclamation(int comboHit)
         {
-            return comboHit % 10 == 0;
+            return comboHit > 0 && comboHit % 10 == 0;
         }
 
         public static string GetExclamation()

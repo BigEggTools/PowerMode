@@ -2,6 +2,7 @@
 {
     using System;
     using System.Linq;
+    using System.Threading;
 
     using Microsoft.VisualStudio.Shell;
     using Microsoft.VisualStudio.Text;
@@ -9,6 +10,7 @@
 
     using BigEgg.Tools.PowerMode.Adornments;
     using BigEgg.Tools.PowerMode.Settings;
+    using System.Windows.Threading;
 
     internal sealed class PowerModeAdornment
     {
@@ -16,7 +18,7 @@
         private readonly IWpfTextView view;
         private readonly ComboAdornment comboAdornment;
 
-        private DateTime lastKeyPressTime = DateTime.Now;
+        private Timer clearHitTimer;
         private int hitCount = 0;
 
 
@@ -59,24 +61,29 @@
             if (!settings.IsEnablePowerMode) { return; }
 
             KeyDown();
-            if (e.Changes?.Count > 0) { e.Changes.Sum(x => x.Delta); }
 
             comboAdornment.OnTextBufferChanged(adornmentLayer, view, hitCount);
         }
 
         private void KeyDown()
         {
-            var now = DateTime.Now;
+            hitCount++;
 
-            if (lastKeyPressTime.AddSeconds(10) < now)
+            if (clearHitTimer == null)
             {
-                hitCount = 1;
+                var autoEvent = new AutoResetEvent(false);
+                clearHitTimer = new Timer(info =>
+                {
+                    hitCount = 0;
+                    view.VisualElement.Dispatcher.Invoke(
+                        () => comboAdornment.OnTextBufferChanged(adornmentLayer, view, hitCount),
+                        DispatcherPriority.ContextIdle);
+                }, autoEvent, 10000, Timeout.Infinite);
             }
             else
             {
-                hitCount++;
+                clearHitTimer.Change(10000, Timeout.Infinite);
             }
-            lastKeyPressTime = now;
         }
     }
 }
