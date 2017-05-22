@@ -3,6 +3,7 @@
     using System.Collections.Generic;
     using System.Windows;
     using System.Windows.Controls;
+    using System.Windows.Media;
 
     using Microsoft.VisualStudio.Text.Editor;
 
@@ -55,11 +56,19 @@
         public void OnTextBufferChanged(IAdornmentLayer adornmentLayer, IWpfTextView view, int comboHit)
         {
             adornmentLayer.RemoveAdornment(comboNumberImage);
+
             var comboNumberImageTuple = UpdateComboNumberImage(comboHit);
             comboNumberImage.Source = comboNumberImageTuple.Item1;
             Canvas.SetLeft(comboNumberImage, view.ViewportRight - RightMargin - ADORNMENT_WIDTH);
             Canvas.SetTop(comboNumberImage, view.ViewportTop + TopMargin + ADORNMENT_TITLE_HEIGHT);
             adornmentLayer.AddAdornment(AdornmentPositioningBehavior.ViewportRelative, null, null, comboNumberImage, null);
+
+            ScaleTransform trans = new ScaleTransform();
+            comboNumberImage.RenderTransformOrigin = new Point((ADORNMENT_WIDTH - comboNumberImageTuple.Item2.Width / 2) / ADORNMENT_WIDTH, (comboNumberImageTuple.Item2.Height / 2) / comboNumberImageTuple.Item2.Height);
+            comboNumberImage.RenderTransform = trans;
+
+            trans.BeginAnimation(ScaleTransform.ScaleXProperty, GetComboNumberSizeAnimation(comboHit));
+            trans.BeginAnimation(ScaleTransform.ScaleYProperty, GetComboNumberSizeAnimation(comboHit));
 
             if (ComboService.ShowExclamation(comboHit))
             {

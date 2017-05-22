@@ -5,10 +5,10 @@
     using System.Drawing.Drawing2D;
     using System.Drawing.Imaging;
     using System.IO;
+    using System.Windows.Media.Animation;
     using System.Windows.Media.Imaging;
 
     using BigEgg.Tools.PowerMode.Services;
-    using Microsoft.VisualStudio.Text.Editor;
 
     public partial class ComboAdornment
     {
@@ -46,6 +46,23 @@
             }
 
             return new Tuple<BitmapImage, SizeF>(bitmapImage, size);
+        }
+
+
+        private DoubleAnimation GetComboNumberSizeAnimation(int comboHit)
+        {
+            if (!ComboService.AnimationOnComboNumber(comboHit))
+            {
+                return null;
+            }
+
+            return new DoubleAnimation()
+            {
+                EasingFunction = new BackEase { Amplitude = 2, EasingMode = EasingMode.EaseOut },
+                From = 0.85,
+                To = 1,
+                Duration = TimeSpan.FromMilliseconds(100)
+            };
         }
     }
 }

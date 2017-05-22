@@ -23,6 +23,11 @@
             return Math.Min(comboHit / HIT_THRESHOLD, MAX_LEVEL);
         }
 
+        public static bool AnimationOnComboNumber(int comboHit)
+        {
+            return GetPowerLevel(comboHit) > 1;
+        }
+
         public static Color GetPowerLevelColor(int comboHit)
         {
             var level = GetPowerLevel(comboHit);
