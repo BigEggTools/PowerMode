@@ -23,7 +23,7 @@
 
             var font = new Font("Tahoma", 8);
             var size = graphics.MeasureString(COMBO_TITLE, font);
-            graphics.DrawString(COMBO_TITLE, font, Brushes.White, new RectangleF(ADORNMENT_WIDTH - size.Width - 10, 0, size.Width, ADORNMENT_TITLE_HEIGHT));
+            graphics.DrawString(COMBO_TITLE, font, Brushes.White, new RectangleF(ADORNMENT_WIDTH - size.Width, 0, size.Width, ADORNMENT_TITLE_HEIGHT));
 
             graphics.Flush();
 

@@ -12,7 +12,7 @@
     {
         private BitmapImage UpdateExclamationImage(int comboHit)
         {
-            var font = new Font("Tahoma", 12);
+            var font = new Font("Tahoma", ComboService.GetPowerLevelExclamationFontSize(comboHit));
             var color = ComboService.GetPowerLevelColor(comboHit);
 
             var bitmap = new Bitmap(ADORNMENT_WIDTH, ADORNMENT_EXCLAMATION_HEIGHT);
@@ -25,7 +25,7 @@
 
             var exclamation = ComboService.GetExclamation();
             var size = graphics.MeasureString(exclamation, font);
-            graphics.DrawString(exclamation, font, new SolidBrush(color), new RectangleF((ADORNMENT_WIDTH - size.Width) / 2, 0, size.Width, ADORNMENT_EXCLAMATION_HEIGHT));
+            graphics.DrawString(exclamation, font, new SolidBrush(color), new RectangleF(ADORNMENT_WIDTH - size.Width, 0, size.Width, ADORNMENT_EXCLAMATION_HEIGHT));
 
             graphics.Flush();
 

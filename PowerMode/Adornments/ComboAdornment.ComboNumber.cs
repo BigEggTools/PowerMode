@@ -1,5 +1,6 @@
 ﻿namespace BigEgg.Tools.PowerMode.Adornments
 {
+    using System;
     using System.Drawing;
     using System.Drawing.Drawing2D;
     using System.Drawing.Imaging;
@@ -7,10 +8,11 @@
     using System.Windows.Media.Imaging;
 
     using BigEgg.Tools.PowerMode.Services;
+    using Microsoft.VisualStudio.Text.Editor;
 
     public partial class ComboAdornment
     {
-        private BitmapImage UpdateComboNumberImage(int comboHit)
+        private Tuple<BitmapImage, SizeF> UpdateComboNumberImage(int comboHit)
         {
             var font = new Font("Tahoma", ComboService.GetPowerLevelFontSize(comboHit));
             var color = ComboService.GetPowerLevelColor(comboHit);
@@ -28,7 +30,7 @@
             graphics.DrawString(comboHit.ToString(), font, new SolidBrush(color), new RectangleF(ADORNMENT_WIDTH - size.Width, 0, size.Width, ADORNMENT_COMBO_NUMBER_HEIGHT));
 
             var pen = new Pen(color, penWidth);
-            graphics.DrawLine(pen, ADORNMENT_WIDTH - size.Width, size.Height - 5 + penWidth / 2, size.Width, size.Height - 5 + penWidth / 2);
+            graphics.DrawLine(pen, ADORNMENT_WIDTH - size.Width, size.Height - 5 + penWidth / 2, ADORNMENT_WIDTH, size.Height - 5 + penWidth / 2);
 
             graphics.Flush();
 
@@ -43,7 +45,7 @@
                 bitmapImage.EndInit();
             }
 
-            return bitmapImage;
+            return new Tuple<BitmapImage, SizeF>(bitmapImage, size);
         }
     }
 }
