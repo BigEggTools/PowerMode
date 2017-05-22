@@ -51,8 +51,19 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="Adornments\ComboAdornment.cs" />
+    <Compile Include="Adornments\ComboAdornment.ComboNumber.cs">
+      <DependentUpon>ComboAdornment.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Adornments\ComboAdornment.Exclamation.cs">
+      <DependentUpon>ComboAdornment.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Adornments\ComboAdornment.Title.cs">
+      <DependentUpon>ComboAdornment.cs</DependentUpon>
+    </Compile>
     <Compile Include="Commands\CommandData.cs" />
     <Compile Include="Commands\CommandHandler.cs" />
+    <Compile Include="Commands\TogglePowerModeCommand.cs" />
     <Compile Include="Commands\ToggleAudioCommand.cs" />
     <Compile Include="Commands\ToggleScreenShakeCommand.cs" />
     <Compile Include="Commands\ToggleParticlesCommand.cs" />
@@ -60,18 +71,21 @@
     <Compile Include="Options\GeneralOptionPage.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Settings\GeneralSettings.cs" />
     <Compile Include="Options\GeneralOptionPageUserControl.xaml.cs">
       <DependentUpon>GeneralOptionPageUserControl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="PowerModeAdornment.cs" />
+    <Compile Include="PowerModeAdornmentTextViewCreationListener.cs" />
     <Compile Include="Fundations\Model.cs" />
     <Compile Include="PowerModePackage.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Services\ComboService.cs" />
+    <Compile Include="Settings\GeneralSettings.cs" />
     <Compile Include="Settings\SettingsService.cs" />
     <Compile Include="Settings\SettingsService.GeneralSettings.cs">
       <DependentUpon>SettingsService.cs</DependentUpon>
     </Compile>
-    <Compile Include="Commands\TogglePowerModeCommand.cs" />
+    <Compile Include="Utils\ColorExtensions.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Key.snk" />
@@ -144,6 +158,22 @@
       <HintPath>..\packages\Microsoft.VisualStudio.Shell.Interop.9.0.9.0.30729\lib\Microsoft.VisualStudio.Shell.Interop.9.0.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="Microsoft.VisualStudio.Text.Data, Version=15.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.VisualStudio.Text.Data.15.0.26201\lib\net45\Microsoft.VisualStudio.Text.Data.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.VisualStudio.Text.Logic, Version=15.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.VisualStudio.Text.Logic.15.0.26201\lib\net45\Microsoft.VisualStudio.Text.Logic.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.VisualStudio.Text.UI, Version=15.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.VisualStudio.Text.UI.15.0.26201\lib\net45\Microsoft.VisualStudio.Text.UI.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.VisualStudio.Text.UI.Wpf, Version=15.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.VisualStudio.Text.UI.Wpf.15.0.26201\lib\net45\Microsoft.VisualStudio.Text.UI.Wpf.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="Microsoft.VisualStudio.TextManager.Interop, Version=7.1.40304.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
       <HintPath>..\packages\Microsoft.VisualStudio.TextManager.Interop.7.10.6070\lib\Microsoft.VisualStudio.TextManager.Interop.dll</HintPath>
       <Private>True</Private>
@@ -172,6 +202,7 @@
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.Composition" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="System.Design" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Windows.Forms" />
