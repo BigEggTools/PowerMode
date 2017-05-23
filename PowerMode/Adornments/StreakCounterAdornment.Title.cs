@@ -6,7 +6,7 @@
     using System.IO;
     using System.Windows.Media.Imaging;
 
-    public partial class ComboAdornment
+    public partial class StreakCounterAdornment
     {
         private const string COMBO_TITLE = "combo";
 

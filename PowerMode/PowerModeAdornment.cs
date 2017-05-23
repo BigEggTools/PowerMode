@@ -16,7 +16,7 @@
     {
         private readonly IAdornmentLayer adornmentLayer;
         private readonly IWpfTextView view;
-        private readonly ComboAdornment comboAdornment;
+        private readonly StreakCounterAdornment comboAdornment;
 
         private Timer clearHitTimer;
         private int hitCount = 0;
@@ -34,7 +34,7 @@
 
             this.view = view;
             this.adornmentLayer = view.GetAdornmentLayer("PowerModeAdornment");
-            this.comboAdornment = new ComboAdornment();
+            this.comboAdornment = new StreakCounterAdornment();
 
             this.view.TextBuffer.Changed += TextBuffer_Changed;
             this.view.ViewportHeightChanged += View_ViewportSizeChanged; ;

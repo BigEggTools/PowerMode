@@ -10,15 +10,15 @@
 
     using BigEgg.Tools.PowerMode.Services;
 
-    public partial class ComboAdornment
+    public partial class StreakCounterAdornment
     {
         private readonly static double EXCLAMATION_START_ALPHA = 0.9;
 
 
-        private BitmapImage UpdateExclamationImage(int comboHit)
+        private BitmapImage UpdateExclamationImage(int streakCount)
         {
-            var font = new Font("Tahoma", ComboService.GetPowerLevelExclamationFontSize(comboHit));
-            var color = ComboService.GetPowerLevelColor(comboHit);
+            var font = new Font("Tahoma", ComboService.GetPowerLevelExclamationFontSize(streakCount));
+            var color = ComboService.GetPowerLevelColor(streakCount);
 
             var bitmap = new Bitmap(ADORNMENT_WIDTH, ADORNMENT_EXCLAMATION_HEIGHT);
             bitmap.MakeTransparent();

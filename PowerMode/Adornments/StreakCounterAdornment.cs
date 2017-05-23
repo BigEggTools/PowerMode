@@ -9,7 +9,7 @@
 
     using BigEgg.Tools.PowerMode.Services;
 
-    public partial class ComboAdornment
+    public partial class StreakCounterAdornment
     {
         private const int ADORNMENT_WIDTH = 100;
         private const int ADORNMENT_TITLE_HEIGHT = 15;
@@ -22,7 +22,7 @@
         private Image exclamationImage;
 
 
-        public ComboAdornment()
+        public StreakCounterAdornment()
         {
             this.titleImage = new Image()
             {
@@ -53,11 +53,11 @@
             };
         }
 
-        public void OnTextBufferChanged(IAdornmentLayer adornmentLayer, IWpfTextView view, int comboHit)
+        public void OnTextBufferChanged(IAdornmentLayer adornmentLayer, IWpfTextView view, int streakCount)
         {
             adornmentLayer.RemoveAdornment(comboNumberImage);
 
-            var comboNumberImageTuple = UpdateComboNumberImage(comboHit);
+            var comboNumberImageTuple = UpdateComboNumberImage(streakCount);
             comboNumberImage.Source = comboNumberImageTuple.Item1;
             Canvas.SetLeft(comboNumberImage, view.ViewportRight - RightMargin - ADORNMENT_WIDTH);
             Canvas.SetTop(comboNumberImage, view.ViewportTop + TopMargin + ADORNMENT_TITLE_HEIGHT);
@@ -67,17 +67,17 @@
             comboNumberImage.RenderTransformOrigin = new Point((ADORNMENT_WIDTH - comboNumberImageTuple.Item2.Width / 2) / ADORNMENT_WIDTH, (comboNumberImageTuple.Item2.Height / 2) / comboNumberImageTuple.Item2.Height);
             comboNumberImage.RenderTransform = trans;
 
-            trans.BeginAnimation(ScaleTransform.ScaleXProperty, GetComboNumberSizeAnimation(comboHit));
-            trans.BeginAnimation(ScaleTransform.ScaleYProperty, GetComboNumberSizeAnimation(comboHit));
+            trans.BeginAnimation(ScaleTransform.ScaleXProperty, GetComboNumberSizeAnimation(streakCount));
+            trans.BeginAnimation(ScaleTransform.ScaleYProperty, GetComboNumberSizeAnimation(streakCount));
 
-            if (ComboService.ShowExclamation(comboHit))
+            if (ComboService.ShowExclamation(streakCount))
             {
                 adornmentLayer.RemoveAdornment(exclamationImage);
                 exclamationImage.BeginAnimation(Canvas.TopProperty, null);
                 exclamationImage.BeginAnimation(UIElement.OpacityProperty, null);
                 exclamationImage.Visibility = Visibility.Visible;
 
-                exclamationImage.Source = UpdateExclamationImage(comboHit);
+                exclamationImage.Source = UpdateExclamationImage(streakCount);
                 Canvas.SetLeft(exclamationImage, view.ViewportRight - RightMargin - ADORNMENT_WIDTH);
                 double exclamationImageTop = view.ViewportTop + TopMargin + ADORNMENT_TITLE_HEIGHT + comboNumberImageTuple.Item2.Height + 5;
                 Canvas.SetTop(exclamationImage, exclamationImageTop);

@@ -51,15 +51,15 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="Adornments\ComboAdornment.cs" />
-    <Compile Include="Adornments\ComboAdornment.ComboNumber.cs">
-      <DependentUpon>ComboAdornment.cs</DependentUpon>
+    <Compile Include="Adornments\StreakCounterAdornment.cs" />
+    <Compile Include="Adornments\StreakCounterAdornment.ComboNumber.cs">
+      <DependentUpon>StreakCounterAdornment.cs</DependentUpon>
     </Compile>
-    <Compile Include="Adornments\ComboAdornment.Exclamation.cs">
-      <DependentUpon>ComboAdornment.cs</DependentUpon>
+    <Compile Include="Adornments\StreakCounterAdornment.Exclamation.cs">
+      <DependentUpon>StreakCounterAdornment.cs</DependentUpon>
     </Compile>
-    <Compile Include="Adornments\ComboAdornment.Title.cs">
-      <DependentUpon>ComboAdornment.cs</DependentUpon>
+    <Compile Include="Adornments\StreakCounterAdornment.Title.cs">
+      <DependentUpon>StreakCounterAdornment.cs</DependentUpon>
     </Compile>
     <Compile Include="Commands\CommandData.cs" />
     <Compile Include="Commands\CommandHandler.cs" />
@@ -81,6 +81,7 @@
     <Compile Include="PowerModePackage.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\ComboService.cs" />
+    <Compile Include="Settings\ComboModeSettings.cs" />
     <Compile Include="Settings\GeneralSettings.cs" />
     <Compile Include="Settings\SettingsService.cs" />
     <Compile Include="Settings\SettingsService.GeneralSettings.cs">
