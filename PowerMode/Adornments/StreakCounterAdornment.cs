@@ -13,12 +13,12 @@
     {
         private const int ADORNMENT_WIDTH = 100;
         private const int ADORNMENT_TITLE_HEIGHT = 15;
-        private const int ADORNMENT_COMBO_NUMBER_HEIGHT = 65;
+        private const int ADORNMENT_STREAK_COUNTER_HEIGHT = 65;
         private const int ADORNMENT_EXCLAMATION_HEIGHT = 30;
         private const double TopMargin = 30;
         private const double RightMargin = 30;
         private Image titleImage;
-        private Image comboNumberImage;
+        private Image streakCounterImage;
         private Image exclamationImage;
 
 
@@ -28,9 +28,9 @@
             {
                 Source = UpdateTitleImage()
             };
-            this.comboNumberImage = new Image()
+            this.streakCounterImage = new Image()
             {
-                Source = UpdateComboNumberImage(0).Item1
+                Source = UpdateStreakCounterImage(0).Item1
             };
             this.exclamationImage = new Image()
             {
@@ -43,33 +43,36 @@
             Canvas.SetLeft(this.titleImage, view.ViewportRight - RightMargin - ADORNMENT_WIDTH);
             Canvas.SetTop(this.titleImage, view.ViewportTop + TopMargin);
 
-            Canvas.SetLeft(this.comboNumberImage, view.ViewportRight - RightMargin - ADORNMENT_WIDTH);
-            Canvas.SetTop(this.comboNumberImage, view.ViewportTop + TopMargin + ADORNMENT_TITLE_HEIGHT);
+            Canvas.SetLeft(this.streakCounterImage, view.ViewportRight - RightMargin - ADORNMENT_WIDTH);
+            Canvas.SetTop(this.streakCounterImage, view.ViewportTop + TopMargin + ADORNMENT_TITLE_HEIGHT);
 
             return new List<Image>()
             {
                 titleImage,
-                comboNumberImage
+                streakCounterImage
             };
         }
 
         public void OnTextBufferChanged(IAdornmentLayer adornmentLayer, IWpfTextView view, int streakCount)
         {
-            adornmentLayer.RemoveAdornment(comboNumberImage);
+            #region StreakCounter
+            adornmentLayer.RemoveAdornment(streakCounterImage);
 
-            var comboNumberImageTuple = UpdateComboNumberImage(streakCount);
-            comboNumberImage.Source = comboNumberImageTuple.Item1;
-            Canvas.SetLeft(comboNumberImage, view.ViewportRight - RightMargin - ADORNMENT_WIDTH);
-            Canvas.SetTop(comboNumberImage, view.ViewportTop + TopMargin + ADORNMENT_TITLE_HEIGHT);
-            adornmentLayer.AddAdornment(AdornmentPositioningBehavior.ViewportRelative, null, null, comboNumberImage, null);
+            var comboNumberImageTuple = UpdateStreakCounterImage(streakCount);
+            streakCounterImage.Source = comboNumberImageTuple.Item1;
+            Canvas.SetLeft(streakCounterImage, view.ViewportRight - RightMargin - ADORNMENT_WIDTH);
+            Canvas.SetTop(streakCounterImage, view.ViewportTop + TopMargin + ADORNMENT_TITLE_HEIGHT);
+            adornmentLayer.AddAdornment(AdornmentPositioningBehavior.ViewportRelative, null, null, streakCounterImage, null);
 
             ScaleTransform trans = new ScaleTransform();
-            comboNumberImage.RenderTransformOrigin = new Point((ADORNMENT_WIDTH - comboNumberImageTuple.Item2.Width / 2) / ADORNMENT_WIDTH, (comboNumberImageTuple.Item2.Height / 2) / comboNumberImageTuple.Item2.Height);
-            comboNumberImage.RenderTransform = trans;
+            streakCounterImage.RenderTransformOrigin = new Point((ADORNMENT_WIDTH - comboNumberImageTuple.Item2.Width / 2) / ADORNMENT_WIDTH, (comboNumberImageTuple.Item2.Height / 2) / comboNumberImageTuple.Item2.Height);
+            streakCounterImage.RenderTransform = trans;
 
-            trans.BeginAnimation(ScaleTransform.ScaleXProperty, GetComboNumberSizeAnimation(streakCount));
-            trans.BeginAnimation(ScaleTransform.ScaleYProperty, GetComboNumberSizeAnimation(streakCount));
+            trans.BeginAnimation(ScaleTransform.ScaleXProperty, GetStreakCounterImageSizeAnimation(streakCount));
+            trans.BeginAnimation(ScaleTransform.ScaleYProperty, GetStreakCounterImageSizeAnimation(streakCount));
+            #endregion
 
+            #region Exclamation
             if (ComboService.ShowExclamation(streakCount))
             {
                 adornmentLayer.RemoveAdornment(exclamationImage);
@@ -88,6 +91,7 @@
                 opacityAnimation.Completed += (sender, e) => exclamationImage.Visibility = Visibility.Hidden;
                 exclamationImage.BeginAnimation(UIElement.OpacityProperty, opacityAnimation);
             }
+            #endregion
         }
     }
 }

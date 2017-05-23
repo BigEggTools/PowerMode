@@ -27,7 +27,7 @@
             return Math.Min(streakCount / comboLevelStreakThreshold, MAX_LEVEL);
         }
 
-        public static bool AnimationOnComboNumber(int streakCount)
+        public static bool AnimationOnStreakCouunter(int streakCount)
         {
             int streakCounterShakeStartLevel = GetSettings().StreakCounterShakeStartLevel;
             return GetPowerLevel(streakCount) > streakCounterShakeStartLevel;

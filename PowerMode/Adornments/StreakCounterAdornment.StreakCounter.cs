@@ -12,13 +12,13 @@
 
     public partial class StreakCounterAdornment
     {
-        private Tuple<BitmapImage, SizeF> UpdateComboNumberImage(int streakCount)
+        private Tuple<BitmapImage, SizeF> UpdateStreakCounterImage(int streakCount)
         {
             var font = new Font("Tahoma", ComboService.GetPowerLevelFontSize(streakCount));
             var color = ComboService.GetPowerLevelColor(streakCount);
             var penWidth = ComboService.GetPowerLevelPenWidth(streakCount);
 
-            var bitmap = new Bitmap(ADORNMENT_WIDTH, ADORNMENT_COMBO_NUMBER_HEIGHT);
+            var bitmap = new Bitmap(ADORNMENT_WIDTH, ADORNMENT_STREAK_COUNTER_HEIGHT);
             bitmap.MakeTransparent();
 
             var graphics = Graphics.FromImage(bitmap);
@@ -27,7 +27,7 @@
             graphics.PixelOffsetMode = PixelOffsetMode.HighQuality;
 
             var size = graphics.MeasureString(streakCount.ToString(), font);
-            graphics.DrawString(streakCount.ToString(), font, new SolidBrush(color), new RectangleF(ADORNMENT_WIDTH - size.Width, 0, size.Width, ADORNMENT_COMBO_NUMBER_HEIGHT));
+            graphics.DrawString(streakCount.ToString(), font, new SolidBrush(color), new RectangleF(ADORNMENT_WIDTH - size.Width, 0, size.Width, ADORNMENT_STREAK_COUNTER_HEIGHT));
 
             var pen = new Pen(color, penWidth);
             graphics.DrawLine(pen, ADORNMENT_WIDTH - size.Width, size.Height - 5 + penWidth / 2, ADORNMENT_WIDTH, size.Height - 5 + penWidth / 2);
@@ -49,9 +49,9 @@
         }
 
 
-        private DoubleAnimation GetComboNumberSizeAnimation(int streakCount)
+        private DoubleAnimation GetStreakCounterImageSizeAnimation(int streakCount)
         {
-            if (!ComboService.AnimationOnComboNumber(streakCount))
+            if (!ComboService.AnimationOnStreakCouunter(streakCount))
             {
                 return null;
             }

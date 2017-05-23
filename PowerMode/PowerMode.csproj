@@ -52,7 +52,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="Adornments\StreakCounterAdornment.cs" />
-    <Compile Include="Adornments\StreakCounterAdornment.ComboNumber.cs">
+    <Compile Include="Adornments\StreakCounterAdornment.StreakCounter.cs">
       <DependentUpon>StreakCounterAdornment.cs</DependentUpon>
     </Compile>
     <Compile Include="Adornments\StreakCounterAdornment.Exclamation.cs">

@@ -15,7 +15,7 @@
     {
         private readonly IAdornmentLayer adornmentLayer;
         private readonly IWpfTextView view;
-        private readonly StreakCounterAdornment comboAdornment;
+        private readonly StreakCounterAdornment streakCounterAdornment;
 
         private Timer clearHitTimer;
         private int hitCount = 0;
@@ -27,7 +27,7 @@
 
             this.view = view;
             this.adornmentLayer = view.GetAdornmentLayer("PowerModeAdornment");
-            this.comboAdornment = new StreakCounterAdornment();
+            this.streakCounterAdornment = new StreakCounterAdornment();
 
             this.view.TextBuffer.Changed += TextBuffer_Changed;
             this.view.ViewportHeightChanged += View_ViewportSizeChanged; ;
@@ -46,7 +46,7 @@
                 var comboModeSettings = SettingsService.GetComboModeSettings(ServiceProvider.GlobalProvider);
                 if (comboModeSettings.IsShowStreakCounter)
                 {
-                    comboAdornment.OnSizeChanged(view)
+                    streakCounterAdornment.OnSizeChanged(view)
                                   .ForEach(image =>
                                         adornmentLayer.AddAdornment(
                                             AdornmentPositioningBehavior.ViewportRelative,
@@ -71,7 +71,7 @@
                 var comboModeSettings = SettingsService.GetComboModeSettings(ServiceProvider.GlobalProvider);
                 if (comboModeSettings.IsShowStreakCounter)
                 {
-                    comboAdornment.OnTextBufferChanged(adornmentLayer, view, hitCount);
+                    streakCounterAdornment.OnTextBufferChanged(adornmentLayer, view, hitCount);
                 }
             }
         }
@@ -90,7 +90,7 @@
                 {
                     hitCount = 0;
                     view.VisualElement.Dispatcher.Invoke(
-                        () => comboAdornment.OnTextBufferChanged(adornmentLayer, view, hitCount),
+                        () => streakCounterAdornment.OnTextBufferChanged(adornmentLayer, view, hitCount),
                         DispatcherPriority.ContextIdle);
                 }, autoEvent, timeout, Timeout.Infinite);
             }
