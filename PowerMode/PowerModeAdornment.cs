@@ -21,12 +21,6 @@
         private int hitCount = 0;
 
 
-        /// <summary>
-        /// Initializes a new instance of the <see cref="PowerModeAdornment"/> class.
-        /// Creates a square image and attaches an event handler to the layout changed event that
-        /// adds the square in the upper right-hand corner of the TextView via the adornment layer
-        /// </summary>
-        /// <param name="view">The <see cref="IWpfTextView"/> upon which the adornment will be drawn</param>
         public PowerModeAdornment(IWpfTextView view)
         {
             if (view == null) { throw new ArgumentNullException("view"); }
@@ -44,29 +38,51 @@
         {
             this.adornmentLayer.RemoveAllAdornments();
 
-            var images = comboAdornment.OnSizeChanged(view);
+            var generalSettings = SettingsService.GetGeneralSettings(ServiceProvider.GlobalProvider);
+            if (!generalSettings.IsEnablePowerMode) { return; }
 
-            foreach (var image in images)
+            if (generalSettings.IsEnableComboMode)
             {
-                this.adornmentLayer.AddAdornment(AdornmentPositioningBehavior.ViewportRelative, null, null, image, null);
+                var comboModeSettings = SettingsService.GetComboModeSettings(ServiceProvider.GlobalProvider);
+                if (comboModeSettings.IsShowStreakCounter)
+                {
+                    comboAdornment.OnSizeChanged(view)
+                                  .ForEach(image =>
+                                        adornmentLayer.AddAdornment(
+                                            AdornmentPositioningBehavior.ViewportRelative,
+                                            null,
+                                            null,
+                                            image,
+                                            null));
+                }
             }
+
         }
 
         private void TextBuffer_Changed(object sender, TextContentChangedEventArgs e)
         {
-            var settings = SettingsService.GetGeneralSettings(ServiceProvider.GlobalProvider);
+            var generalSettings = SettingsService.GetGeneralSettings(ServiceProvider.GlobalProvider);
+            if (!generalSettings.IsEnablePowerMode) { return; }
 
-            if (!settings.IsEnablePowerMode) { return; }
+            if (generalSettings.IsEnableComboMode)
+            {
+                KeyDown();
 
-            KeyDown();
-
-            comboAdornment.OnTextBufferChanged(adornmentLayer, view, hitCount);
+                var comboModeSettings = SettingsService.GetComboModeSettings(ServiceProvider.GlobalProvider);
+                if (comboModeSettings.IsShowStreakCounter)
+                {
+                    comboAdornment.OnTextBufferChanged(adornmentLayer, view, hitCount);
+                }
+            }
         }
 
         private void KeyDown()
         {
+            var comboModeSettings = SettingsService.GetComboModeSettings(ServiceProvider.GlobalProvider);
+
             hitCount++;
 
+            var timeout = comboModeSettings.StreakTimeout * 1000;
             if (clearHitTimer == null)
             {
                 var autoEvent = new AutoResetEvent(false);
@@ -76,11 +92,11 @@
                     view.VisualElement.Dispatcher.Invoke(
                         () => comboAdornment.OnTextBufferChanged(adornmentLayer, view, hitCount),
                         DispatcherPriority.ContextIdle);
-                }, autoEvent, 10000, Timeout.Infinite);
+                }, autoEvent, timeout, Timeout.Infinite);
             }
             else
             {
-                clearHitTimer.Change(10000, Timeout.Infinite);
+                clearHitTimer.Change(timeout, Timeout.Infinite);
             }
         }
     }

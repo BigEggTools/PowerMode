@@ -98,6 +98,7 @@
       <DependentUpon>SettingsService.cs</DependentUpon>
     </Compile>
     <Compile Include="Utils\ColorExtensions.cs" />
+    <Compile Include="Utils\RandomUtils.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Key.snk" />

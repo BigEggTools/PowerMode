@@ -60,13 +60,13 @@
                     <TextBlock Text="Power Color" Grid.Row="0" Grid.Column="0" VerticalAlignment="Center" Margin="10, 0, 0, 0" />
                     <TextBox Grid.Row="0" Grid.Column="1" Margin="0,5,10,5" ToolTip="Color of the streak counter." Text="{Binding DataContext.PowerColorString, ElementName=userControl, Mode=OneWay}" IsEnabled="False" />
                     <TextBlock Text="Streak Counter Opacity" Grid.Row="1" Grid.Column="0" VerticalAlignment="Center" Margin="10, 0, 0, 0" />
-                    <TextBox Grid.Row="1" Grid.Column="1" Margin="0,5,10,5" ToolTip="Opacity of the streak counter. (0-255)" Text="{Binding DataContext.StreakCounterOpacity, ElementName=userControl}" />
+                    <TextBox Grid.Row="1" Grid.Column="1" Margin="0,5,10,5" ToolTip="Opacity of the streak counter. (0-255)" Text="{Binding DataContext.StreakCounterOpacity, ElementName=userControl, UpdateSourceTrigger=PropertyChanged, ValidatesOnExceptions=true, ValidatesOnDataErrors=true, NotifyOnValidationError=true}" />
                     <TextBlock Text="Exclamation Every" Grid.Row="2" Grid.Column="0" VerticalAlignment="Center" Margin="10, 0, 0, 0" />
-                    <TextBox Grid.Row="2" Grid.Column="1" Margin="0,5,10,5" ToolTip="Shows an exclamation every streak count. (10-100)" Text="{Binding DataContext.ExclamationEveryStreak, ElementName=userControl}" />
+                    <TextBox Grid.Row="2" Grid.Column="1" Margin="0,5,10,5" ToolTip="Shows an exclamation every streak count. (10-100)" Text="{Binding DataContext.ExclamationEveryStreak, ElementName=userControl, UpdateSourceTrigger=PropertyChanged, ValidatesOnExceptions=true, ValidatesOnDataErrors=true, NotifyOnValidationError=true}" />
                     <TextBlock Text="Exclamation Texts" Grid.Row="3" Grid.Column="0" VerticalAlignment="Center" Margin="10, 0, 0, 0" />
-                    <TextBox Grid.Row="3" Grid.Column="1" Margin="0,5,10,5" ToolTip="Exclamations to show (randomized), use ',' to split." Text="{Binding DataContext.Exclamations, ElementName=userControl}" />
+                    <TextBox Grid.Row="3" Grid.Column="1" Margin="0,5,10,5" ToolTip="Exclamations to show (randomized), use ';' to split." Text="{Binding DataContext.ExclamationsString, ElementName=userControl, UpdateSourceTrigger=PropertyChanged, ValidatesOnExceptions=true, ValidatesOnDataErrors=true, NotifyOnValidationError=true}" />
                     <TextBlock Text="Streak Counter Shake Start Level" Grid.Row="4" Grid.Column="0" VerticalAlignment="Center" Margin="10, 0, 0, 0" />
-                    <TextBox Grid.Row="4" Grid.Column="1" Margin="0,5,10,5" ToolTip="The combo level (0-16) start shake streak counter." Text="{Binding DataContext.StreakCounterShakeStartLevel, ElementName=userControl}" />
+                    <TextBox Grid.Row="4" Grid.Column="1" Margin="0,5,10,5" ToolTip="The combo level (0-16) start shake streak counter." Text="{Binding DataContext.StreakCounterShakeStartLevel, ElementName=userControl, UpdateSourceTrigger=PropertyChanged, ValidatesOnExceptions=true, ValidatesOnDataErrors=true, NotifyOnValidationError=true}" />
                 </Grid>
             </GroupBox>
         </Grid>

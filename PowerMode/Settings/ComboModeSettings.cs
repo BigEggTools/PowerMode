@@ -1,7 +1,9 @@
 ﻿namespace BigEgg.Tools.PowerMode.Settings
 {
+    using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
     using System.Drawing;
+    using System.Linq;
 
     public class ComboModeSettings : ValidatableModel
     {
@@ -12,7 +14,8 @@
         private int streakCounterShakeStartLevel = 1;
         private int streakTimeout = 5;
         private int exclamationEveryStreak = 10;
-        private string exclamations = string.Join("; ", new string[] { "Super!", "Radical!", "Fantastic!", "Great!", "OMG", "Whoah!", ":O", "Nice!", "Splendid!", "Wild!", "Grand!", "Impressive!", "Stupendous!", "Extreme!", "Awesome!" });
+        private string exclamationsString = string.Join("; ", new string[] { "Super!", "Radical!", "Fantastic!", "Great!", "OMG", "Whoah!", ":O", "Nice!", "Splendid!", "Wild!", "Grand!", "Impressive!", "Stupendous!", "Extreme!", "Awesome!" });
+        private IList<string> exclamations = new List<string>();
         private int particlesStartLevel = 0;
         private int screenShakeStartLevel = 2;
 
@@ -74,10 +77,19 @@
         }
 
         [Required(ErrorMessage = "Exclamations is mandatory")]
-        public string Exclamations
+        public string ExclamationsString
+        {
+            get { return exclamationsString; }
+            set
+            {
+                SetPropertyAndValidate(ref exclamationsString, value);
+                exclamations = exclamationsString.Split(';').Select(x => x.Trim()).ToList();
+            }
+        }
+
+        public IList<string> Exclamations
         {
             get { return exclamations; }
-            set { SetPropertyAndValidate(ref exclamations, value); }
         }
 
         [Range(0, 16, ErrorMessage = "Particles Start Level should be between 1 to 16")]
@@ -104,7 +116,7 @@
             this.StreakCounterShakeStartLevel = other.StreakCounterShakeStartLevel;
             this.StreakTimeout = other.StreakTimeout;
             this.ExclamationEveryStreak = other.ExclamationEveryStreak;
-            this.Exclamations = other.Exclamations;
+            this.ExclamationsString = other.ExclamationsString;
             this.ParticlesStartLevel = other.ParticlesStartLevel;
             this.ScreenShakeStartLevel = other.ScreenShakeStartLevel;
         }

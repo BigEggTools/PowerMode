@@ -22,8 +22,8 @@
                 comboModeSettingsCache.StreakCounterShakeStartLevel = GetIntegerOption(store, nameof(ComboModeSettings.StreakCounterShakeStartLevel)).GetValueOrDefault(comboModeSettingsCache.StreakCounterShakeStartLevel);
                 comboModeSettingsCache.StreakTimeout = GetIntegerOption(store, nameof(ComboModeSettings.StreakTimeout)).GetValueOrDefault(comboModeSettingsCache.StreakTimeout);
                 comboModeSettingsCache.ExclamationEveryStreak = GetIntegerOption(store, nameof(ComboModeSettings.ExclamationEveryStreak)).GetValueOrDefault(comboModeSettingsCache.ExclamationEveryStreak);
-                var exclamations = GetStringOption(store, nameof(ComboModeSettings.Exclamations));
-                comboModeSettingsCache.Exclamations = string.IsNullOrWhiteSpace(exclamations) ? comboModeSettingsCache.Exclamations : exclamations;
+                var exclamations = GetStringOption(store, nameof(ComboModeSettings.ExclamationsString));
+                comboModeSettingsCache.ExclamationsString = string.IsNullOrWhiteSpace(exclamations) ? comboModeSettingsCache.ExclamationsString : exclamations;
                 comboModeSettingsCache.ParticlesStartLevel = GetIntegerOption(store, nameof(ComboModeSettings.ParticlesStartLevel)).GetValueOrDefault(comboModeSettingsCache.ParticlesStartLevel);
                 comboModeSettingsCache.ScreenShakeStartLevel = GetIntegerOption(store, nameof(ComboModeSettings.ScreenShakeStartLevel)).GetValueOrDefault(comboModeSettingsCache.ScreenShakeStartLevel);
             }
@@ -46,7 +46,7 @@
             SetOption(store, nameof(ComboModeSettings.StreakCounterShakeStartLevel), settings.StreakCounterShakeStartLevel);
             SetOption(store, nameof(ComboModeSettings.StreakTimeout), settings.StreakTimeout);
             SetOption(store, nameof(ComboModeSettings.ExclamationEveryStreak), settings.ExclamationEveryStreak);
-            SetOption(store, nameof(ComboModeSettings.Exclamations), settings.Exclamations);
+            SetOption(store, nameof(ComboModeSettings.ExclamationsString), settings.ExclamationsString);
             SetOption(store, nameof(ComboModeSettings.ParticlesStartLevel), settings.ParticlesStartLevel);
             SetOption(store, nameof(ComboModeSettings.ScreenShakeStartLevel), settings.ScreenShakeStartLevel);
         }
