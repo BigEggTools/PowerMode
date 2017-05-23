@@ -69,6 +69,7 @@
     <Compile Include="Commands\ToggleParticlesCommand.cs" />
     <Compile Include="Commands\ToggleComboModeCommand.cs" />
     <Compile Include="Constants.cs" />
+    <Compile Include="Fundations\ValidatableModel.cs" />
     <Compile Include="Options\ComboModeOptionPage.cs">
       <SubType>Component</SubType>
     </Compile>

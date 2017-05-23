@@ -3,7 +3,7 @@
     using System.ComponentModel.DataAnnotations;
     using System.Drawing;
 
-    public class ComboModeSettings : Model
+    public class ComboModeSettings : ValidatableModel
     {
         private int comboLevelStreakThreshold = 30;
         private Color powerColor = Color.FromArgb(78, 255, 161);
@@ -21,7 +21,7 @@
         public int ComboLevelStreakThreshold
         {
             get { return comboLevelStreakThreshold; }
-            set { SetProperty(ref comboLevelStreakThreshold, value); }
+            set { SetPropertyAndValidate(ref comboLevelStreakThreshold, value); }
         }
 
         public Color PowerColor
@@ -29,7 +29,7 @@
             get { return powerColor; }
             set
             {
-                SetProperty(ref powerColor, value);
+                SetPropertyAndValidate(ref powerColor, value);
                 RaisePropertyChanged("PowerColorString");
             }
         }
@@ -42,56 +42,56 @@
         public bool IsShowStreakCounter
         {
             get { return isShowStreakCounter; }
-            set { SetProperty(ref isShowStreakCounter, value); }
+            set { SetPropertyAndValidate(ref isShowStreakCounter, value); }
         }
 
         [Range(1, 255, ErrorMessage = "Streak Counter Opacity should be between 1 to 100")]
         public int StreakCounterOpacity
         {
             get { return streakCounterOpacity; }
-            set { SetProperty(ref streakCounterOpacity, value); }
+            set { SetPropertyAndValidate(ref streakCounterOpacity, value); }
         }
 
         [Range(0, 16, ErrorMessage = "Streak Counter Shake Start Level should be between 1 to 16")]
         public int StreakCounterShakeStartLevel
         {
             get { return streakCounterShakeStartLevel; }
-            set { SetProperty(ref streakCounterShakeStartLevel, value); }
+            set { SetPropertyAndValidate(ref streakCounterShakeStartLevel, value); }
         }
 
         [Range(1, 60, ErrorMessage = "Streak Timeout(Seconds) should be between 1 to 60")]
         public int StreakTimeout
         {
             get { return streakTimeout; }
-            set { SetProperty(ref streakTimeout, value); }
+            set { SetPropertyAndValidate(ref streakTimeout, value); }
         }
 
         [Range(10, 100, ErrorMessage = "Exclamation Every Streak should be between 10 to 100")]
         public int ExclamationEveryStreak
         {
             get { return exclamationEveryStreak; }
-            set { SetProperty(ref exclamationEveryStreak, value); }
+            set { SetPropertyAndValidate(ref exclamationEveryStreak, value); }
         }
 
         [Required(ErrorMessage = "Exclamations is mandatory")]
         public string Exclamations
         {
             get { return exclamations; }
-            set { SetProperty(ref exclamations, value); }
+            set { SetPropertyAndValidate(ref exclamations, value); }
         }
 
         [Range(0, 16, ErrorMessage = "Particles Start Level should be between 1 to 16")]
         public int ParticlesStartLevel
         {
             get { return particlesStartLevel; }
-            set { SetProperty(ref particlesStartLevel, value); }
+            set { SetPropertyAndValidate(ref particlesStartLevel, value); }
         }
 
         [Range(0, 16, ErrorMessage = "Screen Shake Start Level should be between 1 to 16")]
         public int ScreenShakeStartLevel
         {
             get { return screenShakeStartLevel; }
-            set { SetProperty(ref screenShakeStartLevel, value); }
+            set { SetPropertyAndValidate(ref screenShakeStartLevel, value); }
         }
 
 
