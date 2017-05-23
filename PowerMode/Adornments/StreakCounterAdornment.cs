@@ -55,6 +55,13 @@
 
         public void OnTextBufferChanged(IAdornmentLayer adornmentLayer, IWpfTextView view, int streakCount)
         {
+            #region Title
+            adornmentLayer.RemoveAdornment(titleImage);
+            Canvas.SetLeft(this.titleImage, view.ViewportRight - RightMargin - ADORNMENT_WIDTH);
+            Canvas.SetTop(this.titleImage, view.ViewportTop + TopMargin);
+            adornmentLayer.AddAdornment(AdornmentPositioningBehavior.ViewportRelative, null, null, titleImage, null);
+            #endregion
+
             #region StreakCounter
             adornmentLayer.RemoveAdornment(streakCounterImage);
 

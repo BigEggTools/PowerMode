@@ -30,7 +30,7 @@
         public static bool AnimationOnStreakCouunter(int streakCount)
         {
             int streakCounterShakeStartLevel = GetSettings().StreakCounterShakeStartLevel;
-            return GetPowerLevel(streakCount) > streakCounterShakeStartLevel;
+            return GetPowerLevel(streakCount) >= streakCounterShakeStartLevel;
         }
 
         public static Color GetPowerLevelColor(int streakCount)
