@@ -4,26 +4,32 @@
 
     public static partial class SettingsService
     {
+        private static ComboModeSettings comboModeSettingsCache = null;
+
+
         public static void GetFromStorages(ref ComboModeSettings settings, IServiceProvider serviceProvider)
         {
             if (serviceProvider == null) { throw new ArgumentNullException("serviceProvider"); }
 
-            var store = GetSettingsStore(serviceProvider);
-            var result = new ComboModeSettings();
-            result.LevelStreakThreshold = GetIntegerOption(store, nameof(ComboModeSettings.LevelStreakThreshold)).GetValueOrDefault(result.LevelStreakThreshold);
-            result.PowerColor = GetColorOption(store, nameof(ComboModeSettings.PowerColor)).GetValueOrDefault(result.PowerColor);
-            result.IsShowStreakCounter = GetBoolOption(store, nameof(ComboModeSettings.IsShowStreakCounter)).GetValueOrDefault(result.IsShowStreakCounter);
-            result.StreakCounterOpacity = GetIntegerOption(store, nameof(ComboModeSettings.StreakCounterOpacity)).GetValueOrDefault(result.StreakCounterOpacity);
-            result.StreakCounterShakeStartLevel = GetIntegerOption(store, nameof(ComboModeSettings.StreakCounterShakeStartLevel)).GetValueOrDefault(result.StreakCounterShakeStartLevel);
-            result.StreakTimeout = GetIntegerOption(store, nameof(ComboModeSettings.StreakTimeout)).GetValueOrDefault(result.StreakTimeout);
-            result.ExclamationEveryStreak = GetIntegerOption(store, nameof(ComboModeSettings.ExclamationEveryStreak)).GetValueOrDefault(result.ExclamationEveryStreak);
-            var exclamations = GetStringOption(store, nameof(ComboModeSettings.Exclamations));
-            result.Exclamations = string.IsNullOrWhiteSpace(exclamations) ? result.Exclamations : exclamations;
-            result.ParticlesStartLevel = GetIntegerOption(store, nameof(ComboModeSettings.ParticlesStartLevel)).GetValueOrDefault(result.ParticlesStartLevel);
-            result.ScreenShakeStartLevel = GetIntegerOption(store, nameof(ComboModeSettings.ScreenShakeStartLevel)).GetValueOrDefault(result.ScreenShakeStartLevel);
+            if (comboModeSettingsCache == null)
+            {
+                var store = GetSettingsStore(serviceProvider);
+                var comboModeSettingsCache = new ComboModeSettings();
+                comboModeSettingsCache.ComboLevelStreakThreshold = GetIntegerOption(store, nameof(ComboModeSettings.ComboLevelStreakThreshold)).GetValueOrDefault(comboModeSettingsCache.ComboLevelStreakThreshold);
+                comboModeSettingsCache.PowerColor = GetColorOption(store, nameof(ComboModeSettings.PowerColor)).GetValueOrDefault(comboModeSettingsCache.PowerColor);
+                comboModeSettingsCache.IsShowStreakCounter = GetBoolOption(store, nameof(ComboModeSettings.IsShowStreakCounter)).GetValueOrDefault(comboModeSettingsCache.IsShowStreakCounter);
+                comboModeSettingsCache.StreakCounterOpacity = GetIntegerOption(store, nameof(ComboModeSettings.StreakCounterOpacity)).GetValueOrDefault(comboModeSettingsCache.StreakCounterOpacity);
+                comboModeSettingsCache.StreakCounterShakeStartLevel = GetIntegerOption(store, nameof(ComboModeSettings.StreakCounterShakeStartLevel)).GetValueOrDefault(comboModeSettingsCache.StreakCounterShakeStartLevel);
+                comboModeSettingsCache.StreakTimeout = GetIntegerOption(store, nameof(ComboModeSettings.StreakTimeout)).GetValueOrDefault(comboModeSettingsCache.StreakTimeout);
+                comboModeSettingsCache.ExclamationEveryStreak = GetIntegerOption(store, nameof(ComboModeSettings.ExclamationEveryStreak)).GetValueOrDefault(comboModeSettingsCache.ExclamationEveryStreak);
+                var exclamations = GetStringOption(store, nameof(ComboModeSettings.Exclamations));
+                comboModeSettingsCache.Exclamations = string.IsNullOrWhiteSpace(exclamations) ? comboModeSettingsCache.Exclamations : exclamations;
+                comboModeSettingsCache.ParticlesStartLevel = GetIntegerOption(store, nameof(ComboModeSettings.ParticlesStartLevel)).GetValueOrDefault(comboModeSettingsCache.ParticlesStartLevel);
+                comboModeSettingsCache.ScreenShakeStartLevel = GetIntegerOption(store, nameof(ComboModeSettings.ScreenShakeStartLevel)).GetValueOrDefault(comboModeSettingsCache.ScreenShakeStartLevel);
+            }
 
             if (settings == null) { settings = new ComboModeSettings(); }
-            settings.CloneFrom(result);
+            settings.CloneFrom(comboModeSettingsCache);
         }
 
         public static void SaveToStorage(ComboModeSettings settings, IServiceProvider serviceProvider)
@@ -31,8 +37,10 @@
             if (serviceProvider == null) { throw new ArgumentNullException("serviceProvider"); }
             if (settings == null) { throw new ArgumentNullException("settings"); }
 
+            comboModeSettingsCache = null;
+
             var store = GetSettingsStore(serviceProvider);
-            SetOption(store, nameof(ComboModeSettings.LevelStreakThreshold), settings.LevelStreakThreshold);
+            SetOption(store, nameof(ComboModeSettings.ComboLevelStreakThreshold), settings.ComboLevelStreakThreshold);
             SetOption(store, nameof(ComboModeSettings.PowerColor), settings.PowerColor);
             SetOption(store, nameof(ComboModeSettings.IsShowStreakCounter), settings.IsShowStreakCounter);
             SetOption(store, nameof(ComboModeSettings.StreakCounterOpacity), settings.StreakCounterOpacity);
