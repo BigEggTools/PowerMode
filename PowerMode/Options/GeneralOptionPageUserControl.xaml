@@ -14,24 +14,22 @@
             <!-- You can declare additional resources before or after Merged dictionaries, but not both -->
         </ResourceDictionary>
     </UserControl.Resources>
-    <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
-        <Grid>
-            <Grid.RowDefinitions>
-                <RowDefinition Height="30" />
-                <RowDefinition Height="30" />
-                <RowDefinition Height="30" />
-                <RowDefinition Height="30" />
-                <RowDefinition Height="30" />
-            </Grid.RowDefinitions>
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="150" />
-                <ColumnDefinition Width="*" />
-            </Grid.ColumnDefinitions>
-            <CheckBox Content="Enable Power Model" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" ToolTip="Toggle on start." IsChecked="{Binding DataContext.IsEnablePowerMode, ElementName=userControl}" Style="{DynamicResource ToggleCheckBox}"/>
-            <CheckBox Content="Enable Combo Mode" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" Name="EnableComboMode" ToolTip="When enabled, effects won't appear until reach the activation threshold." IsEnabled="{Binding DataContext.IsEnablePowerMode, ElementName=userControl}" IsChecked="{Binding DataContext.IsEnableComboMode, ElementName=userControl}" Style="{DynamicResource ToggleCheckBox}"/>
-            <CheckBox Content="Enable Particles" Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" Name="EnableParticles" ToolTip="Turn the particles on/off." IsEnabled="{Binding DataContext.IsEnablePowerMode, ElementName=userControl}" IsChecked="{Binding DataContext.IsEnableParticles, ElementName=userControl}" Style="{DynamicResource ToggleCheckBox}"/>
-            <CheckBox Content="Enable Screen Shake" Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2" Name="EnableScreenShake" ToolTip="Turn the shaking on/off." IsEnabled="{Binding DataContext.IsEnablePowerMode, ElementName=userControl}" IsChecked="{Binding DataContext.IsEnableScreenShake, ElementName=userControl}" Style="{DynamicResource ToggleCheckBox}"/>
-            <CheckBox Content="Enable Audio" Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="2" Name="EnableAudio" ToolTip="Play audio clip on/off." IsEnabled="False" IsChecked="{Binding DataContext.IsEnableAudio, ElementName=userControl}" Style="{DynamicResource ToggleCheckBox}"/>
-        </Grid>
-    </ScrollViewer>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="30" />
+            <RowDefinition Height="30" />
+            <RowDefinition Height="30" />
+            <RowDefinition Height="30" />
+            <RowDefinition Height="30" />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="150" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+        <CheckBox Content="Enable Power Model" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" ToolTip="Toggle on start." IsChecked="{Binding DataContext.IsEnablePowerMode, ElementName=userControl}" Style="{DynamicResource ToggleCheckBox}"/>
+        <CheckBox Content="Enable Combo Mode" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" Name="EnableComboMode" ToolTip="When enabled, effects won't appear until reach the activation threshold." IsEnabled="{Binding DataContext.IsEnablePowerMode, ElementName=userControl}" IsChecked="{Binding DataContext.IsEnableComboMode, ElementName=userControl}" Style="{DynamicResource ToggleCheckBox}"/>
+        <CheckBox Content="Enable Particles" Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" Name="EnableParticles" ToolTip="Turn the particles on/off." IsEnabled="{Binding DataContext.IsEnablePowerMode, ElementName=userControl}" IsChecked="{Binding DataContext.IsEnableParticles, ElementName=userControl}" Style="{DynamicResource ToggleCheckBox}"/>
+        <CheckBox Content="Enable Screen Shake" Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2" Name="EnableScreenShake" ToolTip="Turn the shaking on/off." IsEnabled="{Binding DataContext.IsEnablePowerMode, ElementName=userControl}" IsChecked="{Binding DataContext.IsEnableScreenShake, ElementName=userControl}" Style="{DynamicResource ToggleCheckBox}"/>
+        <CheckBox Content="Enable Audio" Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="2" Name="EnableAudio" ToolTip="Play audio clip on/off." IsEnabled="False" IsChecked="{Binding DataContext.IsEnableAudio, ElementName=userControl}" Style="{DynamicResource ToggleCheckBox}"/>
+    </Grid>
 </UserControl>

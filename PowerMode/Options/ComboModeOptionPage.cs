@@ -8,24 +8,24 @@
 
     using BigEgg.Tools.PowerMode.Settings;
 
-    public class GeneralOptionPage : UIElementDialogPage
+    public class ComboModeOptionPage : UIElementDialogPage
     {
-        private GeneralSettings settings;
+        private ComboModeSettings settings;
 
 
-        ~GeneralOptionPage()
+        ~ComboModeOptionPage()
         {
             PropertyChangedEventManager.RemoveHandler(settings, SettingModelPropertyChanged, "");
         }
 
 
-        public GeneralSettings Settings
+        public ComboModeSettings Settings
         {
             get
             {
                 if (settings == null)
                 {
-                    settings = SettingsService.GetGeneralSettings(Site);
+                    settings = SettingsService.GetComboModeSettings(Site);
                     PropertyChangedEventManager.AddHandler(settings, SettingModelPropertyChanged, "");
                 }
 
@@ -36,7 +36,7 @@
 
         protected override UIElement Child
         {
-            get { return new GeneralOptionPageUserControl(this); }
+            get { return new ComboModeOptionPageUserControl(this); }
         }
 
         protected override void SaveSetting(PropertyDescriptor property)
@@ -47,19 +47,13 @@
         protected override void OnClosed(EventArgs e)
         {
             base.OnClosed(e);
-            var newSettings = SettingsService.GetGeneralSettings(Site);
+            var newSettings = SettingsService.GetComboModeSettings(Site);
             settings.CloneFrom(newSettings);
         }
 
 
         private void SettingModelPropertyChanged(object sender, PropertyChangedEventArgs e)
         {
-            if (e.PropertyName == nameof(GeneralSettings.IsEnablePowerMode))
-            {
-                settings.IsEnableComboMode = settings.IsEnablePowerMode;
-                settings.IsEnableParticles = settings.IsEnablePowerMode;
-                settings.IsEnableScreenShake = settings.IsEnablePowerMode;
-            }
         }
     }
 }
