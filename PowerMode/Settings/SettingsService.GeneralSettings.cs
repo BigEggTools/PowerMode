@@ -26,11 +26,11 @@
             if (settings == null) { throw new ArgumentNullException("settings"); }
 
             var store = GetSettingsStore(serviceProvider);
-            SetBoolOption(store, nameof(GeneralSettings.IsEnablePowerMode), settings.IsEnablePowerMode);
-            SetBoolOption(store, nameof(GeneralSettings.IsEnableParticles), settings.IsEnableParticles);
-            SetBoolOption(store, nameof(GeneralSettings.IsEnableScreenShake), settings.IsEnableScreenShake);
-            SetBoolOption(store, nameof(GeneralSettings.IsEnableComboMode), settings.IsEnableComboMode);
-            SetBoolOption(store, nameof(GeneralSettings.IsEnableAudio), settings.IsEnableAudio);
+            SetOption(store, nameof(GeneralSettings.IsEnablePowerMode), settings.IsEnablePowerMode);
+            SetOption(store, nameof(GeneralSettings.IsEnableParticles), settings.IsEnableParticles);
+            SetOption(store, nameof(GeneralSettings.IsEnableScreenShake), settings.IsEnableScreenShake);
+            SetOption(store, nameof(GeneralSettings.IsEnableComboMode), settings.IsEnableComboMode);
+            SetOption(store, nameof(GeneralSettings.IsEnableAudio), settings.IsEnableAudio);
         }
     }
 }

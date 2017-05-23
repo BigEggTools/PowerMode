@@ -87,6 +87,9 @@
     <Compile Include="Settings\SettingsService.GeneralSettings.cs">
       <DependentUpon>SettingsService.cs</DependentUpon>
     </Compile>
+    <Compile Include="Settings\SettingsService.ComboModeSettings.cs">
+      <DependentUpon>SettingsService.cs</DependentUpon>
+    </Compile>
     <Compile Include="Utils\ColorExtensions.cs" />
   </ItemGroup>
   <ItemGroup>

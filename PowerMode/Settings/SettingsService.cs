@@ -1,6 +1,8 @@
 ﻿namespace BigEgg.Tools.PowerMode.Settings
 {
     using System;
+    using System.Drawing;
+    using System.Linq;
 
     using Microsoft.VisualStudio.Settings;
     using Microsoft.VisualStudio.Shell.Settings;
@@ -18,18 +20,77 @@
 
         private static bool? GetBoolOption(SettingsStore store, string optionName)
         {
-            if (store == null || !store.CollectionExists(COLLECTION_PATH)) { return null; }
+            if (store == null ||
+                !store.CollectionExists(COLLECTION_PATH) ||
+                !store.PropertyExists(COLLECTION_PATH, optionName)) { return null; }
 
             return store.GetBoolean(COLLECTION_PATH, optionName, false);
         }
 
-        private static void SetBoolOption(WritableSettingsStore store, string optionName, bool value)
+        private static void SetOption(WritableSettingsStore store, string optionName, bool value)
         {
             if (!store.CollectionExists(COLLECTION_PATH))
             {
                 store.CreateCollection(COLLECTION_PATH);
             }
             store?.SetBoolean(COLLECTION_PATH, optionName, value);
+        }
+
+        private static int? GetIntegerOption(SettingsStore store, string optionName)
+        {
+            if (store == null ||
+                !store.CollectionExists(COLLECTION_PATH) ||
+                !store.PropertyExists(COLLECTION_PATH, optionName)) { return null; }
+
+
+            return store.GetInt32(COLLECTION_PATH, optionName);
+        }
+
+        private static void SetOption(WritableSettingsStore store, string optionName, int value)
+        {
+            if (!store.CollectionExists(COLLECTION_PATH))
+            {
+                store.CreateCollection(COLLECTION_PATH);
+            }
+            store?.SetInt32(COLLECTION_PATH, optionName, value);
+        }
+
+        private static string GetStringOption(SettingsStore store, string optionName)
+        {
+            if (store == null ||
+                !store.CollectionExists(COLLECTION_PATH) ||
+                !store.PropertyExists(COLLECTION_PATH, optionName)) { return null; }
+
+            return store.GetString(COLLECTION_PATH, optionName);
+        }
+
+        private static void SetOption(WritableSettingsStore store, string optionName, string value)
+        {
+            if (!store.CollectionExists(COLLECTION_PATH))
+            {
+                store.CreateCollection(COLLECTION_PATH);
+            }
+            store?.SetString(COLLECTION_PATH, optionName, value);
+        }
+
+        private static Color? GetColorOption(SettingsStore store, string optionName)
+        {
+            if (store == null ||
+                !store.CollectionExists(COLLECTION_PATH) ||
+                !store.PropertyExists(COLLECTION_PATH, optionName)) { return null; }
+
+            var rgb = store.GetString(COLLECTION_PATH, optionName).Split(',').Select(x => Int32.Parse(x)).ToList();
+
+            return Color.FromArgb(rgb[0], rgb[1], rgb[2]);
+        }
+
+        private static void SetOption(WritableSettingsStore store, string optionName, Color value)
+        {
+            if (!store.CollectionExists(COLLECTION_PATH))
+            {
+                store.CreateCollection(COLLECTION_PATH);
+            }
+            store?.SetString(COLLECTION_PATH, optionName, string.Join(",", value.R, value.G, value.B));
         }
     }
 }
