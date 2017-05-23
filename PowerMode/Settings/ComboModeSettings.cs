@@ -4,7 +4,7 @@
 
     public class ComboModeSettings : Model
     {
-        private int levelStreakThreshold = 30;
+        private int comboLevelStreakThreshold = 30;
         private Color powerColor = Color.FromArgb(78, 255, 161);
         private bool isShowStreakCounter = true;
         private int streakCounterOpacity = 153; //  60%
@@ -16,10 +16,10 @@
         private int screenShakeStartLevel = 2;
 
 
-        public int LevelStreakThreshold
+        public int ComboLevelStreakThreshold
         {
-            get { return levelStreakThreshold; }
-            set { SetProperty(ref levelStreakThreshold, value); }
+            get { return comboLevelStreakThreshold; }
+            set { SetProperty(ref comboLevelStreakThreshold, value); }
         }
 
         public Color PowerColor
@@ -79,7 +79,7 @@
 
         public void CloneFrom(ComboModeSettings other)
         {
-            this.LevelStreakThreshold = other.LevelStreakThreshold;
+            this.ComboLevelStreakThreshold = other.ComboLevelStreakThreshold;
             this.PowerColor = other.PowerColor;
             this.IsShowStreakCounter = other.IsShowStreakCounter;
             this.StreakCounterOpacity = other.StreakCounterOpacity;
