@@ -1,8 +1,8 @@
 ﻿namespace BigEgg.Tools.PowerMode
 {
     using System;
-    using System.Linq;
     using System.Threading;
+    using System.Windows.Threading;
 
     using Microsoft.VisualStudio.Shell;
     using Microsoft.VisualStudio.Text;
@@ -10,7 +10,6 @@
 
     using BigEgg.Tools.PowerMode.Adornments;
     using BigEgg.Tools.PowerMode.Settings;
-    using System.Windows.Threading;
 
     internal sealed class PowerModeAdornment
     {
@@ -55,8 +54,7 @@
 
         private void TextBuffer_Changed(object sender, TextContentChangedEventArgs e)
         {
-            GeneralSettings settings = null;
-            SettingsService.GetFromStorages(ref settings, ServiceProvider.GlobalProvider);
+            var settings = SettingsService.GetGeneralSettings(ServiceProvider.GlobalProvider);
 
             if (!settings.IsEnablePowerMode) { return; }
 

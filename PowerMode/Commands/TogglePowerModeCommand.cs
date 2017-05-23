@@ -26,15 +26,13 @@
 
         protected override void OnQueryStatus(object sender, EventArgs e)
         {
-            var settings = new GeneralSettings();
-            SettingsService.GetFromStorages(ref settings, serviceProvider);
+            var settings = SettingsService.GetGeneralSettings(serviceProvider);
             menuCommand.Checked = settings.IsEnablePowerMode;
         }
 
         protected override void OnExecute(object sender, EventArgs e)
         {
-            var settings = new GeneralSettings();
-            SettingsService.GetFromStorages(ref settings, serviceProvider);
+            var settings = SettingsService.GetGeneralSettings(serviceProvider);
             settings.IsEnablePowerMode = !settings.IsEnablePowerMode;
             settings.IsEnableComboMode = settings.IsEnablePowerMode;
             settings.IsEnableParticles = settings.IsEnablePowerMode;

@@ -26,16 +26,14 @@
 
         protected override void OnQueryStatus(object sender, EventArgs e)
         {
-            var settings = new GeneralSettings();
-            SettingsService.GetFromStorages(ref settings, serviceProvider);
+            var settings = SettingsService.GetGeneralSettings(serviceProvider);
             menuCommand.Checked = settings.IsEnableAudio;
             menuCommand.Enabled = false;
         }
 
         protected override void OnExecute(object sender, EventArgs e)
         {
-            var settings = new GeneralSettings();
-            SettingsService.GetFromStorages(ref settings, serviceProvider);
+            var settings = SettingsService.GetGeneralSettings(serviceProvider);
             settings.IsEnableAudio = !settings.IsEnableAudio;
             SettingsService.SaveToStorage(settings, serviceProvider);
 

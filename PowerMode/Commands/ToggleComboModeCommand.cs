@@ -26,16 +26,14 @@
 
         protected override void OnQueryStatus(object sender, EventArgs e)
         {
-            var settings = new GeneralSettings();
-            SettingsService.GetFromStorages(ref settings, serviceProvider);
+            var settings = SettingsService.GetGeneralSettings(serviceProvider);
             menuCommand.Checked = settings.IsEnableComboMode;
             menuCommand.Enabled = settings.IsEnablePowerMode;
         }
 
         protected override void OnExecute(object sender, EventArgs e)
         {
-            var settings = new GeneralSettings();
-            SettingsService.GetFromStorages(ref settings, serviceProvider);
+            var settings = SettingsService.GetGeneralSettings(serviceProvider);
             settings.IsEnableComboMode = !settings.IsEnableComboMode;
             SettingsService.SaveToStorage(settings, serviceProvider);
 

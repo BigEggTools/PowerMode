@@ -26,16 +26,14 @@
 
         protected override void OnQueryStatus(object sender, EventArgs e)
         {
-            var settings = new GeneralSettings();
-            SettingsService.GetFromStorages(ref settings, serviceProvider);
+            var settings = SettingsService.GetGeneralSettings(serviceProvider);
             menuCommand.Checked = settings.IsEnableScreenShake;
             menuCommand.Enabled = settings.IsEnablePowerMode;
         }
 
         protected override void OnExecute(object sender, EventArgs e)
         {
-            var settings = new GeneralSettings();
-            SettingsService.GetFromStorages(ref settings, serviceProvider);
+            var settings = SettingsService.GetGeneralSettings(serviceProvider);
             settings.IsEnableScreenShake = !settings.IsEnableScreenShake;
             SettingsService.SaveToStorage(settings, serviceProvider);
 

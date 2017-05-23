@@ -2,7 +2,6 @@
 {
     using System;
     using System.ComponentModel;
-    using System.Runtime.InteropServices;
     using System.Windows;
 
     using Microsoft.VisualStudio.Shell;
@@ -27,7 +26,7 @@
             {
                 if (settings == null)
                 {
-                    SettingsService.GetFromStorages(ref settings, Site);
+                    settings = SettingsService.GetGeneralSettings(Site);
                     PropertyChangedEventManager.AddHandler(settings, SettingModelPropertyChanged, "");
                 }
 
@@ -49,7 +48,8 @@
         protected override void OnClosed(EventArgs e)
         {
             base.OnClosed(e);
-            SettingsService.GetFromStorages(ref settings, Site);
+            var newSettings = SettingsService.GetGeneralSettings(Site);
+            settings.CloneFrom(newSettings);
         }
 
 

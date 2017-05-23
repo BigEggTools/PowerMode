@@ -7,14 +7,14 @@
         private static GeneralSettings generalSettingsCache = null;
 
 
-        public static void GetFromStorages(ref GeneralSettings settings, IServiceProvider serviceProvider)
+        public static GeneralSettings GetGeneralSettings(IServiceProvider serviceProvider)
         {
             if (serviceProvider == null) { throw new ArgumentNullException("serviceProvider"); }
 
             if (generalSettingsCache == null)
             {
                 var store = GetSettingsStore(serviceProvider);
-                var generalSettingsCache = new GeneralSettings();
+                generalSettingsCache = new GeneralSettings();
                 generalSettingsCache.IsEnablePowerMode = GetBoolOption(store, nameof(GeneralSettings.IsEnablePowerMode)).GetValueOrDefault(generalSettingsCache.IsEnablePowerMode);
                 generalSettingsCache.IsEnableParticles = GetBoolOption(store, nameof(GeneralSettings.IsEnableParticles)).GetValueOrDefault(generalSettingsCache.IsEnableParticles);
                 generalSettingsCache.IsEnableScreenShake = GetBoolOption(store, nameof(GeneralSettings.IsEnableScreenShake)).GetValueOrDefault(generalSettingsCache.IsEnableScreenShake);
@@ -22,8 +22,7 @@
                 generalSettingsCache.IsEnableAudio = GetBoolOption(store, nameof(GeneralSettings.IsEnableAudio)).GetValueOrDefault(generalSettingsCache.IsEnableAudio);
             }
 
-            if (settings == null) { settings = new GeneralSettings(); }
-            settings.CloneFrom(generalSettingsCache);
+            return generalSettingsCache;
         }
 
         public static void SaveToStorage(GeneralSettings settings, IServiceProvider serviceProvider)

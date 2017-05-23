@@ -7,14 +7,14 @@
         private static ComboModeSettings comboModeSettingsCache = null;
 
 
-        public static void GetFromStorages(ref ComboModeSettings settings, IServiceProvider serviceProvider)
+        public static ComboModeSettings GetComboModeSettings(IServiceProvider serviceProvider)
         {
             if (serviceProvider == null) { throw new ArgumentNullException("serviceProvider"); }
 
             if (comboModeSettingsCache == null)
             {
                 var store = GetSettingsStore(serviceProvider);
-                var comboModeSettingsCache = new ComboModeSettings();
+                comboModeSettingsCache = new ComboModeSettings();
                 comboModeSettingsCache.ComboLevelStreakThreshold = GetIntegerOption(store, nameof(ComboModeSettings.ComboLevelStreakThreshold)).GetValueOrDefault(comboModeSettingsCache.ComboLevelStreakThreshold);
                 comboModeSettingsCache.PowerColor = GetColorOption(store, nameof(ComboModeSettings.PowerColor)).GetValueOrDefault(comboModeSettingsCache.PowerColor);
                 comboModeSettingsCache.IsShowStreakCounter = GetBoolOption(store, nameof(ComboModeSettings.IsShowStreakCounter)).GetValueOrDefault(comboModeSettingsCache.IsShowStreakCounter);
@@ -28,8 +28,7 @@
                 comboModeSettingsCache.ScreenShakeStartLevel = GetIntegerOption(store, nameof(ComboModeSettings.ScreenShakeStartLevel)).GetValueOrDefault(comboModeSettingsCache.ScreenShakeStartLevel);
             }
 
-            if (settings == null) { settings = new ComboModeSettings(); }
-            settings.CloneFrom(comboModeSettingsCache);
+            return comboModeSettingsCache;
         }
 
         public static void SaveToStorage(ComboModeSettings settings, IServiceProvider serviceProvider)
@@ -41,7 +40,7 @@
 
             var store = GetSettingsStore(serviceProvider);
             SetOption(store, nameof(ComboModeSettings.ComboLevelStreakThreshold), settings.ComboLevelStreakThreshold);
-            SetOption(store, nameof(ComboModeSettings.PowerColor), settings.PowerColor);
+            SetOption(store, nameof(ComboModeSettings.PowerColor), settings.PowerColorString);
             SetOption(store, nameof(ComboModeSettings.IsShowStreakCounter), settings.IsShowStreakCounter);
             SetOption(store, nameof(ComboModeSettings.StreakCounterOpacity), settings.StreakCounterOpacity);
             SetOption(store, nameof(ComboModeSettings.StreakCounterShakeStartLevel), settings.StreakCounterShakeStartLevel);
