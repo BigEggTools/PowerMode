@@ -15,8 +15,9 @@
         private GeneralSettings settings;
 
 
-        public GeneralOptionPage()
+        ~GeneralOptionPage()
         {
+            PropertyChangedEventManager.RemoveHandler(settings, SettingModelPropertyChanged, "");
         }
 
 
