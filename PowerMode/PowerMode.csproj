@@ -52,6 +52,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="Adornments\IAdornment.cs" />
+    <Compile Include="Adornments\ParticlesAdornment.cs" />
     <Compile Include="Adornments\ScreenShakeAdornment.cs" />
     <Compile Include="Adornments\StreakCounterAdornment.cs" />
     <Compile Include="Adornments\StreakCounterAdornment.StreakCounter.cs">

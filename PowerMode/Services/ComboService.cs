@@ -80,10 +80,16 @@
             return RandomUtils.NextString(exclamations);
         }
 
-        public static bool CanShowExclamation(int streakCount)
+        public static bool CanScreenShake(int streakCount)
         {
             var level = GetPowerLevel(streakCount);
             return level >= GetSettings().ScreenShakeStartLevel;
+        }
+
+        public static bool CanShowParticles(int streakCount)
+        {
+            var level = GetPowerLevel(streakCount);
+            return level >= GetSettings().ParticlesStartLevel;
         }
 
 

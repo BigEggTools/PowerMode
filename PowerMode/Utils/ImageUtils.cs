@@ -34,5 +34,11 @@
             Canvas.SetTop(image, right);
             adornmentLayer.AddAdornment(AdornmentPositioningBehavior.ViewportRelative, null, null, image, null);
         }
+
+        public static void RefreshImage(this IAdornmentLayer adornmentLayer, Image image)
+        {
+            adornmentLayer.RemoveAdornment(image);
+            adornmentLayer.AddAdornment(AdornmentPositioningBehavior.ViewportRelative, null, null, image, null);
+        }
     }
 }

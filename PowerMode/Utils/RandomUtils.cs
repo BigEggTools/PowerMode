@@ -2,6 +2,7 @@
 {
     using System;
     using System.Collections.Generic;
+    using System.Drawing;
 
     public class RandomUtils
     {
@@ -19,6 +20,14 @@
         public static int NextSignal()
         {
             return random.Next(0, 2) == 1 ? 1 : -1;
+        }
+
+        public static Color NextColor()
+        {
+            var bytes = new byte[3];
+            random.NextBytes(bytes);
+
+            return Color.FromArgb(bytes[0], bytes[1], bytes[2]);
         }
     }
 }

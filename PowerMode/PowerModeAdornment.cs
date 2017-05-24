@@ -19,6 +19,7 @@
         private readonly IWpfTextView view;
         private readonly IAdornment streakCounterAdornment;
         private readonly IAdornment screenShakeAdornment;
+        private readonly IAdornment particlesAdornment;
 
         private readonly GeneralSettings generalSettings;
         private readonly ComboModeSettings comboModeSettings;
@@ -38,6 +39,7 @@
 
             streakCounterAdornment = new StreakCounterAdornment();
             screenShakeAdornment = new ScreenShakeAdornment();
+            particlesAdornment = new ParticlesAdornment();
 
             generalSettings = new GeneralSettings();
             comboModeSettings = new ComboModeSettings();
@@ -62,6 +64,7 @@
                 streakCounterAdornment.OnSizeChanged(adornmentLayer, view, streakCount);
             }
             screenShakeAdornment.Cleanup(adornmentLayer, view);
+            particlesAdornment.Cleanup(adornmentLayer, view);
         }
 
         private void TextBuffer_Changed(object sender, TextContentChangedEventArgs e)
@@ -82,14 +85,19 @@
                 {
                     streakCounterAdornment.OnTextBufferChanged(adornmentLayer, view, streakCount);
                 }
-                if (ComboService.CanShowExclamation(streakCount))
+                if (ComboService.CanScreenShake(streakCount))
                 {
                     screenShakeAdornment.OnTextBufferChanged(adornmentLayer, view, streakCount);
+                }
+                if (ComboService.CanShowParticles(streakCount))
+                {
+                    particlesAdornment.OnTextBufferChanged(adornmentLayer, view, streakCount);
                 }
             }
             else
             {
                 screenShakeAdornment.OnTextBufferChanged(adornmentLayer, view, streakCount);
+                particlesAdornment.OnTextBufferChanged(adornmentLayer, view, streakCount);
             }
         }
 
