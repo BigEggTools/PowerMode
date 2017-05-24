@@ -1,66 +1,52 @@
 ﻿namespace BigEgg.Tools.PowerMode.Adornments
 {
-    using System.Threading;
-    using System.Windows.Threading;
-
+    using Task = System.Threading.Tasks.Task;
     using Microsoft.VisualStudio.Shell;
     using Microsoft.VisualStudio.Text.Editor;
 
     using BigEgg.Tools.PowerMode.Settings;
     using BigEgg.Tools.PowerMode.Utils;
+    using System;
 
     public class ScreenShakeAdornment : IAdornment
     {
         private readonly static int SHAKE_TIMEOUT_MILLISECONDS = 75;
-        private readonly static int SHAKE_THROTTLED_MILLISECONDS = 100;
-        private Timer clearScreenShakeTimer;
-        private ThrottledAction<IWpfTextView> throttledShake;
+        private readonly static int SHAKE_THROTTLED_MILLISECONDS = 50;
+        private DateTime lastShakeTime = DateTime.Now;
 
-
-        public ScreenShakeAdornment()
-        {
-            throttledShake = new ThrottledAction<IWpfTextView>(Shake, SHAKE_THROTTLED_MILLISECONDS);
-        }
 
 
         public void Cleanup(IAdornmentLayer adornmentLayer, IWpfTextView view)
         {
-            throttledShake.Cancel();
+            lastShakeTime = DateTime.Now;
         }
 
         public void OnSizeChanged(IAdornmentLayer adornmentLayer, IWpfTextView view, int streakCount)
         {
-            throttledShake.Cancel();
+            lastShakeTime = DateTime.Now;
         }
 
         public void OnTextBufferChanged(IAdornmentLayer adornmentLayer, IWpfTextView view, int streakCount)
         {
-            throttledShake.InvokeAccumulated(view);
+            if (lastShakeTime.AddMilliseconds(SHAKE_THROTTLED_MILLISECONDS) > DateTime.Now) { return; }
+
+            Shake(view).ConfigureAwait(false);
         }
 
-        public void Shake(IWpfTextView view)
+        public async Task Shake(IWpfTextView view)
         {
             var settings = SettingsService.GetScreenShakeSettings(ServiceProvider.GlobalProvider);
 
             int leftAmount = GetShakeIntensity(settings.MinIntensity, settings.MaxIntensity),
                 topAmount = GetShakeIntensity(settings.MinIntensity, settings.MaxIntensity);
 
-            view.ViewportLeft += leftAmount;
+            lastShakeTime = DateTime.Now;
+            view.ViewScroller.ScrollViewportHorizontallyByPixels(leftAmount);
             view.ViewScroller.ScrollViewportVerticallyByPixels(topAmount);
 
-            if (clearScreenShakeTimer == null)
-            {
-                clearScreenShakeTimer = new Timer(info =>
-                {
-                    view.VisualElement.Dispatcher.Invoke(
-                        () =>
-                        {
-                            view.ViewportLeft -= leftAmount;
-                            view.ViewScroller.ScrollViewportVerticallyByPixels(-topAmount);
-                        },
-                        DispatcherPriority.ContextIdle);
-                }, new AutoResetEvent(false), SHAKE_TIMEOUT_MILLISECONDS, Timeout.Infinite);
-            }
+            await Task.Delay(SHAKE_TIMEOUT_MILLISECONDS);
+            view.ViewScroller.ScrollViewportHorizontallyByPixels(-leftAmount);
+            view.ViewScroller.ScrollViewportVerticallyByPixels(-topAmount);
         }
 
 
