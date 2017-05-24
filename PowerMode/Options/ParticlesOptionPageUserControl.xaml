@@ -1,0 +1,50 @@
+﻿<UserControl x:Name="userControl" x:Class="BigEgg.Tools.PowerMode.Options.ParticlesOptionPageUserControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:BigEgg.Tools.PowerMode.Options"
+             mc:Ignorable="d" 
+             xmlns:System="clr-namespace:System;assembly=mscorlib"
+             xmlns:Settings="clr-namespace:BigEgg.Tools.PowerMode.Settings"
+             d:DesignHeight="300" d:DesignWidth="300">
+    <UserControl.Resources>
+        <ObjectDataProvider x:Key="particlesColorTypes" MethodName="GetValues" ObjectType="{x:Type System:Enum}">
+            <ObjectDataProvider.MethodParameters>
+                <x:Type TypeName="Settings:ParticlesColorType"/>
+            </ObjectDataProvider.MethodParameters>
+        </ObjectDataProvider>
+    </UserControl.Resources>
+    <ScrollViewer HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="30" />
+                <RowDefinition Height="30" />
+                <RowDefinition Height="30" />
+                <RowDefinition Height="30" />
+                <RowDefinition Height="30" />
+                <RowDefinition Height="30" />
+                <RowDefinition Height="30" />
+                <RowDefinition Height="auto" />
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="200" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <TextBlock Text="Color Type" Grid.Row="0" Grid.Column="0" VerticalAlignment="Center" Margin="10, 0, 0, 0" />
+            <ComboBox Grid.Row="0" Grid.Column="1" Margin="0,5,10,5" ToolTip="The color type of particles" SelectedItem="{Binding DataContext.ParticlesColorType, ElementName=userControl}" ItemsSource="{Binding Source={StaticResource particlesColorTypes}}" IsEnabled="False" />
+            <TextBlock Text="Particles Color" Grid.Row="1" Grid.Column="0" VerticalAlignment="Center" Margin="10, 0, 0, 0" />
+            <TextBox Grid.Row="1" Grid.Column="1" Margin="0,5,10,5" ToolTip="Color of particles when fixed color is selected." Text="{Binding DataContext.FixedColorString, ElementName=userControl, Mode=OneWay}" IsEnabled="False" />
+            <TextBlock Text="Max Total" Grid.Row="2" Grid.Column="0" VerticalAlignment="Center" Margin="10, 0, 0, 0" />
+            <TextBox Grid.Row="2" Grid.Column="1" Margin="0,5,10,5" ToolTip="The maximum total number of particles on the screen." Text="{Binding DataContext.MaxParticlesCount, ElementName=userControl, UpdateSourceTrigger=PropertyChanged, ValidatesOnExceptions=true, ValidatesOnDataErrors=true, NotifyOnValidationError=true}" />
+            <TextBlock Text="Minimum Spawned" Grid.Row="3" Grid.Column="0" VerticalAlignment="Center" Margin="10, 0, 0, 0" />
+            <TextBox Grid.Row="3" Grid.Column="1" Margin="0,5,10,5" ToolTip="The maximum total number of particles on the screen." Text="{Binding DataContext.MinSpawnedParticles, ElementName=userControl, UpdateSourceTrigger=PropertyChanged, ValidatesOnExceptions=true, ValidatesOnDataErrors=true, NotifyOnValidationError=true}" />
+            <TextBlock Text="Maximum Spawned" Grid.Row="4" Grid.Column="0" VerticalAlignment="Center" Margin="10, 0, 0, 0" />
+            <TextBox Grid.Row="4" Grid.Column="1" Margin="0,5,10,5" ToolTip="The maximum total number of particles on the screen." Text="{Binding DataContext.MaxSpawnedParticles, ElementName=userControl, UpdateSourceTrigger=PropertyChanged, ValidatesOnExceptions=true, ValidatesOnDataErrors=true, NotifyOnValidationError=true}" />
+            <TextBlock Text="Minimum Size" Grid.Row="5" Grid.Column="0" VerticalAlignment="Center" Margin="10, 0, 0, 0" />
+            <TextBox Grid.Row="5" Grid.Column="1" Margin="0,5,10,5" ToolTip="The maximum total number of particles on the screen." Text="{Binding DataContext.MinParticlesSize, ElementName=userControl, UpdateSourceTrigger=PropertyChanged, ValidatesOnExceptions=true, ValidatesOnDataErrors=true, NotifyOnValidationError=true}" />
+            <TextBlock Text="Maximum Size" Grid.Row="6" Grid.Column="0" VerticalAlignment="Center" Margin="10, 0, 0, 0" />
+            <TextBox Grid.Row="6" Grid.Column="1" Margin="0,5,10,5" ToolTip="The maximum total number of particles on the screen." Text="{Binding DataContext.MaxParticlesSize, ElementName=userControl, UpdateSourceTrigger=PropertyChanged, ValidatesOnExceptions=true, ValidatesOnDataErrors=true, NotifyOnValidationError=true}" />
+        </Grid>
+    </ScrollViewer>
+</UserControl>

@@ -33,6 +33,7 @@
     [ProvideOptionPage(typeof(GeneralOptionPage), "Power Mode", "General", 0, 0, true)]
     [ProvideOptionPage(typeof(ComboModeOptionPage), "Power Mode", "Combo Mode", 0, 0, true)]
     [ProvideOptionPage(typeof(ScreenShakeOptionPage), "Power Mode", "Screen Shake", 0, 0, true)]
+    [ProvideOptionPage(typeof(ParticlesOptionPage), "Power Mode", "Particles", 0, 0, true)]
     [ProvideMenuResource("Menus.ctmenu", 1)]
     [ProvideAutoLoad("ADFC4E64-0397-11D1-9F4E-00A0C911004F")]
     public sealed class PowerModePackage : Package
