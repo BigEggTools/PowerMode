@@ -1,12 +1,13 @@
 ﻿namespace BigEgg.Tools.PowerMode.Adornments
 {
+    using System;
     using Task = System.Threading.Tasks.Task;
+
     using Microsoft.VisualStudio.Shell;
     using Microsoft.VisualStudio.Text.Editor;
 
     using BigEgg.Tools.PowerMode.Settings;
     using BigEgg.Tools.PowerMode.Utils;
-    using System;
 
     public class ScreenShakeAdornment : IAdornment
     {

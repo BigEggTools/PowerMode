@@ -3,15 +3,15 @@
     using System.Drawing;
     using System.Drawing.Imaging;
     using System.IO;
-    using Controls = System.Windows.Controls;
     using System.Windows.Controls;
+    using Image = System.Windows.Controls.Image;
     using System.Windows.Media.Imaging;
 
     using Microsoft.VisualStudio.Text.Editor;
 
     public static class ImageUtils
     {
-        public static void UpdateSource(this Controls.Image image, Bitmap bitmap)
+        public static void UpdateSource(this Image image, Bitmap bitmap)
         {
             BitmapImage bitmapImage = new BitmapImage();
             using (MemoryStream memory = new MemoryStream())
@@ -27,7 +27,7 @@
             image.Source = bitmapImage;
         }
 
-        public static void RefreshImage(this IAdornmentLayer adornmentLayer, Controls.Image image, double left, double right)
+        public static void RefreshImage(this IAdornmentLayer adornmentLayer, Image image, double left, double right)
         {
             adornmentLayer.RemoveAdornment(image);
             Canvas.SetLeft(image, left);

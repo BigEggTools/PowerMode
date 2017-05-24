@@ -1,6 +1,7 @@
 ﻿namespace BigEgg.Tools.PowerMode
 {
     using System;
+    using System.ComponentModel;
     using System.Threading;
     using System.Windows.Threading;
 
@@ -9,9 +10,8 @@
     using Microsoft.VisualStudio.Text.Editor;
 
     using BigEgg.Tools.PowerMode.Adornments;
-    using BigEgg.Tools.PowerMode.Settings;
-    using System.ComponentModel;
     using BigEgg.Tools.PowerMode.Services;
+    using BigEgg.Tools.PowerMode.Settings;
 
     internal sealed class PowerModeAdornment
     {
