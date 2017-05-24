@@ -12,7 +12,7 @@
         {
             if (serviceProvider == null) { throw new ArgumentNullException("serviceProvider"); }
 
-            if (screenShakeSettingsCache == null)
+            if (particlesSettingsCache == null)
             {
                 var store = GetSettingsStore(serviceProvider);
                 particlesSettingsCache = new ParticlesSettings();
