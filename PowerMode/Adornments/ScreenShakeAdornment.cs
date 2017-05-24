@@ -44,6 +44,7 @@
             lastShakeTime = DateTime.Now;
             view.ViewScroller.ScrollViewportHorizontallyByPixels(leftAmount);
             view.ViewScroller.ScrollViewportVerticallyByPixels(topAmount);
+            //  TODO: Should have a better way to shake the screen
 
             await Task.Delay(SHAKE_TIMEOUT_MILLISECONDS);
             view.ViewScroller.ScrollViewportHorizontallyByPixels(-leftAmount);

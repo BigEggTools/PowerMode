@@ -68,6 +68,7 @@
         {
             if (lastTextChangeTime.AddMilliseconds(TEXT_CHANGE_THROTTLED_MILLISECONDS) > DateTime.Now) { return; }
             lastTextChangeTime = DateTime.Now;
+            //  TODO: Should have a better way to reduce effect of batch action, such as: CTRL+Z
 
             RefreshSettings();
 
