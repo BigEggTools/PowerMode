@@ -39,19 +39,15 @@
             get { return new ComboModeOptionPageUserControl(this); }
         }
 
-        protected override void SaveSetting(PropertyDescriptor property)
-        {
-            if (settings.HasErrors) { return; }
-
-            SettingsService.SaveToStorage(settings, Site);
-        }
-
         protected override void OnApply(PageApplyEventArgs e)
         {
             if (settings.HasErrors)
             {
                 e.ApplyBehavior = ApplyKind.CancelNoNavigate;
+                return;
             }
+
+            SettingsService.SaveToStorage(settings, Site);
         }
 
         protected override void OnClosed(EventArgs e)
