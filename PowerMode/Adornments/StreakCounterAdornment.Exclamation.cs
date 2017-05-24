@@ -3,10 +3,7 @@
     using System;
     using System.Drawing;
     using System.Drawing.Drawing2D;
-    using System.Drawing.Imaging;
-    using System.IO;
     using System.Windows.Media.Animation;
-    using System.Windows.Media.Imaging;
 
     using BigEgg.Tools.PowerMode.Services;
 
@@ -15,7 +12,7 @@
         private readonly static double EXCLAMATION_START_ALPHA = 0.9;
 
 
-        private BitmapImage UpdateExclamationImage(int streakCount)
+        private Bitmap GetExclamationImage(int streakCount)
         {
             var font = new Font("Tahoma", ComboService.GetPowerLevelExclamationFontSize(streakCount));
             var color = ComboService.GetPowerLevelColor(streakCount);
@@ -23,29 +20,19 @@
             var bitmap = new Bitmap(ADORNMENT_WIDTH, ADORNMENT_EXCLAMATION_HEIGHT);
             bitmap.MakeTransparent();
 
-            var graphics = Graphics.FromImage(bitmap);
-            graphics.SmoothingMode = SmoothingMode.AntiAlias;
-            graphics.InterpolationMode = InterpolationMode.HighQualityBicubic;
-            graphics.PixelOffsetMode = PixelOffsetMode.HighQuality;
-
-            var exclamation = ComboService.GetExclamation();
-            var size = graphics.MeasureString(exclamation, font);
-            graphics.DrawString(exclamation, font, new SolidBrush(color), new RectangleF(ADORNMENT_WIDTH - size.Width, 0, size.Width, ADORNMENT_EXCLAMATION_HEIGHT));
-
-            graphics.Flush();
-
-            BitmapImage bitmapImage = new BitmapImage();
-            using (MemoryStream memory = new MemoryStream())
+            using (var graphics = Graphics.FromImage(bitmap))
             {
-                bitmap.Save(memory, ImageFormat.Png);
-                memory.Position = 0;
-                bitmapImage.BeginInit();
-                bitmapImage.StreamSource = memory;
-                bitmapImage.CacheOption = BitmapCacheOption.OnLoad;
-                bitmapImage.EndInit();
-            }
+                graphics.SmoothingMode = SmoothingMode.AntiAlias;
+                graphics.InterpolationMode = InterpolationMode.HighQualityBicubic;
+                graphics.PixelOffsetMode = PixelOffsetMode.HighQuality;
 
-            return bitmapImage;
+                var exclamation = ComboService.GetExclamation();
+                var size = graphics.MeasureString(exclamation, font);
+                graphics.DrawString(exclamation, font, new SolidBrush(color), new RectangleF(ADORNMENT_WIDTH - size.Width, 0, size.Width, ADORNMENT_EXCLAMATION_HEIGHT));
+
+                graphics.Flush();
+                return bitmap;
+            }
         }
 
 

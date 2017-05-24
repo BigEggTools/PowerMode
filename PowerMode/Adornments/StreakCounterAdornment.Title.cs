@@ -2,43 +2,30 @@
 {
     using System.Drawing;
     using System.Drawing.Drawing2D;
-    using System.Drawing.Imaging;
-    using System.IO;
-    using System.Windows.Media.Imaging;
 
     public partial class StreakCounterAdornment
     {
         private const string COMBO_TITLE = "combo";
 
 
-        private BitmapImage UpdateTitleImage()
+        private Bitmap GetTitleImage()
         {
             var bitmap = new Bitmap(ADORNMENT_WIDTH, ADORNMENT_TITLE_HEIGHT);
             bitmap.MakeTransparent();
 
-            var graphics = Graphics.FromImage(bitmap);
-            graphics.SmoothingMode = SmoothingMode.AntiAlias;
-            graphics.InterpolationMode = InterpolationMode.HighQualityBicubic;
-            graphics.PixelOffsetMode = PixelOffsetMode.HighQuality;
-
-            var font = new Font("Tahoma", 8);
-            var size = graphics.MeasureString(COMBO_TITLE, font);
-            graphics.DrawString(COMBO_TITLE, font, Brushes.White, new RectangleF(ADORNMENT_WIDTH - size.Width, 0, size.Width, ADORNMENT_TITLE_HEIGHT));
-
-            graphics.Flush();
-
-            BitmapImage bitmapImage = new BitmapImage();
-            using (MemoryStream memory = new MemoryStream())
+            using (var graphics = Graphics.FromImage(bitmap))
             {
-                bitmap.Save(memory, ImageFormat.Png);
-                memory.Position = 0;
-                bitmapImage.BeginInit();
-                bitmapImage.StreamSource = memory;
-                bitmapImage.CacheOption = BitmapCacheOption.OnLoad;
-                bitmapImage.EndInit();
-            }
+                graphics.SmoothingMode = SmoothingMode.AntiAlias;
+                graphics.InterpolationMode = InterpolationMode.HighQualityBicubic;
+                graphics.PixelOffsetMode = PixelOffsetMode.HighQuality;
 
-            return bitmapImage;
+                var font = new Font("Tahoma", 8);
+                var size = graphics.MeasureString(COMBO_TITLE, font);
+                graphics.DrawString(COMBO_TITLE, font, Brushes.White, new RectangleF(ADORNMENT_WIDTH - size.Width, 0, size.Width, ADORNMENT_TITLE_HEIGHT));
+
+                graphics.Flush();
+                return bitmap;
+            }
         }
     }
 }

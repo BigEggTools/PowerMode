@@ -3,16 +3,13 @@
     using System;
     using System.Drawing;
     using System.Drawing.Drawing2D;
-    using System.Drawing.Imaging;
-    using System.IO;
     using System.Windows.Media.Animation;
-    using System.Windows.Media.Imaging;
 
     using BigEgg.Tools.PowerMode.Services;
 
     public partial class StreakCounterAdornment
     {
-        private Tuple<BitmapImage, SizeF> UpdateStreakCounterImage(int streakCount)
+        private Tuple<Bitmap, SizeF> GetStreakCounterImage(int streakCount)
         {
             var font = new Font("Tahoma", ComboService.GetPowerLevelFontSize(streakCount));
             var color = ComboService.GetPowerLevelColor(streakCount);
@@ -21,31 +18,22 @@
             var bitmap = new Bitmap(ADORNMENT_WIDTH, ADORNMENT_STREAK_COUNTER_HEIGHT);
             bitmap.MakeTransparent();
 
-            var graphics = Graphics.FromImage(bitmap);
-            graphics.SmoothingMode = SmoothingMode.AntiAlias;
-            graphics.InterpolationMode = InterpolationMode.HighQualityBicubic;
-            graphics.PixelOffsetMode = PixelOffsetMode.HighQuality;
-
-            var size = graphics.MeasureString(streakCount.ToString(), font);
-            graphics.DrawString(streakCount.ToString(), font, new SolidBrush(color), new RectangleF(ADORNMENT_WIDTH - size.Width, 0, size.Width, ADORNMENT_STREAK_COUNTER_HEIGHT));
-
-            var pen = new Pen(color, penWidth);
-            graphics.DrawLine(pen, ADORNMENT_WIDTH - size.Width, size.Height - 5 + penWidth / 2, ADORNMENT_WIDTH, size.Height - 5 + penWidth / 2);
-
-            graphics.Flush();
-
-            BitmapImage bitmapImage = new BitmapImage();
-            using (MemoryStream memory = new MemoryStream())
+            using (var graphics = Graphics.FromImage(bitmap))
             {
-                bitmap.Save(memory, ImageFormat.Png);
-                memory.Position = 0;
-                bitmapImage.BeginInit();
-                bitmapImage.StreamSource = memory;
-                bitmapImage.CacheOption = BitmapCacheOption.OnLoad;
-                bitmapImage.EndInit();
-            }
+                graphics.SmoothingMode = SmoothingMode.AntiAlias;
+                graphics.InterpolationMode = InterpolationMode.HighQualityBicubic;
+                graphics.PixelOffsetMode = PixelOffsetMode.HighQuality;
 
-            return new Tuple<BitmapImage, SizeF>(bitmapImage, size);
+                var size = graphics.MeasureString(streakCount.ToString(), font);
+                graphics.DrawString(streakCount.ToString(), font, new SolidBrush(color), new RectangleF(ADORNMENT_WIDTH - size.Width, 0, size.Width, ADORNMENT_STREAK_COUNTER_HEIGHT));
+
+                var pen = new Pen(color, penWidth);
+                graphics.DrawLine(pen, ADORNMENT_WIDTH - size.Width, size.Height - 5 + penWidth / 2, ADORNMENT_WIDTH, size.Height - 5 + penWidth / 2);
+
+                graphics.Flush();
+
+                return new Tuple<Bitmap, SizeF>(bitmap, size);
+            }
         }
 
 

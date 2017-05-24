@@ -10,6 +10,7 @@
 
     using BigEgg.Tools.PowerMode.Adornments;
     using BigEgg.Tools.PowerMode.Settings;
+    using System.ComponentModel;
 
     internal sealed class PowerModeAdornment
     {
@@ -17,8 +18,11 @@
         private readonly IWpfTextView view;
         private readonly StreakCounterAdornment streakCounterAdornment;
 
+        private readonly GeneralSettings generalSettings;
+        private readonly ComboModeSettings comboModeSettings;
+
         private Timer clearHitTimer;
-        private int hitCount = 0;
+        private int streakCount = 0;
 
 
         public PowerModeAdornment(IWpfTextView view)
@@ -26,77 +30,103 @@
             if (view == null) { throw new ArgumentNullException("view"); }
 
             this.view = view;
-            this.adornmentLayer = view.GetAdornmentLayer("PowerModeAdornment");
-            this.streakCounterAdornment = new StreakCounterAdornment();
+            adornmentLayer = view.GetAdornmentLayer("PowerModeAdornment");
+
+            streakCounterAdornment = new StreakCounterAdornment();
+
+            generalSettings = new GeneralSettings();
+            comboModeSettings = new ComboModeSettings();
 
             this.view.TextBuffer.Changed += TextBuffer_Changed;
-            this.view.ViewportHeightChanged += View_ViewportSizeChanged; ;
+            this.view.ViewportHeightChanged += View_ViewportSizeChanged;
             this.view.ViewportWidthChanged += View_ViewportSizeChanged;
+
+            PropertyChangedEventManager.RemoveHandler(generalSettings, GeneralSettingModelPropertyChanged, "");
+            PropertyChangedEventManager.RemoveHandler(comboModeSettings, ComboModeSettingsModelPropertyChanged, "");
+
         }
 
         private void View_ViewportSizeChanged(object sender, EventArgs e)
         {
-            this.adornmentLayer.RemoveAllAdornments();
+            RefreshSettings();
 
-            var generalSettings = SettingsService.GetGeneralSettings(ServiceProvider.GlobalProvider);
             if (!generalSettings.IsEnablePowerMode) { return; }
 
-            if (generalSettings.IsEnableComboMode)
+            if (generalSettings.IsEnableComboMode && comboModeSettings.IsShowStreakCounter)
             {
-                var comboModeSettings = SettingsService.GetComboModeSettings(ServiceProvider.GlobalProvider);
-                if (comboModeSettings.IsShowStreakCounter)
-                {
-                    streakCounterAdornment.OnSizeChanged(view)
-                                  .ForEach(image =>
-                                        adornmentLayer.AddAdornment(
-                                            AdornmentPositioningBehavior.ViewportRelative,
-                                            null,
-                                            null,
-                                            image,
-                                            null));
-                }
+                streakCounterAdornment.OnSizeChanged(adornmentLayer, view, streakCount);
             }
-
         }
 
         private void TextBuffer_Changed(object sender, TextContentChangedEventArgs e)
         {
-            var generalSettings = SettingsService.GetGeneralSettings(ServiceProvider.GlobalProvider);
+            RefreshSettings();
+
             if (!generalSettings.IsEnablePowerMode) { return; }
 
             if (generalSettings.IsEnableComboMode)
             {
                 KeyDown();
 
-                var comboModeSettings = SettingsService.GetComboModeSettings(ServiceProvider.GlobalProvider);
                 if (comboModeSettings.IsShowStreakCounter)
                 {
-                    streakCounterAdornment.OnTextBufferChanged(adornmentLayer, view, hitCount);
+                    streakCounterAdornment.OnTextBufferChanged(adornmentLayer, view, streakCount);
                 }
             }
         }
 
         private void KeyDown()
         {
-            var comboModeSettings = SettingsService.GetComboModeSettings(ServiceProvider.GlobalProvider);
+            RefreshSettings();
 
-            hitCount++;
+            streakCount++;
 
             var timeout = comboModeSettings.StreakTimeout * 1000;
             if (clearHitTimer == null)
             {
-                var autoEvent = new AutoResetEvent(false);
                 clearHitTimer = new Timer(info =>
                 {
-                    hitCount = 0;
+                    streakCount = 0;
                     view.VisualElement.Dispatcher.Invoke(
-                        () => streakCounterAdornment.OnTextBufferChanged(adornmentLayer, view, hitCount),
+                        () =>
+                        {
+                            RefreshSettings();
+                            if (generalSettings.IsEnablePowerMode && generalSettings.IsEnableComboMode && comboModeSettings.IsShowStreakCounter)
+                            {
+                                streakCounterAdornment.OnTextBufferChanged(adornmentLayer, view, streakCount);
+                            }
+                        },
                         DispatcherPriority.ContextIdle);
-                }, autoEvent, timeout, Timeout.Infinite);
+                }, new AutoResetEvent(false), timeout, Timeout.Infinite);
             }
             else
             {
                 clearHitTimer.Change(timeout, Timeout.Infinite);
+            }
+        }
+
+        private void RefreshSettings()
+        {
+            generalSettings.CloneFrom(SettingsService.GetGeneralSettings(ServiceProvider.GlobalProvider));
+            comboModeSettings.CloneFrom(SettingsService.GetComboModeSettings(ServiceProvider.GlobalProvider));
+        }
+
+        private void GeneralSettingModelPropertyChanged(object sender, PropertyChangedEventArgs e)
+        {
+            if ((e.PropertyName == nameof(GeneralSettings.IsEnablePowerMode) ||
+                 e.PropertyName == nameof(GeneralSettings.IsEnableComboMode)) &&
+                !generalSettings.IsEnablePowerMode)
+            {
+                streakCounterAdornment.Cleanup(adornmentLayer, view);
+            }
+        }
+
+        private void ComboModeSettingsModelPropertyChanged(object sender, PropertyChangedEventArgs e)
+        {
+            if (e.PropertyName == nameof(ComboModeSettings.IsShowStreakCounter) &&
+                !comboModeSettings.IsShowStreakCounter)
+            {
+                streakCounterAdornment.Cleanup(adornmentLayer, view);
             }
         }
     }
