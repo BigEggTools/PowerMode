@@ -23,6 +23,8 @@
         private readonly GeneralSettings generalSettings;
         private readonly ComboModeSettings comboModeSettings;
 
+        private readonly static int TEXT_CHANGE_THROTTLED_MILLISECONDS = 50;
+        private DateTime lastTextChangeTime = DateTime.Now;
         private Timer clearStreakCountTimer;
         private int streakCount = 0;
 
@@ -64,6 +66,9 @@
 
         private void TextBuffer_Changed(object sender, TextContentChangedEventArgs e)
         {
+            if (lastTextChangeTime.AddMilliseconds(TEXT_CHANGE_THROTTLED_MILLISECONDS) > DateTime.Now) { return; }
+            lastTextChangeTime = DateTime.Now;
+
             RefreshSettings();
 
             if (!generalSettings.IsEnablePowerMode) { return; }
