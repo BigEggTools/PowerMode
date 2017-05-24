@@ -16,8 +16,6 @@ namespace BigEgg.Tools.PowerMode.Adornments
     public class ParticlesAdornment : IAdornment
     {
         private readonly static double PARTICLES_START_ALPHA = 0.9;
-        private static double MAX_SIDE_VELOCITY = 2;
-        private static double MAX_UP_VELOCITY = 10;
         private readonly double iterations;
         private readonly TimeSpan timeSpan;
         private readonly List<Image> particlesList;
@@ -68,11 +66,8 @@ namespace BigEgg.Tools.PowerMode.Adornments
 
             var top = view.Caret.Top;
             var left = view.Caret.Left;
-            var upVelocity = -RandomUtils.Random.NextDouble() * MAX_UP_VELOCITY;
-            var leftVelocity = RandomUtils.Random.NextDouble() * MAX_SIDE_VELOCITY * RandomUtils.NextSignal();
-
-            particles.BeginAnimation(Canvas.TopProperty, GetParticlesTopAnimation(top, upVelocity));
-            particles.BeginAnimation(Canvas.LeftProperty, GetParticlesLeftAnimation(left, left - (iterations * leftVelocity)));
+            particles.BeginAnimation(Canvas.TopProperty, GetParticlesTopAnimation(top));
+            particles.BeginAnimation(Canvas.LeftProperty, GetParticlesLeftAnimation(left));
             var opacityAnimation = GetParticlesOpacityAnimation();
             opacityAnimation.Completed += (sender, e) =>
             {
@@ -106,22 +101,24 @@ namespace BigEgg.Tools.PowerMode.Adornments
         }
 
 
-        private DoubleAnimation GetParticlesTopAnimation(double from, double by)
+        private DoubleAnimation GetParticlesTopAnimation(double top)
         {
             return new DoubleAnimation()
             {
-                EasingFunction = new BackEase(),
-                From = from,
-                By = by,
+                EasingFunction = new BackEase { Amplitude = RandomUtils.Random.NextDouble() * 5 + 0.5, EasingMode = EasingMode.EaseIn },
+                From = top,
+                To = top + RandomUtils.Random.Next(1, 30),
                 Duration = timeSpan
             };
         }
-        private DoubleAnimation GetParticlesLeftAnimation(double from, double to)
+        private DoubleAnimation GetParticlesLeftAnimation(double left)
         {
+            var leftDelta = RandomUtils.Random.NextDouble() * 40 * RandomUtils.NextSignal();
+
             return new DoubleAnimation()
             {
-                From = from,
-                To = to,
+                From = left,
+                To = left - leftDelta,
                 Duration = timeSpan
             };
         }
