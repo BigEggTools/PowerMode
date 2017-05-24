@@ -25,7 +25,8 @@
             {
                 if (settings == null)
                 {
-                    settings = SettingsService.GetScreenShakeSettings(Site);
+                    settings = new ScreenShakeSettings();
+                    settings.CloneFrom(SettingsService.GetScreenShakeSettings(Site));
                     PropertyChangedEventManager.AddHandler(settings, SettingModelPropertyChanged, "");
                 }
 

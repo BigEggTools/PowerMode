@@ -25,7 +25,8 @@
             {
                 if (settings == null)
                 {
-                    settings = SettingsService.GetGeneralSettings(Site);
+                    settings = new GeneralSettings();
+                    settings.CloneFrom(SettingsService.GetGeneralSettings(Site));
                     PropertyChangedEventManager.AddHandler(settings, SettingModelPropertyChanged, "");
                 }
 

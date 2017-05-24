@@ -25,7 +25,8 @@
             {
                 if (settings == null)
                 {
-                    settings = SettingsService.GetComboModeSettings(Site);
+                    settings = new ComboModeSettings();
+                    settings.CloneFrom(SettingsService.GetComboModeSettings(Site));
                     PropertyChangedEventManager.AddHandler(settings, SettingModelPropertyChanged, "");
                 }
 
