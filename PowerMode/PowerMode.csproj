@@ -52,6 +52,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="Adornments\IAdornment.cs" />
+    <Compile Include="Adornments\ScreenShakeAdornment.cs" />
     <Compile Include="Adornments\StreakCounterAdornment.cs" />
     <Compile Include="Adornments\StreakCounterAdornment.StreakCounter.cs">
       <DependentUpon>StreakCounterAdornment.cs</DependentUpon>
@@ -70,6 +71,7 @@
     <Compile Include="Commands\ToggleParticlesCommand.cs" />
     <Compile Include="Commands\ToggleComboModeCommand.cs" />
     <Compile Include="Constants.cs" />
+    <Compile Include="Fundations\ThrottledAction.cs" />
     <Compile Include="Fundations\ValidatableModel.cs" />
     <Compile Include="Fundations\Validations\LessThanAttribute.cs" />
     <Compile Include="Options\ComboModeOptionPage.cs">

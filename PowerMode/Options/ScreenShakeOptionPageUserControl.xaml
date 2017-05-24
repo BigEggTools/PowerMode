@@ -18,9 +18,9 @@
                 <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
             <TextBlock Text="Minimum Intensity" Grid.Row="0" Grid.Column="0" VerticalAlignment="Center" Margin="10, 0, 0, 0" />
-            <TextBox Grid.Row="0" Grid.Column="1" Margin="0,5,10,5" ToolTip="The minimum  (1-10) (randomized) intensity of the shake." Text="{Binding DataContext.MinimumIntensity, ElementName=userControl, UpdateSourceTrigger=PropertyChanged, ValidatesOnExceptions=true, ValidatesOnDataErrors=true, NotifyOnValidationError=true}" />
+            <TextBox Grid.Row="0" Grid.Column="1" Margin="0,5,10,5" ToolTip="The minimum  (1-10) (randomized) intensity of the shake." Text="{Binding DataContext.MinIntensity, ElementName=userControl, UpdateSourceTrigger=PropertyChanged, ValidatesOnExceptions=true, ValidatesOnDataErrors=true, NotifyOnValidationError=true}" />
             <TextBlock Text="Maximum Intensity" Grid.Row="1" Grid.Column="0" VerticalAlignment="Center" Margin="10, 0, 0, 0" />
-            <TextBox Grid.Row="1" Grid.Column="1" Margin="0,5,10,5" ToolTip="The maximum (1-10) (randomized) intensity of the shake." Text="{Binding DataContext.MaximumIntensity, ElementName=userControl, UpdateSourceTrigger=PropertyChanged, ValidatesOnExceptions=true, ValidatesOnDataErrors=true, NotifyOnValidationError=true}" />
+            <TextBox Grid.Row="1" Grid.Column="1" Margin="0,5,10,5" ToolTip="The maximum (1-10) (randomized) intensity of the shake." Text="{Binding DataContext.MaxIntensity, ElementName=userControl, UpdateSourceTrigger=PropertyChanged, ValidatesOnExceptions=true, ValidatesOnDataErrors=true, NotifyOnValidationError=true}" />
         </Grid>
     </ScrollViewer>
 </UserControl>

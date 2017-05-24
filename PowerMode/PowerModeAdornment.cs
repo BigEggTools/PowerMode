@@ -11,17 +11,19 @@
     using BigEgg.Tools.PowerMode.Adornments;
     using BigEgg.Tools.PowerMode.Settings;
     using System.ComponentModel;
+    using BigEgg.Tools.PowerMode.Services;
 
     internal sealed class PowerModeAdornment
     {
         private readonly IAdornmentLayer adornmentLayer;
         private readonly IWpfTextView view;
-        private readonly StreakCounterAdornment streakCounterAdornment;
+        private readonly IAdornment streakCounterAdornment;
+        private readonly IAdornment screenShakeAdornment;
 
         private readonly GeneralSettings generalSettings;
         private readonly ComboModeSettings comboModeSettings;
 
-        private Timer clearHitTimer;
+        private Timer clearStreakCountTimer;
         private int streakCount = 0;
 
 
@@ -33,6 +35,7 @@
             adornmentLayer = view.GetAdornmentLayer("PowerModeAdornment");
 
             streakCounterAdornment = new StreakCounterAdornment();
+            screenShakeAdornment = new ScreenShakeAdornment();
 
             generalSettings = new GeneralSettings();
             comboModeSettings = new ComboModeSettings();
@@ -56,6 +59,7 @@
             {
                 streakCounterAdornment.OnSizeChanged(adornmentLayer, view, streakCount);
             }
+            screenShakeAdornment.Cleanup(adornmentLayer, view);
         }
 
         private void TextBuffer_Changed(object sender, TextContentChangedEventArgs e)
@@ -72,6 +76,14 @@
                 {
                     streakCounterAdornment.OnTextBufferChanged(adornmentLayer, view, streakCount);
                 }
+                if (ComboService.CanShowExclamation(streakCount))
+                {
+                    screenShakeAdornment.OnTextBufferChanged(adornmentLayer, view, streakCount);
+                }
+            }
+            else
+            {
+                screenShakeAdornment.OnTextBufferChanged(adornmentLayer, view, streakCount);
             }
         }
 
@@ -82,9 +94,9 @@
             streakCount++;
 
             var timeout = comboModeSettings.StreakTimeout * 1000;
-            if (clearHitTimer == null)
+            if (clearStreakCountTimer == null)
             {
-                clearHitTimer = new Timer(info =>
+                clearStreakCountTimer = new Timer(info =>
                 {
                     streakCount = 0;
                     view.VisualElement.Dispatcher.Invoke(
@@ -101,7 +113,7 @@
             }
             else
             {
-                clearHitTimer.Change(timeout, Timeout.Infinite);
+                clearStreakCountTimer.Change(timeout, Timeout.Infinite);
             }
         }
 
@@ -118,6 +130,12 @@
                 !generalSettings.IsEnablePowerMode)
             {
                 streakCounterAdornment.Cleanup(adornmentLayer, view);
+            }
+            if ((e.PropertyName == nameof(GeneralSettings.IsEnablePowerMode) ||
+                 e.PropertyName == nameof(GeneralSettings.IsEnableScreenShake)) &&
+                !generalSettings.IsEnablePowerMode)
+            {
+                screenShakeAdornment.Cleanup(adornmentLayer, view);
             }
         }
 

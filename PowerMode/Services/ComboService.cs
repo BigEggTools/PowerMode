@@ -80,6 +80,12 @@
             return RandomUtils.NextString(exclamations);
         }
 
+        public static bool CanShowExclamation(int streakCount)
+        {
+            var level = GetPowerLevel(streakCount);
+            return level >= GetSettings().ScreenShakeStartLevel;
+        }
+
 
         private static ComboModeSettings GetSettings()
         {
