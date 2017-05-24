@@ -5,7 +5,7 @@
     public static partial class SettingsService
     {
         private static ScreenShakeSettings screenShakeSettingsCache = null;
-        private static readonly string SCREEN_SHAKE_SETTINGS_CATELOG = "General";
+        private static readonly string SCREEN_SHAKE_SETTINGS_CATELOG = "ScreenShake";
 
 
         public static ScreenShakeSettings GetScreenShakeSettings(IServiceProvider serviceProvider)
