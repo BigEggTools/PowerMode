@@ -1,6 +1,7 @@
 ﻿namespace BigEgg.Tools.PowerMode
 {
     using System;
+    using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
 
     [AttributeUsage(AttributeTargets.Property | AttributeTargets.Field, AllowMultiple = false)]
@@ -20,21 +21,22 @@
 
         protected override ValidationResult IsValid(object value, ValidationContext validationContext)
         {
-            if (value == null) { return new ValidationResult($"Property '{validationContext.MemberName}' have null value."); }
+            if (value == null) { return new ValidationResult($"Property '{validationContext.MemberName}' have null value.", new List<string>() { validationContext.MemberName, dependentPropertyName }); }
             if (!(value is IComparable)) { return new ValidationResult($"Property '{validationContext.MemberName}' should be comparable."); }
 
             var dependentPropertyInfo = validationContext.ObjectType.GetProperty(this.dependentPropertyName);
-            if (dependentPropertyInfo == null) { return new ValidationResult($"Cannot find the dependent property '{dependentPropertyName}'."); }
+            if (dependentPropertyInfo == null) { return new ValidationResult($"Cannot find the dependent property '{dependentPropertyName}'.", new List<string>() { validationContext.MemberName, dependentPropertyName }); }
 
             var dependentPropertyValue = dependentPropertyInfo.GetValue(validationContext.ObjectInstance);
-            if (dependentPropertyValue == null) { return new ValidationResult($"Property '{dependentPropertyName}' have null value."); }
-            if (!(dependentPropertyValue is IComparable)) { return new ValidationResult($"Property '{dependentPropertyName}' should be comparable."); }
+            if (dependentPropertyValue == null) { return new ValidationResult($"Property '{dependentPropertyName}' have null value.", new List<string>() { validationContext.MemberName, dependentPropertyName }); }
+            if (!(dependentPropertyValue is IComparable)) { return new ValidationResult($"Property '{dependentPropertyName}' should be comparable.", new List<string>() { validationContext.MemberName, dependentPropertyName }); }
 
-            if (value.GetType() != dependentPropertyValue.GetType()) { return new ValidationResult($"Property '{validationContext.MemberName}' and property '{dependentPropertyName}' should have same type."); }
+            if (value.GetType() != dependentPropertyValue.GetType()) { return new ValidationResult($"Property '{validationContext.MemberName}' and property '{dependentPropertyName}' should have same type.", new List<string>() { validationContext.MemberName, dependentPropertyName }); }
 
-            if ((value as IComparable).CompareTo(dependentPropertyValue as IComparable) >= 0)
+            var compareResult = (value as IComparable).CompareTo(dependentPropertyValue as IComparable);
+            if (compareResult > 0 || (compareResult == 0 && !allowEqual))
             {
-                return new ValidationResult(ErrorMessage ?? $"Property '{validationContext.MemberName}' Should less than property '{dependentPropertyName}'.");
+                return new ValidationResult(ErrorMessage ?? $"Property '{validationContext.MemberName}' Should less than property '{dependentPropertyName}'.", new List<string>() { validationContext.MemberName, dependentPropertyName });
             }
             return ValidationResult.Success;
         }

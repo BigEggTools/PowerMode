@@ -8,7 +8,7 @@
     using System.Linq;
     using System.Runtime.CompilerServices;
 
-    public abstract class ValidatableModel : Model, INotifyDataErrorInfo, IValidatableObject
+    public abstract class ValidatableModel : Model, INotifyDataErrorInfo
     {
         private readonly Dictionary<string, List<ValidationResult>> errors;
         private IReadOnlyList<ValidationResult> allErrorsCache;
@@ -40,13 +40,6 @@
         IEnumerable INotifyDataErrorInfo.GetErrors(string propertyName)
         {
             return GetErrors(propertyName);
-        }
-        #endregion
-
-        #region Implement Interface IValidatableObject
-        public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
-        {
-            return allErrorsCache;
         }
         #endregion
 
