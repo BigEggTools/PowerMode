@@ -71,17 +71,24 @@
     <Compile Include="Commands\ToggleComboModeCommand.cs" />
     <Compile Include="Constants.cs" />
     <Compile Include="Fundations\ValidatableModel.cs" />
+    <Compile Include="Fundations\Validations\LessThanAttribute.cs" />
     <Compile Include="Options\ComboModeOptionPage.cs">
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Options\ComboModeOptionPageUserControl.xaml.cs">
       <DependentUpon>ComboModeOptionPageUserControl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Options\ScreenShakeOptionPage.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Options\GeneralOptionPage.cs">
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Options\GeneralOptionPageUserControl.xaml.cs">
       <DependentUpon>GeneralOptionPageUserControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Options\ScreenShakeOptionPageUserControl.xaml.cs">
+      <DependentUpon>ScreenShakeOptionPageUserControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="PowerModeAdornment.cs" />
     <Compile Include="PowerModeAdornmentTextViewCreationListener.cs" />
@@ -91,11 +98,15 @@
     <Compile Include="Services\ComboService.cs" />
     <Compile Include="Settings\ComboModeSettings.cs" />
     <Compile Include="Settings\GeneralSettings.cs" />
+    <Compile Include="Settings\ScreenShakeSettings.cs" />
     <Compile Include="Settings\SettingsService.cs" />
     <Compile Include="Settings\SettingsService.GeneralSettings.cs">
       <DependentUpon>SettingsService.cs</DependentUpon>
     </Compile>
     <Compile Include="Settings\SettingsService.ComboModeSettings.cs">
+      <DependentUpon>SettingsService.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Settings\SettingsService.ScreenShakeSettings.cs">
       <DependentUpon>SettingsService.cs</DependentUpon>
     </Compile>
     <Compile Include="Utils\ColorExtensions.cs" />
@@ -245,6 +256,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Options\GeneralOptionPageUserControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Options\ScreenShakeOptionPageUserControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
