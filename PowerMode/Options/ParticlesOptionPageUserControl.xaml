@@ -36,20 +36,20 @@
                 <ColumnDefinition Width="200" />
                 <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
-            <TextBlock Text="Color Type" Grid.Row="0" Grid.Column="0" VerticalAlignment="Center" Margin="10, 0, 0, 0" />
-            <ComboBox Grid.Row="0" Grid.Column="1" Margin="0,5,10,5" ToolTip="The color type of particles" SelectedItem="{Binding DataContext.ParticlesColorType, ElementName=userControl}" ItemsSource="{Binding Source={StaticResource particlesColorTypes}}" IsEnabled="False" />
-            <TextBlock Text="Particles Color" Grid.Row="1" Grid.Column="0" VerticalAlignment="Center" Margin="10, 0, 0, 0" />
-            <TextBox Grid.Row="1" Grid.Column="1" Margin="0,5,10,5" ToolTip="Color of particles when fixed color is selected." Text="{Binding DataContext.FixedColorString, ElementName=userControl, Mode=OneWay}" IsEnabled="False" />
-            <TextBlock Text="Max Total" Grid.Row="2" Grid.Column="0" VerticalAlignment="Center" Margin="10, 0, 0, 0" />
-            <TextBox Grid.Row="2" Grid.Column="1" Margin="0,5,10,5" ToolTip="The maximum total number of particles on the screen." Text="{Binding DataContext.MaxParticlesCount, ElementName=userControl, UpdateSourceTrigger=PropertyChanged, ValidatesOnExceptions=true, ValidatesOnDataErrors=true, NotifyOnValidationError=true}" />
-            <TextBlock Text="Minimum Spawned" Grid.Row="3" Grid.Column="0" VerticalAlignment="Center" Margin="10, 0, 0, 0" />
-            <TextBox Grid.Row="3" Grid.Column="1" Margin="0,5,10,5" ToolTip="The maximum total number of particles on the screen." Text="{Binding DataContext.MinSpawnedParticles, ElementName=userControl, UpdateSourceTrigger=PropertyChanged, ValidatesOnExceptions=true, ValidatesOnDataErrors=true, NotifyOnValidationError=true}" />
-            <TextBlock Text="Maximum Spawned" Grid.Row="4" Grid.Column="0" VerticalAlignment="Center" Margin="10, 0, 0, 0" />
-            <TextBox Grid.Row="4" Grid.Column="1" Margin="0,5,10,5" ToolTip="The maximum total number of particles on the screen." Text="{Binding DataContext.MaxSpawnedParticles, ElementName=userControl, UpdateSourceTrigger=PropertyChanged, ValidatesOnExceptions=true, ValidatesOnDataErrors=true, NotifyOnValidationError=true}" />
-            <TextBlock Text="Minimum Size" Grid.Row="5" Grid.Column="0" VerticalAlignment="Center" Margin="10, 0, 0, 0" />
-            <TextBox Grid.Row="5" Grid.Column="1" Margin="0,5,10,5" ToolTip="The maximum total number of particles on the screen." Text="{Binding DataContext.MinParticlesSize, ElementName=userControl, UpdateSourceTrigger=PropertyChanged, ValidatesOnExceptions=true, ValidatesOnDataErrors=true, NotifyOnValidationError=true}" />
-            <TextBlock Text="Maximum Size" Grid.Row="6" Grid.Column="0" VerticalAlignment="Center" Margin="10, 0, 0, 0" />
-            <TextBox Grid.Row="6" Grid.Column="1" Margin="0,5,10,5" ToolTip="The maximum total number of particles on the screen." Text="{Binding DataContext.MaxParticlesSize, ElementName=userControl, UpdateSourceTrigger=PropertyChanged, ValidatesOnExceptions=true, ValidatesOnDataErrors=true, NotifyOnValidationError=true}" />
+            <TextBlock Text="Color Type" Grid.Row="0" Grid.Column="0" VerticalAlignment="Center" Margin="10, 0, 0, 0" ToolTip="The color type of particles" />
+            <ComboBox Grid.Row="0" Grid.Column="1" Margin="0,5,10,5" SelectedItem="{Binding DataContext.ParticlesColorType, ElementName=userControl}" ItemsSource="{Binding Source={StaticResource particlesColorTypes}}" IsEnabled="False" />
+            <TextBlock Text="Particles Color" Grid.Row="1" Grid.Column="0" VerticalAlignment="Center" Margin="10, 0, 0, 0" ToolTip="Color of particles when fixed color is selected." />
+            <TextBox Grid.Row="1" Grid.Column="1" Margin="0,5,10,5" Text="{Binding DataContext.FixedColorString, ElementName=userControl, Mode=OneWay}" IsEnabled="False" />
+            <TextBlock Text="Max Total" Grid.Row="2" Grid.Column="0" VerticalAlignment="Center" Margin="10, 0, 0, 0" ToolTip="The maximum total number of particles on the screen." />
+            <TextBox Grid.Row="2" Grid.Column="1" Margin="0,5,10,5" Text="{Binding DataContext.MaxParticlesCount, ElementName=userControl, UpdateSourceTrigger=PropertyChanged, ValidatesOnExceptions=true, ValidatesOnDataErrors=true, NotifyOnValidationError=true}" />
+            <TextBlock Text="Minimum Spawned" Grid.Row="3" Grid.Column="0" VerticalAlignment="Center" Margin="10, 0, 0, 0" ToolTip="The minimum (randomized) number of particles spawned on input." />
+            <TextBox Grid.Row="3" Grid.Column="1" Margin="0,5,10,5" Text="{Binding DataContext.MinSpawnedParticles, ElementName=userControl, UpdateSourceTrigger=PropertyChanged, ValidatesOnExceptions=true, ValidatesOnDataErrors=true, NotifyOnValidationError=true}" />
+            <TextBlock Text="Maximum Spawned" Grid.Row="4" Grid.Column="0" VerticalAlignment="Center" Margin="10, 0, 0, 0" ToolTip="The maximum (randomized) number of particles spawned on input." />
+            <TextBox Grid.Row="4" Grid.Column="1" Margin="0,5,10,5" Text="{Binding DataContext.MaxSpawnedParticles, ElementName=userControl, UpdateSourceTrigger=PropertyChanged, ValidatesOnExceptions=true, ValidatesOnDataErrors=true, NotifyOnValidationError=true}" />
+            <TextBlock Text="Minimum Size" Grid.Row="5" Grid.Column="0" VerticalAlignment="Center" Margin="10, 0, 0, 0" ToolTip="The minimum (randomized) size of the particles." />
+            <TextBox Grid.Row="5" Grid.Column="1" Margin="0,5,10,5" Text="{Binding DataContext.MinParticlesSize, ElementName=userControl, UpdateSourceTrigger=PropertyChanged, ValidatesOnExceptions=true, ValidatesOnDataErrors=true, NotifyOnValidationError=true}" />
+            <TextBlock Text="Maximum Size" Grid.Row="6" Grid.Column="0" VerticalAlignment="Center" Margin="10, 0, 0, 0" ToolTip="The maximum (randomized) size of the particles." />
+            <TextBox Grid.Row="6" Grid.Column="1" Margin="0,5,10,5" Text="{Binding DataContext.MaxParticlesSize, ElementName=userControl, UpdateSourceTrigger=PropertyChanged, ValidatesOnExceptions=true, ValidatesOnDataErrors=true, NotifyOnValidationError=true}" />
         </Grid>
     </ScrollViewer>
 </UserControl>

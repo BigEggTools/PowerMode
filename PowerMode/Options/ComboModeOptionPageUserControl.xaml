@@ -34,14 +34,14 @@
                 <ColumnDefinition Width="200" />
                 <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
-            <TextBlock Text="Streak Timeout" Grid.Row="0" Grid.Column="0" VerticalAlignment="Center" Margin="10, 0, 0, 0" />
-            <TextBox Grid.Row="0" Grid.Column="1" Margin="0,5,10,5" ToolTip="Timeout to reset the streak counter. (1-60) In seconds." Text="{Binding DataContext.StreakTimeout, ElementName=userControl, UpdateSourceTrigger=PropertyChanged, ValidatesOnExceptions=true, ValidatesOnDataErrors=true, NotifyOnValidationError=true}" />
-            <TextBlock Text="Combo Level Streak Threshold" Grid.Row="1" Grid.Column="0" VerticalAlignment="Center" Margin="10, 0, 0, 0" />
-            <TextBox Grid.Row="1" Grid.Column="1" Margin="0,5,10,5" ToolTip="Streak threshold of the combo level. (10-100) Maximum level is 16" Text="{Binding DataContext.ComboLevelStreakThreshold, ElementName=userControl, UpdateSourceTrigger=PropertyChanged, ValidatesOnExceptions=true, ValidatesOnDataErrors=true, NotifyOnValidationError=true}" />
-            <TextBlock Text="Particles Start Level" Grid.Row="2" Grid.Column="0" VerticalAlignment="Center" Margin="10, 0, 0, 0" />
-            <TextBox Grid.Row="2" Grid.Column="1" Margin="0,5,10,5" ToolTip="The combo level (0-16) start show particles." Text="{Binding DataContext.ParticlesStartLevel, ElementName=userControl, UpdateSourceTrigger=PropertyChanged, ValidatesOnExceptions=true, ValidatesOnDataErrors=true, NotifyOnValidationError=true}" />
-            <TextBlock Text="Screen Shake Start Level" Grid.Row="3" Grid.Column="0" VerticalAlignment="Center" Margin="10, 0, 0, 0" />
-            <TextBox Grid.Row="3" Grid.Column="1" Margin="0,5,10,5" ToolTip="The combo level (0-16) start shake screen." Text="{Binding DataContext.ScreenShakeStartLevel, ElementName=userControl, UpdateSourceTrigger=PropertyChanged, ValidatesOnExceptions=true, ValidatesOnDataErrors=true, NotifyOnValidationError=true}" />
+            <TextBlock Text="Streak Timeout" Grid.Row="0" Grid.Column="0" VerticalAlignment="Center" Margin="10, 0, 0, 0" ToolTip="Timeout to reset the streak counter. (1-60) In seconds." />
+            <TextBox Grid.Row="0" Grid.Column="1" Margin="0,5,10,5" Text="{Binding DataContext.StreakTimeout, ElementName=userControl, UpdateSourceTrigger=PropertyChanged, ValidatesOnExceptions=true, ValidatesOnDataErrors=true, NotifyOnValidationError=true}" />
+            <TextBlock Text="Combo Level Streak Threshold" Grid.Row="1" Grid.Column="0" VerticalAlignment="Center" Margin="10, 0, 0, 0" ToolTip="Streak threshold of the combo level. (10-100) Maximum level is 16" />
+            <TextBox Grid.Row="1" Grid.Column="1" Margin="0,5,10,5" Text="{Binding DataContext.ComboLevelStreakThreshold, ElementName=userControl, UpdateSourceTrigger=PropertyChanged, ValidatesOnExceptions=true, ValidatesOnDataErrors=true, NotifyOnValidationError=true}" />
+            <TextBlock Text="Particles Start Level" Grid.Row="2" Grid.Column="0" VerticalAlignment="Center" Margin="10, 0, 0, 0" ToolTip="The combo level (0-16) start show particles." />
+            <TextBox Grid.Row="2" Grid.Column="1" Margin="0,5,10,5" Text="{Binding DataContext.ParticlesStartLevel, ElementName=userControl, UpdateSourceTrigger=PropertyChanged, ValidatesOnExceptions=true, ValidatesOnDataErrors=true, NotifyOnValidationError=true}" />
+            <TextBlock Text="Screen Shake Start Level" Grid.Row="3" Grid.Column="0" VerticalAlignment="Center" Margin="10, 0, 0, 0" ToolTip="The combo level (0-16) start shake screen." />
+            <TextBox Grid.Row="3" Grid.Column="1" Margin="0,5,10,5" Text="{Binding DataContext.ScreenShakeStartLevel, ElementName=userControl, UpdateSourceTrigger=PropertyChanged, ValidatesOnExceptions=true, ValidatesOnDataErrors=true, NotifyOnValidationError=true}" />
             <CheckBox Content="Show Streak Counter" Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="2" ToolTip="When enabled, show the streak counter." IsChecked="{Binding DataContext.IsShowStreakCounter, ElementName=userControl}" Style="{DynamicResource ToggleCheckBox}"/>
             <GroupBox Grid.Row="5" Grid.Column="0" Grid.ColumnSpan="2" Grid.RowSpan="6" Header="Streak Counter" IsEnabled="{Binding DataContext.IsShowStreakCounter, ElementName=userControl}">
                 <Grid>
@@ -57,16 +57,16 @@
                         <ColumnDefinition Width="195" />
                         <ColumnDefinition Width="*" />
                     </Grid.ColumnDefinitions>
-                    <TextBlock Text="Power Color" Grid.Row="0" Grid.Column="0" VerticalAlignment="Center" Margin="10, 0, 0, 0" />
-                    <TextBox Grid.Row="0" Grid.Column="1" Margin="0,5,10,5" ToolTip="Color of the streak counter." Text="{Binding DataContext.PowerColorString, ElementName=userControl, Mode=OneWay}" IsEnabled="False" />
-                    <TextBlock Text="Streak Counter Opacity" Grid.Row="1" Grid.Column="0" VerticalAlignment="Center" Margin="10, 0, 0, 0" />
-                    <TextBox Grid.Row="1" Grid.Column="1" Margin="0,5,10,5" ToolTip="Opacity of the streak counter. (0-255)" Text="{Binding DataContext.StreakCounterOpacity, ElementName=userControl, UpdateSourceTrigger=PropertyChanged, ValidatesOnExceptions=true, ValidatesOnDataErrors=true, NotifyOnValidationError=true}" />
-                    <TextBlock Text="Exclamation Every" Grid.Row="2" Grid.Column="0" VerticalAlignment="Center" Margin="10, 0, 0, 0" />
-                    <TextBox Grid.Row="2" Grid.Column="1" Margin="0,5,10,5" ToolTip="Shows an exclamation every streak count. (10-100)" Text="{Binding DataContext.ExclamationEveryStreak, ElementName=userControl, UpdateSourceTrigger=PropertyChanged, ValidatesOnExceptions=true, ValidatesOnDataErrors=true, NotifyOnValidationError=true}" />
-                    <TextBlock Text="Exclamation Texts" Grid.Row="3" Grid.Column="0" VerticalAlignment="Center" Margin="10, 0, 0, 0" />
-                    <TextBox Grid.Row="3" Grid.Column="1" Margin="0,5,10,5" ToolTip="Exclamations to show (randomized), use ';' to split." Text="{Binding DataContext.ExclamationsString, ElementName=userControl, UpdateSourceTrigger=PropertyChanged, ValidatesOnExceptions=true, ValidatesOnDataErrors=true, NotifyOnValidationError=true}" />
-                    <TextBlock Text="Streak Counter Shake Start Level" Grid.Row="4" Grid.Column="0" VerticalAlignment="Center" Margin="10, 0, 0, 0" />
-                    <TextBox Grid.Row="4" Grid.Column="1" Margin="0,5,10,5" ToolTip="The combo level (0-16) start shake streak counter." Text="{Binding DataContext.StreakCounterShakeStartLevel, ElementName=userControl, UpdateSourceTrigger=PropertyChanged, ValidatesOnExceptions=true, ValidatesOnDataErrors=true, NotifyOnValidationError=true}" />
+                    <TextBlock Text="Power Color" Grid.Row="0" Grid.Column="0" VerticalAlignment="Center" Margin="10, 0, 0, 0" ToolTip="Color of the streak counter." />
+                    <TextBox Grid.Row="0" Grid.Column="1" Margin="0,5,10,5" Text="{Binding DataContext.PowerColorString, ElementName=userControl, Mode=OneWay}" IsEnabled="False" />
+                    <TextBlock Text="Streak Counter Opacity" Grid.Row="1" Grid.Column="0" VerticalAlignment="Center" Margin="10, 0, 0, 0" ToolTip="Opacity of the streak counter. (0-255)" />
+                    <TextBox Grid.Row="1" Grid.Column="1" Margin="0,5,10,5" Text="{Binding DataContext.StreakCounterOpacity, ElementName=userControl, UpdateSourceTrigger=PropertyChanged, ValidatesOnExceptions=true, ValidatesOnDataErrors=true, NotifyOnValidationError=true}" />
+                    <TextBlock Text="Exclamation Every" Grid.Row="2" Grid.Column="0" VerticalAlignment="Center" Margin="10, 0, 0, 0" ToolTip="Shows an exclamation every streak count. (10-100)" />
+                    <TextBox Grid.Row="2" Grid.Column="1" Margin="0,5,10,5" Text="{Binding DataContext.ExclamationEveryStreak, ElementName=userControl, UpdateSourceTrigger=PropertyChanged, ValidatesOnExceptions=true, ValidatesOnDataErrors=true, NotifyOnValidationError=true}" />
+                    <TextBlock Text="Exclamation Texts" Grid.Row="3" Grid.Column="0" VerticalAlignment="Center" Margin="10, 0, 0, 0" ToolTip="Exclamations to show (randomized), use ';' to split." />
+                    <TextBox Grid.Row="3" Grid.Column="1" Margin="0,5,10,5" Text="{Binding DataContext.ExclamationsString, ElementName=userControl, UpdateSourceTrigger=PropertyChanged, ValidatesOnExceptions=true, ValidatesOnDataErrors=true, NotifyOnValidationError=true}" />
+                    <TextBlock Text="Streak Counter Shake Start Level" Grid.Row="4" Grid.Column="0" VerticalAlignment="Center" Margin="10, 0, 0, 0" ToolTip="The combo level (0-16) start shake streak counter." />
+                    <TextBox Grid.Row="4" Grid.Column="1" Margin="0,5,10,5" Text="{Binding DataContext.StreakCounterShakeStartLevel, ElementName=userControl, UpdateSourceTrigger=PropertyChanged, ValidatesOnExceptions=true, ValidatesOnDataErrors=true, NotifyOnValidationError=true}" />
                 </Grid>
             </GroupBox>
         </Grid>
