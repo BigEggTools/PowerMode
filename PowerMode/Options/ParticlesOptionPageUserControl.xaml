@@ -9,11 +9,16 @@
              xmlns:Settings="clr-namespace:BigEgg.Tools.PowerMode.Settings"
              d:DesignHeight="300" d:DesignWidth="300">
     <UserControl.Resources>
-        <ObjectDataProvider x:Key="particlesColorTypes" MethodName="GetValues" ObjectType="{x:Type System:Enum}">
-            <ObjectDataProvider.MethodParameters>
-                <x:Type TypeName="Settings:ParticlesColorType"/>
-            </ObjectDataProvider.MethodParameters>
-        </ObjectDataProvider>
+        <ResourceDictionary >
+            <ResourceDictionary.MergedDictionaries >
+                <ResourceDictionary Source="/PowerMode;component/Options/Styles/TextBoxStyle.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+            <ObjectDataProvider x:Key="particlesColorTypes" MethodName="GetValues" ObjectType="{x:Type System:Enum}">
+                <ObjectDataProvider.MethodParameters>
+                    <x:Type TypeName="Settings:ParticlesColorType"/>
+                </ObjectDataProvider.MethodParameters>
+            </ObjectDataProvider>
+        </ResourceDictionary>
     </UserControl.Resources>
     <ScrollViewer HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto">
         <Grid>

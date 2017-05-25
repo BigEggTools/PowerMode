@@ -6,6 +6,14 @@
              xmlns:local="clr-namespace:BigEgg.Tools.PowerMode.Options"
              mc:Ignorable="d" 
              d:DesignHeight="360" d:DesignWidth="500">
+    <UserControl.Resources>
+        <ResourceDictionary >
+            <ResourceDictionary.MergedDictionaries >
+                <ResourceDictionary Source="/PowerMode;component/Options/Styles/ToggleButtonStyle.xaml"/>
+                <ResourceDictionary Source="/PowerMode;component/Options/Styles/TextBoxStyle.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </UserControl.Resources>
     <ScrollViewer HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto">
         <Grid>
             <Grid.RowDefinitions>

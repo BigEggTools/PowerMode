@@ -10,8 +10,8 @@
         <ResourceDictionary >
             <ResourceDictionary.MergedDictionaries >
                 <ResourceDictionary Source="/PowerMode;component/Options/Styles/ToggleButtonStyle.xaml"/>
+                <ResourceDictionary Source="/PowerMode;component/Options/Styles/TextBoxStyle.xaml"/>
             </ResourceDictionary.MergedDictionaries>
-            <!-- You can declare additional resources before or after Merged dictionaries, but not both -->
         </ResourceDictionary>
     </UserControl.Resources>
     <ScrollViewer HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto">
