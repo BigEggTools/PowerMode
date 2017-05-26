@@ -35,7 +35,8 @@
 
         public static Color GetPowerLevelColor(int streakCount)
         {
-            var powerColor = GetSettings().PowerColor;
+            var settings = GetSettings();
+            var powerColor = settings.PowerColor;
 
             if (levelColor == null) { levelColor = new Dictionary<int, Color>(); }
             if (levelColor.Count == 0 || levelColor[0] != powerColor)
@@ -43,7 +44,9 @@
                 levelColor.Clear();
                 for (int i = 0; i <= MAX_LEVEL; i++)
                 {
-                    levelColor.Add(i, powerColor.SpinColor(LEVEL_COLOR_SPIN_ANGLE * i));
+                    levelColor.Add(i,
+                        Color.FromArgb(settings.StreakCounterOpacity,
+                                       powerColor.SpinColor(LEVEL_COLOR_SPIN_ANGLE * i)));
                 }
             }
 
