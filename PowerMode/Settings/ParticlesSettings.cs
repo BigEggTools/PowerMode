@@ -35,14 +35,14 @@
             get { return string.Join(",", FixedColor.R, FixedColor.G, FixedColor.B); }
         }
 
-        [Range(1, 2000, ErrorMessage = "Maximum Particles Count should be between 1 to 100")]
+        [Range(1, 2000, ErrorMessage = "Maximum Particles Count should be between 1 to 2000")]
         public int MaxParticlesCount
         {
             get { return maxParticlesCount; }
             set { SetPropertyAndValidate(ref maxParticlesCount, value); }
         }
 
-        [Range(1, 50, ErrorMessage = "Minimum Spawned Particles should be between 1 to 100")]
+        [Range(1, 50, ErrorMessage = "Minimum Spawned Particles should be between 1 to 50")]
         [LessThan(nameof(MaxSpawnedParticles))]
         public int MinSpawnedParticles
         {
@@ -50,14 +50,14 @@
             set { SetPropertyAndValidate(ref minSpawnedParticles, value); }
         }
 
-        [Range(1, 50, ErrorMessage = "Maximum Spawned Particles should be between 1 to 100")]
+        [Range(1, 50, ErrorMessage = "Maximum Spawned Particles should be between 1 to 50")]
         public int MaxSpawnedParticles
         {
             get { return maxSpawnedParticles; }
             set { SetPropertyAndValidate(ref maxSpawnedParticles, value); }
         }
 
-        [Range(1, 50, ErrorMessage = "Minimum Particles Size should be between 1 to 100")]
+        [Range(1, 50, ErrorMessage = "Minimum Particles Size should be between 1 to 50")]
         [LessThan(nameof(MaxParticlesSize))]
         public int MinParticlesSize
         {
@@ -65,7 +65,7 @@
             set { SetPropertyAndValidate(ref minParticlesSize, value); }
         }
 
-        [Range(1, 50, ErrorMessage = "Maximum Particles Size should be between 1 to 100")]
+        [Range(1, 50, ErrorMessage = "Maximum Particles Size should be between 1 to 50")]
         public int MaxParticlesSize
         {
             get { return maxParticlesSize; }
