@@ -4,6 +4,8 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:local="clr-namespace:BigEgg.Tools.PowerMode.Options"
+             xmlns:conv="clr-namespace:BigEgg.Tools.PowerMode.Options.Converters"
+             xmlns:controls="clr-namespace:BigEgg.Tools.PowerMode.Options.Controls"
              mc:Ignorable="d" 
              d:DesignHeight="360" d:DesignWidth="500">
     <UserControl.Resources>
@@ -12,6 +14,7 @@
                 <ResourceDictionary Source="/PowerMode;component/Options/Styles/ToggleButtonStyle.xaml"/>
                 <ResourceDictionary Source="/PowerMode;component/Options/Styles/TextBoxStyle.xaml"/>
             </ResourceDictionary.MergedDictionaries>
+            <conv:ColorDrawingToMediaConverter x:Key="ColorDrawingToMediaConverter" />
         </ResourceDictionary>
     </UserControl.Resources>
     <ScrollViewer HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto">
@@ -58,7 +61,7 @@
                         <ColumnDefinition Width="*" />
                     </Grid.ColumnDefinitions>
                     <TextBlock Text="Power Color" Grid.Row="0" Grid.Column="0" VerticalAlignment="Center" Margin="10, 0, 0, 0" ToolTip="Color of the streak counter." />
-                    <TextBox Grid.Row="0" Grid.Column="1" Margin="0,5,10,5" Text="{Binding DataContext.PowerColorString, ElementName=userControl, Mode=OneWay}" IsEnabled="False" />
+                    <controls:ColorPicker Grid.Row="0" Grid.Column="1" Margin="0,5,10,5" SelectedColor="{Binding DataContext.PowerColor, ElementName=userControl, Converter={StaticResource ColorDrawingToMediaConverter}}" />
                     <TextBlock Text="Streak Counter Opacity" Grid.Row="1" Grid.Column="0" VerticalAlignment="Center" Margin="10, 0, 0, 0" ToolTip="Opacity of the streak counter. (0-255)" />
                     <TextBox Grid.Row="1" Grid.Column="1" Margin="0,5,10,5" Text="{Binding DataContext.StreakCounterOpacity, ElementName=userControl, UpdateSourceTrigger=PropertyChanged, ValidatesOnExceptions=true, ValidatesOnDataErrors=true, NotifyOnValidationError=true}" />
                     <TextBlock Text="Exclamation Every" Grid.Row="2" Grid.Column="0" VerticalAlignment="Center" Margin="10, 0, 0, 0" ToolTip="Shows an exclamation every streak count. (10-100)" />

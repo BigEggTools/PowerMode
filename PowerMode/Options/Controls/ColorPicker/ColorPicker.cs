@@ -1,10 +1,10 @@
 ﻿namespace BigEgg.Tools.PowerMode.Options.Controls
 {
-    using System.Drawing;
     using System.Windows;
     using System.Windows.Controls;
     using System.Windows.Controls.Primitives;
     using System.Windows.Input;
+    using System.Windows.Media;
 
     using BigEgg.Tools.PowerMode.Utils;
 
@@ -74,17 +74,17 @@
         {
             if (d is ColorPicker colorPicker)
             {
-                colorPicker.OnSelectedColorChanged((Color)e.OldValue, (Color)e.NewValue);
+                colorPicker.OnSelectedColorChanged((Color?)e.OldValue, (Color?)e.NewValue);
             }
         }
 
-        private void OnSelectedColorChanged(Color oldValue, Color newValue)
+        private void OnSelectedColorChanged(Color? oldValue, Color? newValue)
         {
-            SelectedColorText = newValue.ToHexString();
+            SelectedColorText = newValue.Value.ToDrawingColor().ToHexString();
 
-            var args = new RoutedPropertyChangedEventArgs<Color>(oldValue, newValue)
+            var args = new RoutedPropertyChangedEventArgs<Color?>(oldValue, newValue)
             {
-                RoutedEvent = ColorPicker.SelectedColorChangedEvent
+                RoutedEvent = SelectedColorChangedEvent
             };
             RaiseEvent(args);
         }
@@ -146,7 +146,7 @@
         #region SelectedColorChangedEvent
         public static readonly RoutedEvent SelectedColorChangedEvent = EventManager.RegisterRoutedEvent("SelectedColorChanged", RoutingStrategy.Bubble, typeof(RoutedPropertyChangedEventHandler<Color?>), typeof(ColorPicker));
 
-        public event RoutedPropertyChangedEventHandler<Color> SelectedColorChanged
+        public event RoutedPropertyChangedEventHandler<Color?> SelectedColorChanged
         {
             add { AddHandler(SelectedColorChangedEvent, value); }
             remove { RemoveHandler(SelectedColorChangedEvent, value); }
