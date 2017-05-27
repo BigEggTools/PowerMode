@@ -2,6 +2,7 @@
 {
     using System;
     using System.Drawing;
+    using Color2 = System.Windows.Media.Color;
 
     public static class ColorExtensions
     {
@@ -51,6 +52,26 @@
                 return Color.FromArgb(255, t, p, v);
             else
                 return Color.FromArgb(255, v, p, q);
+        }
+
+        public static Color2 ToMediaColor(this Color color)
+        {
+            return Color2.FromRgb(color.R, color.G, color.B);
+        }
+
+        public static Color ToDrawingColor(this Color2 color)
+        {
+            return Color.FromArgb(color.R, color.G, color.B);
+        }
+
+        public static String ToHexString(this Color color)
+        {
+            return $"#{color.R.ToString("X2")}{color.G.ToString("X2")}{color.B.ToString("X2")}";
+        }
+
+        public static String ToRGBString(this Color color)
+        {
+            return string.Join(", ", color.R.ToString());
         }
     }
 }

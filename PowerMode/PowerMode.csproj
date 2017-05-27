@@ -80,6 +80,7 @@
     <Compile Include="Options\ComboModeOptionPageUserControl.xaml.cs">
       <DependentUpon>ComboModeOptionPageUserControl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Options\Controls\ColorSpectrumSlider\ColorSpectrumSlider.cs" />
     <Compile Include="Options\ParticlesOptionPage.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -267,6 +268,10 @@
     <Page Include="Options\ComboModeOptionPageUserControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Options\Controls\ColorSpectrumSlider\ColorSpectrumSlider.xaml">
+      <SubType>Designer</SubType>
+      <Generator>XamlIntelliSenseFileGenerator</Generator>
     </Page>
     <Page Include="Options\GeneralOptionPageUserControl.xaml">
       <SubType>Designer</SubType>
