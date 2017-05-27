@@ -81,8 +81,10 @@
       <DependentUpon>ComboModeOptionPageUserControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="Options\Controls\ColorCanvas\ColorCanvas.cs" />
+    <Compile Include="Options\Controls\ColorPicker\ColorPicker.cs" />
     <Compile Include="Options\Controls\ColorSpectrumSlider\ColorSpectrumSlider.cs" />
     <Compile Include="Options\Converters\ColorToSolidColorBrushConverter.cs" />
+    <Compile Include="Options\Converters\InverseBoolConverter.cs" />
     <Compile Include="Options\ParticlesOptionPage.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -272,6 +274,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Options\Controls\ColorCanvas\ColorCanvas.xaml">
+      <SubType>Designer</SubType>
+      <Generator>XamlIntelliSenseFileGenerator</Generator>
+    </Page>
+    <Page Include="Options\Controls\ColorPicker\ColorPicker.xaml">
       <SubType>Designer</SubType>
       <Generator>XamlIntelliSenseFileGenerator</Generator>
     </Page>

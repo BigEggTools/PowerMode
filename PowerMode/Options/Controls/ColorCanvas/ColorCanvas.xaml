@@ -3,10 +3,6 @@
                     xmlns:local="clr-namespace:BigEgg.Tools.PowerMode.Options.Controls"
                     xmlns:conv="clr-namespace:BigEgg.Tools.PowerMode.Options.Converters">
 
-    <ResourceDictionary.MergedDictionaries>
-        <ResourceDictionary Source="..\ColorSpectrumSlider\ColorSpectrumSlider.xaml" />
-    </ResourceDictionary.MergedDictionaries>
-
     <conv:ColorToSolidColorBrushConverter x:Key="ColorToSolidColorBrushConverter" />
     
     <LinearGradientBrush x:Key="ColorCanvasBackgroundBrush" StartPoint="0,0" EndPoint="0,1">
