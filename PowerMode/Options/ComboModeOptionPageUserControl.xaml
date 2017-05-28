@@ -13,6 +13,7 @@
             <ResourceDictionary.MergedDictionaries >
                 <ResourceDictionary Source="/PowerMode;component/Options/Styles/ToggleButtonStyle.xaml"/>
                 <ResourceDictionary Source="/PowerMode;component/Options/Styles/TextBoxStyle.xaml"/>
+                <ResourceDictionary Source="/PowerMode;component/Options/Controls/ColorPicker/ColorPicker.xaml"/>
             </ResourceDictionary.MergedDictionaries>
             <conv:ColorDrawingToMediaConverter x:Key="ColorDrawingToMediaConverter" />
         </ResourceDictionary>

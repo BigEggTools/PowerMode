@@ -4,6 +4,10 @@
                     xmlns:local="clr-namespace:BigEgg.Tools.PowerMode.Options.Controls"
                     xmlns:conv="clr-namespace:BigEgg.Tools.PowerMode.Options.Converters">
 
+    <ResourceDictionary.MergedDictionaries>
+        <ResourceDictionary Source="..\ColorCanvas\ColorCanvas.xaml" />
+    </ResourceDictionary.MergedDictionaries>
+    
     <conv:ColorToSolidColorBrushConverter x:Key="ColorToSolidColorBrushConverter" />
     <conv:InverseBoolConverter x:Key="InverseBoolConverter" />
 
@@ -97,8 +101,7 @@
                                 <Style TargetType="ToolTip">
                                     <Style.Triggers>
                                         <Trigger Property="Content" Value="{x:Static sys:String.Empty}">
-                                            <Setter Property="Visibility"
-                                                  Value="Collapsed" />
+                                            <Setter Property="Visibility" Value="Collapsed" />
                                         </Trigger>
                                     </Style.Triggers>
                                 </Style>
