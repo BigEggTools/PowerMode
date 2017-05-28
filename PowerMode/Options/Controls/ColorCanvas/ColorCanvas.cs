@@ -33,11 +33,11 @@
 
         #region Dependency Properties
         #region Selected Color
-        public static readonly DependencyProperty SelectedColorProperty = DependencyProperty.Register("SelectedColor", typeof(Color), typeof(ColorCanvas), new UIPropertyMetadata(Colors.Black));
+        public static readonly DependencyProperty SelectedColorProperty = DependencyProperty.Register("SelectedColor", typeof(Color?), typeof(ColorCanvas), new UIPropertyMetadata(Colors.Black));
 
-        public Color SelectedColor
+        public Color? SelectedColor
         {
-            get { return (Color)GetValue(SelectedColorProperty); }
+            get { return (Color?)GetValue(SelectedColorProperty); }
             set { SetValue(SelectedColorProperty, value); }
         }
         #endregion
@@ -198,7 +198,7 @@
 
         private void SpectrumSlider_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
-            if ((currentColorPosition != null) && (this.SelectedColor != null))
+            if ((currentColorPosition != null) && SelectedColor.HasValue)
             {
                 CalculateColor(currentColorPosition);
             }
@@ -221,13 +221,15 @@
             SelectedColor = Color.FromRgb(R, G, B);
         }
 
-        private void UpdateRGBValues(Color color)
+        private void UpdateRGBValues(Color? color)
         {
+            if (!color.HasValue) { return; }
+
             suppressPropertyChanged = true;
 
-            R = color.R;
-            G = color.G;
-            B = color.B;
+            R = color.Value.R;
+            G = color.Value.G;
+            B = color.Value.B;
 
             suppressPropertyChanged = false;
         }
@@ -248,9 +250,11 @@
             currentColorPosition = p;
         }
 
-        private void UpdateColorShadeSelectorPosition(Color color)
+        private void UpdateColorShadeSelectorPosition(Color? color)
         {
-            color.ToDrawingColor().ColorToHSV(out double hue, out double saturation, out double value);
+            if (!color.HasValue) { return; }
+
+            color.Value.ToDrawingColor().ColorToHSV(out double hue, out double saturation, out double value);
             if (updateSpectrumSliderValue) { spectrumSlider.Value = hue; }
 
             Point p = new Point(saturation, 1 - value);
@@ -267,7 +271,7 @@
             updateSpectrumSliderValue = false;
             SelectedColor = currentColor;
             updateSpectrumSliderValue = true;
-            HexadecimalString = SelectedColor.ToDrawingColor().ToHexString();
+            HexadecimalString = SelectedColor.Value.ToDrawingColor().ToHexString();
         }
     }
 }

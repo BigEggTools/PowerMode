@@ -27,11 +27,11 @@
 
         #region Dependency Properties
         #region Selected Color
-        public static readonly DependencyProperty SelectedColorProperty = DependencyProperty.Register("SelectedColor", typeof(Color), typeof(ColorSpectrumSlider), new PropertyMetadata(Colors.Transparent));
+        public static readonly DependencyProperty SelectedColorProperty = DependencyProperty.Register("SelectedColor", typeof(Color?), typeof(ColorSpectrumSlider), new PropertyMetadata(Colors.Transparent));
 
-        public Color SelectedColor
+        public Color? SelectedColor
         {
-            get { return (Color)GetValue(SelectedColorProperty); }
+            get { return (Color?)GetValue(SelectedColorProperty); }
             set { SetValue(SelectedColorProperty, value); }
         }
         #endregion

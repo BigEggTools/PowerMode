@@ -17,7 +17,7 @@
 
         private ToggleButton toggleButton;
         private Popup popup;
-        private Color originColor;
+        private Color? originColor;
 
 
         static ColorPicker()
@@ -61,12 +61,12 @@
         }
         #endregion
 
-        #region SelectedColor
+        #region Selected Color
         public static readonly DependencyProperty SelectedColorProperty = DependencyProperty.Register("SelectedColor", typeof(Color?), typeof(ColorPicker), new FrameworkPropertyMetadata(null, FrameworkPropertyMetadataOptions.BindsTwoWayByDefault, new PropertyChangedCallback(OnSelectedColorPropertyChanged)));
 
-        public Color SelectedColor
+        public Color? SelectedColor
         {
-            get { return (Color)GetValue(SelectedColorProperty); }
+            get { return (Color?)GetValue(SelectedColorProperty); }
             set { SetValue(SelectedColorProperty, value); }
         }
 
