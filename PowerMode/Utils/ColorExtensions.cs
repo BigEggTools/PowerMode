@@ -41,17 +41,17 @@
             int t = Convert.ToInt32(value * (1 - (1 - f) * saturation));
 
             if (hi == 0)
-                return Color.FromArgb(255, v, t, p);
+                return Color.FromArgb(v, t, p);
             else if (hi == 1)
-                return Color.FromArgb(255, q, v, p);
+                return Color.FromArgb(q, v, p);
             else if (hi == 2)
-                return Color.FromArgb(255, p, v, t);
+                return Color.FromArgb(p, v, t);
             else if (hi == 3)
-                return Color.FromArgb(255, p, q, v);
+                return Color.FromArgb(p, q, v);
             else if (hi == 4)
-                return Color.FromArgb(255, t, p, v);
+                return Color.FromArgb(t, p, v);
             else
-                return Color.FromArgb(255, v, p, q);
+                return Color.FromArgb(v, p, q);
         }
 
         public static Color2 ToMediaColor(this Color color)
