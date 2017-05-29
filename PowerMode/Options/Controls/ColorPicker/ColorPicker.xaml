@@ -35,11 +35,11 @@
                                 <ContentPresenter Content="{TemplateBinding Content}" ContentTemplate="{TemplateBinding ContentTemplate}" ContentTemplateSelector="{TemplateBinding ContentTemplateSelector}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" />
                             </Border>
 
-                            <Button x:Name="ToggleButtonChrome" Grid.Column="1">
-                                <Grid x:Name="arrowGlyph" IsHitTestVisible="False" Grid.Column="1" Margin="5">
+                            <Border Grid.Column="1" Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="1" SnapsToDevicePixels="True">
+                                <Grid IsHitTestVisible="False" Margin="5">
                                     <Path x:Name="Arrow" Width="9" Height="5" Data="{StaticResource DownArrowGeometry}" Fill="#FF000000" Margin="0, 1, 0, 0"/>
                                 </Grid>
-                            </Button>
+                            </Border>
                         </Grid>
                     </Grid>
                     <ControlTemplate.Triggers>
@@ -96,16 +96,7 @@
                             </Grid>
                         </ToggleButton>
 
-                        <Popup x:Name="PART_ColorPickerPalettePopup" VerticalAlignment="Bottom" IsOpen="{Binding ElementName=PART_ColorPickerToggleButton, Path=IsChecked}" StaysOpen="False" AllowsTransparency="True" Focusable="False" HorizontalOffset="1" VerticalOffset="1" PopupAnimation="Slide" ToolTip="{x:Static sys:String.Empty}">
-                            <Popup.Resources>
-                                <Style TargetType="ToolTip">
-                                    <Style.Triggers>
-                                        <Trigger Property="Content" Value="{x:Static sys:String.Empty}">
-                                            <Setter Property="Visibility" Value="Collapsed" />
-                                        </Trigger>
-                                    </Style.Triggers>
-                                </Style>
-                            </Popup.Resources>
+                        <Popup x:Name="PART_ColorPickerPopup" VerticalAlignment="Bottom" IsOpen="{Binding ElementName=PART_ColorPickerToggleButton, Path=IsChecked}" StaysOpen="False" AllowsTransparency="True" Focusable="False" HorizontalOffset="1" VerticalOffset="1" PopupAnimation="Slide">
                             <Border BorderThickness="1" Background="{StaticResource PopupBackgroundBrush}" BorderBrush="{StaticResource ColorPickerDarkBorderBrush}" Padding="3">
                                 <Grid>
                                     <Grid.RowDefinitions>

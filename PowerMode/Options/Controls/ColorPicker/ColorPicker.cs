@@ -9,11 +9,11 @@
     using BigEgg.Tools.PowerMode.Utils;
 
     [TemplatePart(Name = PART_ColorPickerToggleButton, Type = typeof(ToggleButton))]
-    [TemplatePart(Name = PART_ColorPickerPalettePopup, Type = typeof(Popup))]
+    [TemplatePart(Name = PART_ColorPickerPopup, Type = typeof(Popup))]
     public class ColorPicker : Control
     {
         private const string PART_ColorPickerToggleButton = "PART_ColorPickerToggleButton";
-        private const string PART_ColorPickerPalettePopup = "PART_ColorPickerPalettePopup";
+        private const string PART_ColorPickerPopup = "PART_ColorPickerPopup";
 
         private ToggleButton toggleButton;
         private Popup popup;
@@ -106,7 +106,7 @@
             base.OnApplyTemplate();
 
             toggleButton = this.Template.FindName(PART_ColorPickerToggleButton, this) as ToggleButton;
-            popup = GetTemplateChild(PART_ColorPickerPalettePopup) as Popup;
+            popup = GetTemplateChild(PART_ColorPickerPopup) as Popup;
         }
 
         protected override void OnMouseUp(MouseButtonEventArgs e)
