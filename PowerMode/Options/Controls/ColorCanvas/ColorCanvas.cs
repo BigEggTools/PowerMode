@@ -21,8 +21,7 @@
         private Canvas colorShadingCanvas;
         private Canvas colorShadeSelector;
         private ColorSpectrumSlider spectrumSlider;
-        private Point currentColorPosition;
-        private bool suppressRGBPropertyChanged;
+        private bool updatingRGB;
         private bool currentColorPositionPropertyChanged;
 
 
@@ -99,12 +98,11 @@
 
         protected virtual void OnRGBChanged(byte oldValue, byte newValue)
         {
-            if (!suppressRGBPropertyChanged)
-            {
-                suppressRGBPropertyChanged = true;
-                SelectedColor = Color.FromRgb(R, G, B);
-                suppressRGBPropertyChanged = false;
-            }
+            if (updatingRGB) { return; }
+
+            updatingRGB = true;
+            SelectedColor = Color.FromRgb(R, G, B);
+            updatingRGB = false;
         }
         #endregion
 
@@ -140,10 +138,21 @@
             colorShadeSelector = GetTemplateChild(PART_ColorShadeSelector) as Canvas;
             if (colorShadeSelector != null) { colorShadeSelector.RenderTransform = colorShadeSelectorTransform; }
 
-            if (spectrumSlider != null) { spectrumSlider.ValueChanged -= SpectrumSlider_ValueChanged; }
+            if (spectrumSlider != null)
+            {
+                spectrumSlider.ValueChanged -= SpectrumSlider_ValueChanged;
+                spectrumSlider.MouseLeftButtonDown -= SpectrumSlider_MouseLeftButtonDown;
+                spectrumSlider.MouseLeftButtonUp -= SpectrumSlider_MouseLeftButtonUp; ;
+            }
             spectrumSlider = GetTemplateChild(PART_SpectrumSlider) as ColorSpectrumSlider;
-            if (spectrumSlider != null) { spectrumSlider.ValueChanged += SpectrumSlider_ValueChanged; }
+            if (spectrumSlider != null)
+            {
+                spectrumSlider.ValueChanged += SpectrumSlider_ValueChanged;
+                spectrumSlider.MouseLeftButtonDown += SpectrumSlider_MouseLeftButtonDown;
+                spectrumSlider.MouseLeftButtonUp += SpectrumSlider_MouseLeftButtonUp; ;
+            }
 
+            HexadecimalString = SelectedColor.Value.ToDrawingColor().ToHexString();
             UpdateRGBValues(SelectedColor);
             UpdateColorShadeSelectorPosition(SelectedColor);
         }
@@ -151,9 +160,10 @@
         #region Event Handlers
         private void ColorShadingCanvas_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
-            Point p = e.GetPosition(colorShadingCanvas);
-            UpdateColorShadeSelectorPosition(p);
-            CalculateColor(currentColorPosition);
+            var p = e.GetPosition(colorShadingCanvas);
+            var colorShadeSelectorPosition = UpdateColorShadeSelectorPosition(p);
+            CalculateColor(colorShadeSelectorPosition);
+
             colorShadingCanvas.CaptureMouse();
             e.Handled = true;
         }
@@ -169,28 +179,28 @@
             if (e.LeftButton == MouseButtonState.Pressed)
             {
                 Point p = e.GetPosition(colorShadingCanvas);
-                UpdateColorShadeSelectorPosition(p);
-                CalculateColor(currentColorPosition);
+                var colorShadeSelectorPosition = UpdateColorShadeSelectorPosition(p);
+                CalculateColor(colorShadeSelectorPosition);
+
                 Mouse.Synchronize();
             }
         }
 
         private void SpectrumSlider_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
-            if ((currentColorPosition != null) && SelectedColor.HasValue)
-            {
-                CalculateColor(currentColorPosition);
-            }
+            SelectedColor.Value.ToDrawingColor().ColorToHSV(out double hue, out double saturation, out double value);
+            var position = new Point(saturation, 1 - value);
+            CalculateColor(position);
         }
-        #endregion
 
-        #region Events
-        public static readonly RoutedEvent SelectedColorChangedEvent = EventManager.RegisterRoutedEvent("SelectedColorChanged", RoutingStrategy.Bubble, typeof(RoutedPropertyChangedEventHandler<Color?>), typeof(ColorCanvas));
-
-        public event RoutedPropertyChangedEventHandler<Color?> SelectedColorChanged
+        private void SpectrumSlider_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
         {
-            add { AddHandler(SelectedColorChangedEvent, value); }
-            remove { RemoveHandler(SelectedColorChangedEvent, value); }
+            e.Handled = true;
+        }
+
+        private void SpectrumSlider_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            e.Handled = true;
         }
         #endregion
 
@@ -198,19 +208,20 @@
         private void UpdateRGBValues(Color? color)
         {
             if (!color.HasValue) { return; }
+            if (updatingRGB) { return; }
 
-            suppressRGBPropertyChanged = true;
+            updatingRGB = true;
 
             R = color.Value.R;
             G = color.Value.G;
             B = color.Value.B;
 
-            suppressRGBPropertyChanged = false;
+            updatingRGB = false;
         }
 
-        private void UpdateColorShadeSelectorPosition(Point p)
+        private Point UpdateColorShadeSelectorPosition(Point p)
         {
-            if (colorShadeSelector == null || colorShadingCanvas == null) { return; }
+            if (colorShadeSelector == null || colorShadingCanvas == null) { return p; }
 
             if (p.Y < 0) { p.Y = 0; }
             if (p.X < 0) { p.X = 0; }
@@ -223,23 +234,26 @@
             p.X = p.X / colorShadingCanvas.ActualWidth;
             p.Y = p.Y / colorShadingCanvas.ActualHeight;
 
-            currentColorPosition = p;
+            return p;
         }
 
-        private void UpdateColorShadeSelectorPosition(Color? color)
+        private Point UpdateColorShadeSelectorPosition(Color? color)
         {
-            if (!color.HasValue || spectrumSlider == null || colorShadingCanvas == null) { return; }
-
-            if (currentColorPositionPropertyChanged) { return; }
+            if (!color.HasValue) { new Point(0, 0); }
 
             color.Value.ToDrawingColor().ColorToHSV(out double hue, out double saturation, out double value);
-            spectrumSlider.Value = hue;
-
             Point p = new Point(saturation, 1 - value);
-            currentColorPosition = p;
+            if (currentColorPositionPropertyChanged || spectrumSlider == null || colorShadingCanvas == null)
+            {
+                return p;
+            }
+
+            spectrumSlider.Value = 360 - hue;
 
             colorShadeSelectorTransform.X = (p.X * colorShadingCanvas.Width) - 5;
             colorShadeSelectorTransform.Y = (p.Y * colorShadingCanvas.Height) - 5;
+
+            return p;
         }
 
         private void CalculateColor(Point p)
