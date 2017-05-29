@@ -16,7 +16,6 @@
         private const string PART_SpectrumDisplay = "PART_SpectrumDisplay";
 
         private Rectangle spectrumDisplay;
-        private LinearGradientBrush pickerBrush;
 
 
         static ColorSpectrumSlider()
@@ -55,7 +54,7 @@
 
         private void CreateSpectrum()
         {
-            pickerBrush = new LinearGradientBrush()
+            var pickerBrush = new LinearGradientBrush()
             {
                 StartPoint = new Point(0.5f, 0),
                 EndPoint = new Point(0.5f, 1),

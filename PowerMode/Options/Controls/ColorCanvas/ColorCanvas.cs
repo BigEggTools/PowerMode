@@ -1,5 +1,6 @@
 ﻿namespace BigEgg.Tools.PowerMode.Options.Controls
 {
+    using System;
     using System.Windows;
     using System.Windows.Controls;
     using System.Windows.Input;
@@ -21,8 +22,8 @@
         private Canvas colorShadeSelector;
         private ColorSpectrumSlider spectrumSlider;
         private Point currentColorPosition;
-        private bool suppressPropertyChanged;
-        private bool updateSpectrumSliderValue = true;
+        private bool suppressRGBPropertyChanged;
+        private bool currentColorPositionPropertyChanged;
 
 
         static ColorCanvas()
@@ -33,84 +34,78 @@
 
         #region Dependency Properties
         #region Selected Color
-        public static readonly DependencyProperty SelectedColorProperty = DependencyProperty.Register("SelectedColor", typeof(Color?), typeof(ColorCanvas), new UIPropertyMetadata(Colors.Black));
+        public static readonly DependencyProperty SelectedColorProperty = DependencyProperty.Register("SelectedColor", typeof(Color?), typeof(ColorCanvas), new UIPropertyMetadata(Colors.Black, OnSelectedColorChanged));
 
         public Color? SelectedColor
         {
             get { return (Color?)GetValue(SelectedColorProperty); }
             set { SetValue(SelectedColorProperty, value); }
         }
+
+        private static void OnSelectedColorChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        {
+            if (d is ColorCanvas colorCanvas)
+            {
+                colorCanvas.OnSelectedColorChanged((Color?)e.OldValue, (Color?)e.NewValue);
+            }
+        }
+
+        protected virtual void OnSelectedColorChanged(Color? oldValue, Color? newValue)
+        {
+            HexadecimalString = SelectedColor.Value.ToDrawingColor().ToHexString();
+            UpdateRGBValues(SelectedColor);
+            UpdateColorShadeSelectorPosition(SelectedColor);
+        }
         #endregion
 
         #region RGB
         #region R
-        public static readonly DependencyProperty RProperty = DependencyProperty.Register("R", typeof(byte), typeof(ColorCanvas), new UIPropertyMetadata((byte)0, OnRChanged));
+        public static readonly DependencyProperty RProperty = DependencyProperty.Register("R", typeof(byte), typeof(ColorCanvas), new UIPropertyMetadata((byte)0, OnRGBChanged));
 
         public byte R
         {
             get { return (byte)GetValue(RProperty); }
             set { SetValue(RProperty, value); }
         }
-
-        private static void OnRChanged(DependencyObject o, DependencyPropertyChangedEventArgs e)
-        {
-            if (o is ColorCanvas colorCanvas)
-            {
-                colorCanvas.OnRChanged((byte)e.OldValue, (byte)e.NewValue);
-            }
-        }
-
-        protected virtual void OnRChanged(byte oldValue, byte newValue)
-        {
-            if (!suppressPropertyChanged) { UpdateSelectedColor(); }
-        }
         #endregion
 
         #region G
-        public static readonly DependencyProperty GProperty = DependencyProperty.Register("G", typeof(byte), typeof(ColorCanvas), new UIPropertyMetadata((byte)0, OnGChanged));
+        public static readonly DependencyProperty GProperty = DependencyProperty.Register("G", typeof(byte), typeof(ColorCanvas), new UIPropertyMetadata((byte)0, OnRGBChanged));
 
         public byte G
         {
             get { return (byte)GetValue(GProperty); }
             set { SetValue(GProperty, value); }
         }
-
-        private static void OnGChanged(DependencyObject o, DependencyPropertyChangedEventArgs e)
-        {
-            if (o is ColorCanvas colorCanvas)
-            {
-                colorCanvas.OnGChanged((byte)e.OldValue, (byte)e.NewValue);
-            }
-        }
-
-        protected virtual void OnGChanged(byte oldValue, byte newValue)
-        {
-            if (!suppressPropertyChanged) { UpdateSelectedColor(); }
-        }
         #endregion
 
         #region B
-        public static readonly DependencyProperty BProperty = DependencyProperty.Register("B", typeof(byte), typeof(ColorCanvas), new UIPropertyMetadata((byte)0, OnBChanged));
+        public static readonly DependencyProperty BProperty = DependencyProperty.Register("B", typeof(byte), typeof(ColorCanvas), new UIPropertyMetadata((byte)0, OnRGBChanged));
 
         public byte B
         {
             get { return (byte)GetValue(BProperty); }
             set { SetValue(BProperty, value); }
         }
+        #endregion
 
-        private static void OnBChanged(DependencyObject o, DependencyPropertyChangedEventArgs e)
+        private static void OnRGBChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
-            if (o is ColorCanvas colorCanvas)
+            if (d is ColorCanvas colorCanvas)
             {
-                colorCanvas.OnBChanged((byte)e.OldValue, (byte)e.NewValue);
+                colorCanvas.OnRGBChanged((byte)e.OldValue, (byte)e.NewValue);
             }
         }
 
-        protected virtual void OnBChanged(byte oldValue, byte newValue)
+        protected virtual void OnRGBChanged(byte oldValue, byte newValue)
         {
-            if (!suppressPropertyChanged) { UpdateSelectedColor(); }
+            if (!suppressRGBPropertyChanged)
+            {
+                suppressRGBPropertyChanged = true;
+                SelectedColor = Color.FromRgb(R, G, B);
+                suppressRGBPropertyChanged = false;
+            }
         }
-        #endregion
         #endregion
 
         #region HexadecimalString
@@ -133,7 +128,6 @@
                 colorShadingCanvas.MouseLeftButtonDown -= ColorShadingCanvas_MouseLeftButtonDown;
                 colorShadingCanvas.MouseLeftButtonUp -= ColorShadingCanvas_MouseLeftButtonUp;
                 colorShadingCanvas.MouseMove -= ColorShadingCanvas_MouseMove;
-                colorShadingCanvas.SizeChanged -= ColorShadingCanvas_SizeChanged;
             }
             colorShadingCanvas = GetTemplateChild(PART_ColorShadingCanvas) as Canvas;
             if (colorShadingCanvas != null)
@@ -141,7 +135,6 @@
                 colorShadingCanvas.MouseLeftButtonDown += ColorShadingCanvas_MouseLeftButtonDown;
                 colorShadingCanvas.MouseLeftButtonUp += ColorShadingCanvas_MouseLeftButtonUp;
                 colorShadingCanvas.MouseMove += ColorShadingCanvas_MouseMove;
-                colorShadingCanvas.SizeChanged += ColorShadingCanvas_SizeChanged;
             }
 
             colorShadeSelector = GetTemplateChild(PART_ColorShadeSelector) as Canvas;
@@ -162,13 +155,13 @@
             UpdateColorShadeSelectorPosition(p);
             CalculateColor(currentColorPosition);
             colorShadingCanvas.CaptureMouse();
-            //Prevent from closing ColorCanvas after mouseDown in ListView
             e.Handled = true;
         }
 
         private void ColorShadingCanvas_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
         {
             colorShadingCanvas.ReleaseMouseCapture();
+            e.Handled = true;
         }
 
         private void ColorShadingCanvas_MouseMove(object sender, MouseEventArgs e)
@@ -179,20 +172,6 @@
                 UpdateColorShadeSelectorPosition(p);
                 CalculateColor(currentColorPosition);
                 Mouse.Synchronize();
-            }
-        }
-
-        private void ColorShadingCanvas_SizeChanged(object sender, SizeChangedEventArgs e)
-        {
-            if (currentColorPosition != null)
-            {
-                Point newPoint = new Point
-                {
-                    X = currentColorPosition.X * e.NewSize.Width,
-                    Y = currentColorPosition.Y * e.NewSize.Height
-                };
-
-                UpdateColorShadeSelectorPosition(currentColorPosition);
             }
         }
 
@@ -216,26 +195,23 @@
         #endregion
 
 
-        private void UpdateSelectedColor()
-        {
-            SelectedColor = Color.FromRgb(R, G, B);
-        }
-
         private void UpdateRGBValues(Color? color)
         {
             if (!color.HasValue) { return; }
 
-            suppressPropertyChanged = true;
+            suppressRGBPropertyChanged = true;
 
             R = color.Value.R;
             G = color.Value.G;
             B = color.Value.B;
 
-            suppressPropertyChanged = false;
+            suppressRGBPropertyChanged = false;
         }
 
         private void UpdateColorShadeSelectorPosition(Point p)
         {
+            if (colorShadeSelector == null || colorShadingCanvas == null) { return; }
+
             if (p.Y < 0) { p.Y = 0; }
             if (p.X < 0) { p.X = 0; }
             if (p.X > colorShadingCanvas.ActualWidth) { p.X = colorShadingCanvas.ActualWidth; }
@@ -252,10 +228,12 @@
 
         private void UpdateColorShadeSelectorPosition(Color? color)
         {
-            if (!color.HasValue) { return; }
+            if (!color.HasValue || spectrumSlider == null || colorShadingCanvas == null) { return; }
+
+            if (currentColorPositionPropertyChanged) { return; }
 
             color.Value.ToDrawingColor().ColorToHSV(out double hue, out double saturation, out double value);
-            if (updateSpectrumSliderValue) { spectrumSlider.Value = hue; }
+            spectrumSlider.Value = hue;
 
             Point p = new Point(saturation, 1 - value);
             currentColorPosition = p;
@@ -268,10 +246,9 @@
         {
             var currentColor = ColorExtensions.ColorFromHSV(360 - spectrumSlider.Value, p.X, 1 - p.Y).ToMediaColor();
 
-            updateSpectrumSliderValue = false;
+            currentColorPositionPropertyChanged = true;
             SelectedColor = currentColor;
-            updateSpectrumSliderValue = true;
-            HexadecimalString = SelectedColor.Value.ToDrawingColor().ToHexString();
+            currentColorPositionPropertyChanged = false;
         }
     }
 }
