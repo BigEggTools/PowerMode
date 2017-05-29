@@ -110,6 +110,15 @@
                             </Border>
                         </Popup>
                     </Grid>
+                    
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsEnabled" Value="False">
+                            <Setter Property="Opacity" TargetName="PART_ColorPickerToggleButton" Value="0.56"/>
+                        </Trigger>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="BorderBrush" TargetName="PART_ColorPickerToggleButton" Value="#FF7EB4EA"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
