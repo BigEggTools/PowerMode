@@ -17,7 +17,7 @@
 
         private ToggleButton toggleButton;
         private Popup popup;
-        private Color? originColor;
+        private Color originColor;
 
 
         static ColorPicker()
@@ -54,7 +54,6 @@
         private void OnIsOpenChanged(bool oldValue, bool newValue)
         {
             if (newValue) { originColor = SelectedColor; }
-            else { SelectedColor = originColor; }
 
             RoutedEventArgs args = new RoutedEventArgs(newValue ? OpenedEvent : ClosedEvent, this);
             RaiseEvent(args);
@@ -62,11 +61,11 @@
         #endregion
 
         #region Selected Color
-        public static readonly DependencyProperty SelectedColorProperty = DependencyProperty.Register("SelectedColor", typeof(Color?), typeof(ColorPicker), new FrameworkPropertyMetadata(null, FrameworkPropertyMetadataOptions.BindsTwoWayByDefault, new PropertyChangedCallback(OnSelectedColorPropertyChanged)));
+        public static readonly DependencyProperty SelectedColorProperty = DependencyProperty.Register("SelectedColor", typeof(Color), typeof(ColorPicker), new FrameworkPropertyMetadata(Colors.Black, FrameworkPropertyMetadataOptions.BindsTwoWayByDefault, new PropertyChangedCallback(OnSelectedColorPropertyChanged)));
 
-        public Color? SelectedColor
+        public Color SelectedColor
         {
-            get { return (Color?)GetValue(SelectedColorProperty); }
+            get { return (Color)GetValue(SelectedColorProperty); }
             set { SetValue(SelectedColorProperty, value); }
         }
 
@@ -74,15 +73,15 @@
         {
             if (d is ColorPicker colorPicker)
             {
-                colorPicker.OnSelectedColorChanged((Color?)e.OldValue, (Color?)e.NewValue);
+                colorPicker.OnSelectedColorChanged((Color)e.OldValue, (Color)e.NewValue);
             }
         }
 
-        private void OnSelectedColorChanged(Color? oldValue, Color? newValue)
+        private void OnSelectedColorChanged(Color oldValue, Color newValue)
         {
-            SelectedColorText = newValue.Value.ToDrawingColor().ToHexString();
+            SelectedColorText = newValue.ToDrawingColor().ToHexString();
 
-            var args = new RoutedPropertyChangedEventArgs<Color?>(oldValue, newValue)
+            var args = new RoutedPropertyChangedEventArgs<Color>(oldValue, newValue)
             {
                 RoutedEvent = SelectedColorChangedEvent
             };
@@ -131,6 +130,7 @@
             }
             if (IsOpen && e.Key == Key.Escape)
             {
+                SelectedColor = originColor;
                 CloseColorPicker(true);
                 e.Handled = true;
             }

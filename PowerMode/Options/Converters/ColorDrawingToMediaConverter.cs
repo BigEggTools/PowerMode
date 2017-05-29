@@ -12,13 +12,13 @@
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            if (value is Color c) { return c.ToMediaColor(); }
+            if (value != null && value is Color c) { return c.ToMediaColor(); }
             return value;
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            if (value is Color2 c) { return c.ToDrawingColor(); }
+            if (value != null && value is Color2 c) { return c.ToDrawingColor(); }
             return value;
         }
     }

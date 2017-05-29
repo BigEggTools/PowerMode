@@ -41,7 +41,7 @@
 
             var store = GetSettingsStore(serviceProvider);
             SetOption(store, COMBO_MODE_SETTINGS_CATELOG, nameof(ComboModeSettings.ComboLevelStreakThreshold), settings.ComboLevelStreakThreshold);
-            SetOption(store, COMBO_MODE_SETTINGS_CATELOG, nameof(ComboModeSettings.PowerColor), settings.PowerColorString);
+            SetOption(store, COMBO_MODE_SETTINGS_CATELOG, nameof(ComboModeSettings.PowerColor), settings.PowerColor);
             SetOption(store, COMBO_MODE_SETTINGS_CATELOG, nameof(ComboModeSettings.IsShowStreakCounter), settings.IsShowStreakCounter);
             SetOption(store, COMBO_MODE_SETTINGS_CATELOG, nameof(ComboModeSettings.StreakCounterOpacity), settings.StreakCounterOpacity);
             SetOption(store, COMBO_MODE_SETTINGS_CATELOG, nameof(ComboModeSettings.StreakCounterShakeStartLevel), settings.StreakCounterShakeStartLevel);

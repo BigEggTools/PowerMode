@@ -30,16 +30,7 @@
         public Color PowerColor
         {
             get { return powerColor; }
-            set
-            {
-                SetPropertyAndValidate(ref powerColor, value);
-                RaisePropertyChanged("PowerColorString");
-            }
-        }
-
-        public string PowerColorString
-        {
-            get { return string.Join(",", PowerColor.R, PowerColor.G, PowerColor.B); }
+            set { SetPropertyAndValidate(ref powerColor, value); }
         }
 
         public bool IsShowStreakCounter
