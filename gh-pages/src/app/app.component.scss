@@ -1,0 +1,12 @@
+a {
+  &.disabled {
+    pointer-events: none;
+    cursor: default;
+  }
+}
+
+.project-name {
+  a {
+    color: white;
+  }
+}
