@@ -8,12 +8,14 @@ import { AppComponent } from './app.component';
 
 import { GeneralContentComponent } from './general/general-content.component';
 import { MenuContentComponent } from './menu/menu-content.component';
+import { OptionContentComponent } from './option/option-content.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     GeneralContentComponent,
-    MenuContentComponent
+    MenuContentComponent,
+    OptionContentComponent
   ],
   imports: [
     BrowserModule,
