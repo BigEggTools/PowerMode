@@ -5,7 +5,7 @@ permalink: /menu/
 ---
 
 The Power Mode extension have Visual Studio menu to toggle the features.
-![Toggle Menu](images/menu.jpg)
+![Toggle Menu](../images/menu.jpg)
 
 ## Enabled Menu
 The "Enabled" menu will be the main toggle to control if the Power Mode is enabled or not.

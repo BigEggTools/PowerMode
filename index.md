@@ -20,7 +20,7 @@ For now, can only download the source code and build the VSIX file to use.
 
 # Features
 In current version, contains the following features:
-* Visual Studio menu to toggle the features. (See [Detail](/menu))
+* Visual Studio menu to toggle the features. (See [Detail](menu))
 * User Friendly Visual Studio Option. (See Detail)
 * Combo Mode. (See Detail)
 * Streak Counter. (See Detail)
