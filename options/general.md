@@ -7,7 +7,7 @@ permalink: /options/general/
 The Power Mode extension have Visual Studio option pages to config features.
 
 To see other option pages please click links below.
-* [General](options/general)
+* General
 * Combo Mode
 * Particles
 * Screen Shake
