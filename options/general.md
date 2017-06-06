@@ -8,9 +8,9 @@ The Power Mode extension have Visual Studio option pages to config features.
 
 To see other option pages please click links below.
 * **General**
-* [Combo Mode](combomode)
-* [Particles](particles)
-* [Screen Shake](screenshake)
+* [Combo Mode](../combomode)
+* [Particles](../particles)
+* [Screen Shake](../screenshake)
 
 ## General Option
 

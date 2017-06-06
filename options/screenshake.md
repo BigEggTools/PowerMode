@@ -7,9 +7,9 @@ permalink: /options/screenshake/
 The Power Mode extension have Visual Studio option pages to config features.
 
 To see other option pages please click links below.
-* [General](general)
-* [Combo Mode](combomode)
-* [Particles](particles)
+* [General](../general)
+* [Combo Mode](../combomode)
+* [Particles](../particles)
 * **Screen Shake**
 
 ## Screen Shake Option

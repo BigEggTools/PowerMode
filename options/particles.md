@@ -7,10 +7,10 @@ permalink: /options/particles/
 The Power Mode extension have Visual Studio option pages to config features.
 
 To see other option pages please click links below.
-* [General](general)
-* [Combo Mode](combomode)
+* [General](../general)
+* [Combo Mode](../combomode)
 * **Particles**
-* [Screen Shake](screenshake)
+* [Screen Shake](../screenshake)
 
 ## Particles Option
 

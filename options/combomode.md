@@ -7,10 +7,10 @@ permalink: /options/combomode/
 The Power Mode extension have Visual Studio option pages to config features.
 
 To see other option pages please click links below.
-* [General](general)
+* [General](../general)
 * **Combo Mode**
-* [Particles](particles)
-* [Screen Shake](screenshake)
+* [Particles](../particles)
+* [Screen Shake](../screenshake)
 
 ## Combo Mode Option
 
