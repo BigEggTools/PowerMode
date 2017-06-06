@@ -9,13 +9,17 @@ The Power Mode extension have Visual Studio option pages to config features.
 To see other option pages please click links below.
 * [General](general)
 * **Combo Mode**
-* Particles
+* [Particles](particles)
 * Screen Shake
 
 ## Combo Mode Option
 
 The "Combo Mode" page have all the settings related with the streak counter and power mode.
-![Combo Mode Pages](../images/option-combomode.jpg)
+![Combo Mode Option Pages](../images/option-combomode.jpg)
+
+**Note:**
+
+> When Combo Mode is enabled, Particles and Screen Shake won't appear until reach the activation threshold.
 
 ### **Streak Timeout** Textbox
 
@@ -38,6 +42,8 @@ The combo level (0 - 16) activation threshold to start shaking screen.
 The "Show Streak Counter" toggle button will be the toggle to control if show or not show the Streak Counter.
 
 ### **Streak Counter** Options Group
+
+Only when "Show Streak Counter" toggle button is enabled, this section of settings can be updated.
 
 #### **Power Color** Color Picker
 
