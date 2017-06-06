@@ -5,6 +5,7 @@ permalink: /menu/
 ---
 
 The Power Mode extension have Visual Studio menu to toggle the features.
+
 ![Toggle Menu](../images/menu.jpg)
 
 ## **Enabled** Menu

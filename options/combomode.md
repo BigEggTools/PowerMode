@@ -15,6 +15,7 @@ To see other option pages please click links below.
 ## Combo Mode Option
 
 The "Combo Mode" page have all the settings related with the streak counter and power mode.
+
 ![Combo Mode Option Pages](../images/option-combomode.jpg)
 
 **Note:**

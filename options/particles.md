@@ -15,6 +15,7 @@ To see other option pages please click links below.
 ## Particles Option
 
 The "Particles" page have all the settings related with the Particles.
+
 ![Particles Option Pages](../images/option-particles.jpg)
 
 **Note:**
@@ -30,7 +31,7 @@ The color type of particles. Have 3 values:
 
 Default is *Random*.
 
-### **Combo Level Streak Threshold** Textbox
+### **Particles Color** Color Picker
 
 The fixed color of particles.
 
