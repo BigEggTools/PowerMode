@@ -7,21 +7,21 @@ permalink: /options/general/
 The Power Mode extension have Visual Studio option pages to config features.
 
 To see other option pages please click links below.
-* General
+* **General**
 * Combo Mode
 * Particles
 * Screen Shake
 
 ## General Option
 
-The "General" is the default option page of Power Mode extension. It have 5 toggle button to toggle the features.
+The "General" option page is the default option page of Power Mode extension. It have 5 toggle button to toggle the features.
 ![Option Pages](../images/option-general.jpg)
 
 ### Enabled Toggle Button
 
 The "Enabled" toggle button will be the main toggle to control if the Power Mode is enabled or not.
 
-Same as the option page, when disabled the Power Mode, all other feature will be disabled.
+When disabled the Power Mode, all other feature will be disabled.
 
 ### Combo Mode Toggle Button
 
