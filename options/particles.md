@@ -10,16 +10,16 @@ To see other option pages please click links below.
 * [General](general)
 * [Combo Mode](combomode)
 * **Particles**
-* Screen Shake
+* [Screen Shake](screenshake)
 
 ## Particles Option
 
-The "Particles" page have all the settings related with the particles.
+The "Particles" page have all the settings related with the Particles.
 ![Particles Option Pages](../images/option-particles.jpg)
 
 **Note:**
 
-> When Combo Mode is enabled, Particles and Screen Shake won't appear until reach the activation threshold.
+> When Combo Mode is enabled, Particles won't appear until reach the activation threshold.
 
 ### **Color Type** Selector
 

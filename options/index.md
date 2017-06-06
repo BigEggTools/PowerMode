@@ -11,4 +11,4 @@ There have 4 option pages to config all the features (for current version).
 * [General](general)
 * [Combo Mode](combomode)
 * [Particles](particles)
-* Screen Shake
+* [Screen Shake](screenshake)

@@ -10,7 +10,7 @@ To see other option pages please click links below.
 * [General](general)
 * **Combo Mode**
 * [Particles](particles)
-* Screen Shake
+* [Screen Shake](screenshake)
 
 ## Combo Mode Option
 
