@@ -26,7 +26,7 @@ When disabled the Power Mode, all other feature will be disabled.
 
 ### **Combo Mode** Toggle Button
 
-The **Combo Mode** toggle button will be the toggle to control if the Combo Mode is enabled or not.
+The **Combo Mode** toggle button will be the toggle to control if the *Combo Mode* is enabled or not.
 
 **Note:**
 

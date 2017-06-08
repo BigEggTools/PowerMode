@@ -14,7 +14,7 @@ The **Enabled** menu will be the main toggle to control if the Power Mode is ena
 Same as the option page, when disabled the Power Mode, all other feature will be disabled.
 
 ## **Combo Mode** Menu
-The **Combo Mode** menu will be the toggle to control if the Combo Mode is enabled or not.
+The **Combo Mode** menu will be the toggle to control if the *Combo Mode* is enabled or not.
 
 **Note:**
 
