@@ -20,7 +20,7 @@ The "Screen Shake" page have all the settings related with the Screen Shake.
 
 **Note:**
 
-> When Combo Mode is enabled, Screen Shake won't appear until reach the activation threshold.
+> When *Combo Mode* is enabled, effects, *Screen Shake*, won't appear until reach the activation threshold.
 
 ### **Minimum Intensity** Textbox
 

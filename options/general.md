@@ -20,22 +20,22 @@ The "General" option page is the default option page of Power Mode extension. It
 
 ### **Enabled** Toggle Button
 
-The "Enabled" toggle button will be the main toggle to control if the Power Mode is enabled or not.
+The **Enabled** toggle button will be the main toggle to control if the Power Mode is enabled or not.
 
 When disabled the Power Mode, all other feature will be disabled.
 
 ### **Combo Mode** Toggle Button
 
-The "Combo Mode" toggle button will be the toggle to control if the Combo Mode is enabled or not.
+The **Combo Mode** toggle button will be the toggle to control if the Combo Mode is enabled or not.
 
 **Note:**
 
-> When Combo Mode is enabled, Particles and Screen Shake won't appear until reach the activation threshold.
+> When *Combo Mode* is enabled, effects, *Streak Counter Shake*, *Particles* and *Screen Shake*, won't appear until reach the activation threshold.
 
 ### **Particles** Toggle Button
 
-The "Particles" toggle button will be the toggle to control if show or not show the particles when detect user input.
+The **Particles** toggle button will be the toggle to control if show or not show the particles when detect user input.
 
 ### **Screen Shake** Toggle Button
 
-The "Screen Shake" toggle button will be the toggle to control if shake or not shake the screen when detect user input.
+The **Screen Shake** toggle button will be the toggle to control if shake or not shake the screen when detect user input.

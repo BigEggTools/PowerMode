@@ -20,7 +20,7 @@ The "Particles" page have all the settings related with the Particles.
 
 **Note:**
 
-> When Combo Mode is enabled, Particles won't appear until reach the activation threshold.
+> When *Combo Mode* is enabled, effects, *Particles*, won't appear until reach the activation threshold.
 
 ### **Color Type** Selector
 
@@ -35,11 +35,7 @@ Default is *Random*.
 
 The fixed color of particles.
 
-Only when "Show Streak Counter" toggle button is enabled, this section of settings can be updated.
-
-**Note:**
-
-> When "Fixed" color type is selected at **Color Type** Selector.
+Only when "Color Type" Selector choose "Fixed", this field can be edit.
 
 ### **Max Total** Textbox
 

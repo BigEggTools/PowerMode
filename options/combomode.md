@@ -20,7 +20,7 @@ The "Combo Mode" page have all the settings related with the streak counter and 
 
 **Note:**
 
-> When Combo Mode is enabled, Particles and Screen Shake won't appear until reach the activation threshold.
+> When *Combo Mode* is enabled, effects, *Streak Counter Shake*, *Particles* and *Screen Shake*, won't appear until reach the activation threshold.
 
 ### **Streak Timeout** Textbox
 
@@ -44,7 +44,7 @@ The "Show Streak Counter" toggle button will be the toggle to control if show or
 
 ### **Streak Counter** Options Group
 
-Only when "Show Streak Counter" toggle button is enabled, this section of settings can be updated.
+Only when **Show Streak Counter** toggle button is enabled, this section of settings can be updated.
 
 #### **Power Color** Color Picker
 
