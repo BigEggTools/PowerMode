@@ -16,7 +16,7 @@ To see other option pages please click links below.
 
 The "General" option page is the default option page of Power Mode extension. It have 5 toggle button to toggle the features.
 
-![General Option Pages](../images/option-general.jpg)
+![General Option Pages](general.jpg)
 
 ### **Enabled** Toggle Button
 
