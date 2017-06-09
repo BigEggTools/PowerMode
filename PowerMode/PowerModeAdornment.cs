@@ -85,19 +85,25 @@
                 {
                     streakCounterAdornment.OnTextBufferChanged(adornmentLayer, view, streakCount);
                 }
-                if (ComboService.CanScreenShake(streakCount))
+                if (ComboService.CanScreenShake(streakCount) && generalSettings.IsEnableScreenShake)
                 {
                     screenShakeAdornment.OnTextBufferChanged(adornmentLayer, view, streakCount);
                 }
-                if (ComboService.CanShowParticles(streakCount))
+                if (ComboService.CanShowParticles(streakCount) && generalSettings.IsEnableParticles)
                 {
                     particlesAdornment.OnTextBufferChanged(adornmentLayer, view, streakCount);
                 }
             }
             else
             {
-                screenShakeAdornment.OnTextBufferChanged(adornmentLayer, view, streakCount);
-                particlesAdornment.OnTextBufferChanged(adornmentLayer, view, streakCount);
+                if (generalSettings.IsEnableParticles)
+                {
+                    particlesAdornment.OnTextBufferChanged(adornmentLayer, view, streakCount);
+                }
+                if (generalSettings.IsEnableScreenShake)
+                {
+                    screenShakeAdornment.OnTextBufferChanged(adornmentLayer, view, streakCount);
+                }
             }
         }
 
