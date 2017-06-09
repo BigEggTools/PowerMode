@@ -8,10 +8,10 @@ This is the Power Mode extension for Visual Studio to replicate the effects from
 Inspired by the Power Mode Extension for Atom, which can be found [here](https://atom.io/packages/activate-power-mode).
 
 # Effects
-## Particles & Screen Shake
-![Explosion Effect](https://i.github-camo.com/b1d03b9b7a9d7dc9a32d1eab307b5378f8c59a7b/68747470733a2f2f636c6f75642e67697468756275736572636f6e74656e742e636f6d2f6173736574732f3638383431352f31313631353536352f31306631363435362d396336352d313165352d386166342d3236356630316663383361302e676966)
+## Power Mode
+![Power Mode](PowerMode.gif)
 ## Combo Mode
-![Steak Counter](https://i.github-camo.com/ca572e22e64a42c44f59e1ebb40d4a1e1b748761/68747470733a2f2f636c6f75642e67697468756275736572636f6e74656e742e636f6d2f6173736574732f31303539303739392f31383831373233372f38373663326438342d383332312d313165362d383332342d6631353430363034633062642e676966)
+![Streak Counter](StreakCounter.gif)
 
 # Installation
 Soon will publish to [Visual Studio Gallery](https://visualstudiogallery.msdn.microsoft.com/).
