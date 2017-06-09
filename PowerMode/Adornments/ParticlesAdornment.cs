@@ -105,7 +105,7 @@ namespace BigEgg.Tools.PowerMode.Adornments
         {
             return new DoubleAnimation()
             {
-                EasingFunction = new BackEase { Amplitude = RandomUtils.Random.NextDouble() * 5 + 0.5, EasingMode = EasingMode.EaseIn },
+                EasingFunction = new BackEase { Amplitude = RandomUtils.Random.NextDouble() * 3 + 0.5, EasingMode = EasingMode.EaseIn },
                 From = top,
                 To = top + RandomUtils.Random.Next(1, 30),
                 Duration = timeSpan
