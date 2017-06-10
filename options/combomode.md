@@ -14,7 +14,7 @@ To see other option pages please click links below.
 
 ## Combo Mode Option
 
-The "Combo Mode" page have all the settings related with the streak counter and power mode.
+The "Combo Mode" page have all the settings related with the *Streak Counter* and *Combo Mode*.
 
 ![Combo Mode Option Pages](combomode.jpg)
 
@@ -54,7 +54,7 @@ Default color of the streak counter.
 
 Opacity of the streak counter. Should be 0 - 255.
 
-#### **Exclamation Every** Textbox
+#### ** Every** Textbox
 
 Shows an exclamation every streak count. Should be 10 - 100.
 

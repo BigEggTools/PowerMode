@@ -14,7 +14,7 @@ To see other option pages please click links below.
 
 ## Screen Shake Option
 
-The "Screen Shake" page have all the settings related with the Screen Shake.
+The "Screen Shake" page have all the settings related with the *Screen Shake*.
 
 ![Screen Shake Option Pages](screenshake.jpg)
 

@@ -30,7 +30,7 @@ The **Combo Mode** toggle button will be the toggle to control if the *Combo Mod
 
 **Note:**
 
-> When *Combo Mode* is enabled, effects, *Streak Counter Shake*, *Particles* and *Screen Shake*, won't appear until reach the activation threshold.
+> When *Combo Mode* is enabled, effects, such as: *Streak Counter Shake*, *Particles* and *Screen Shake*, won't appear until reach the activation threshold.
 
 ### **Particles** Toggle Button
 

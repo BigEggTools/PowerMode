@@ -14,7 +14,7 @@ To see other option pages please click links below.
 
 ## Particles Option
 
-The "Particles" page have all the settings related with the Particles.
+The "Particles" page have all the settings related with the *Particles*.
 
 ![Particles Option Pages](particles.jpg)
 

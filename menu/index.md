@@ -18,7 +18,7 @@ The **Combo Mode** menu will be the toggle to control if the *Combo Mode* is ena
 
 **Note:**
 
-> When *Combo Mode* is enabled, effects, *Streak Counter Shake*, *Particles* and *Screen Shake*, won't appear until reach the activation threshold.
+> When *Combo Mode* is enabled, effects, such as: *Streak Counter Shake*, *Particles* and *Screen Shake*, won't appear until reach the activation threshold.
 
 ## **Particles** Menu
 The **Particles** menu will be the toggle to control if the show or not show the particles when detect user input.
