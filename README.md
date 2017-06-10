@@ -1,9 +1,15 @@
 ﻿# PowerMode
-The PowerMode extension for Visual Studio.
+TThis is the Power Mode extension for Visual Studio to replicate the effects from [codeinthedark/editor](https://github.com/codeinthedark/editor).
 
-The power mode extension for Atom can be found here : [https://atom.io/packages/activate-power-mode](https://atom.io/packages/activate-power-mode).
+Inspired by the Power Mode Extension for Atom, which can be found [here](https://atom.io/packages/activate-power-mode).
 
-## Features
+# Effects
+![Power Mode](PowerMode.gif)
+
+# User Guide
+Can go to [GitHub Page](https://bigeggtools.github.io/PowerMode/) to find more information.
+
+# Features
 Try to contain all features exist in Atom extension:
 * Ctrl + Alt + O to toggle power mode
 * Particles 
