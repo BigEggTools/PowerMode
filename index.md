@@ -19,8 +19,8 @@ For now, can only download the source code and build the VSIX file to use.
 In current version, contains the following features:
 * Visual Studio menu to toggle the features. (See [Detail](menu))
 * User Friendly Visual Studio Option. (See [Detail](options))
-* Combo Mode. (See Detail)
-* Streak Counter. (See Detail)
+* Combo Mode. (See [Detail](combomode))
+* Streak Counter. (See [Detail](streakcounter))
 * Particles. (See Detail)
 * Screen Shake. (See Detail)
 
