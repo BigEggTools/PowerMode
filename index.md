@@ -8,10 +8,7 @@ This is the Power Mode extension for Visual Studio to replicate the effects from
 Inspired by the Power Mode Extension for Atom, which can be found [here](https://atom.io/packages/activate-power-mode).
 
 # Effects
-## Power Mode
 ![Power Mode](PowerMode.gif)
-## Combo Mode
-![Streak Counter](StreakCounter.gif)
 
 # Installation
 Soon will publish to [Visual Studio Gallery](https://visualstudiogallery.msdn.microsoft.com/).
