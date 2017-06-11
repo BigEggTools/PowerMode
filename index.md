@@ -22,7 +22,7 @@ In current version, contains the following features:
 * Combo Mode. (See [Detail](combomode))
 * Streak Counter. (See [Detail](streakcounter))
 * Particles. (See [Detail](particles))
-* Screen Shake. (See Detail)
+* Screen Shake. (See [Detail](screenshake))
 
 # Next Features
 The next version of this extension will have the following features:
