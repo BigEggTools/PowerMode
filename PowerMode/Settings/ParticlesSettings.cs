@@ -23,16 +23,7 @@
         public Color FixedColor
         {
             get { return fixedColor; }
-            set
-            {
-                SetPropertyAndValidate(ref fixedColor, value);
-                RaisePropertyChanged("FixedColorString");
-            }
-        }
-
-        public string FixedColorString
-        {
-            get { return string.Join(",", FixedColor.R, FixedColor.G, FixedColor.B); }
+            set { SetPropertyAndValidate(ref fixedColor, value); }
         }
 
         [Range(1, 2000, ErrorMessage = "Maximum Particles Count should be between 1 to 2000")]
@@ -71,7 +62,6 @@
             get { return maxParticlesSize; }
             set { SetPropertyAndValidate(ref maxParticlesSize, value); }
         }
-
 
 
         public void CloneFrom(ParticlesSettings other)

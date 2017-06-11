@@ -7,12 +7,16 @@
              mc:Ignorable="d" 
              xmlns:System="clr-namespace:System;assembly=mscorlib"
              xmlns:Settings="clr-namespace:BigEgg.Tools.PowerMode.Settings"
+             xmlns:conv="clr-namespace:BigEgg.Tools.PowerMode.Options.Converters"
+             xmlns:controls="clr-namespace:BigEgg.Tools.PowerMode.Options.Controls"
              d:DesignHeight="300" d:DesignWidth="300">
     <UserControl.Resources>
         <ResourceDictionary >
             <ResourceDictionary.MergedDictionaries >
                 <ResourceDictionary Source="/PowerMode;component/Options/Styles/TextBoxStyle.xaml"/>
+                <ResourceDictionary Source="/PowerMode;component/Options/Controls/ColorPicker/ColorPicker.xaml"/>
             </ResourceDictionary.MergedDictionaries>
+            <conv:ColorDrawingToMediaConverter x:Key="ColorDrawingToMediaConverter" />
             <ObjectDataProvider x:Key="particlesColorTypes" MethodName="GetValues" ObjectType="{x:Type System:Enum}">
                 <ObjectDataProvider.MethodParameters>
                     <x:Type TypeName="Settings:ParticlesColorType"/>
@@ -39,7 +43,7 @@
             <TextBlock Text="Color Type" Grid.Row="0" Grid.Column="0" VerticalAlignment="Center" Margin="10, 0, 0, 0" ToolTip="The color type of particles" />
             <ComboBox Grid.Row="0" Grid.Column="1" Margin="0,5,10,5" SelectedItem="{Binding DataContext.ParticlesColorType, ElementName=userControl}" ItemsSource="{Binding Source={StaticResource particlesColorTypes}}" IsEnabled="False" />
             <TextBlock Text="Particles Color" Grid.Row="1" Grid.Column="0" VerticalAlignment="Center" Margin="10, 0, 0, 0" ToolTip="Color of particles when fixed color is selected." />
-            <TextBox Grid.Row="1" Grid.Column="1" Margin="0,5,10,5" Text="{Binding DataContext.FixedColorString, ElementName=userControl, Mode=OneWay}" IsEnabled="False" />
+            <controls:ColorPicker Grid.Row="1" Grid.Column="1" Margin="0,5,10,5" IsEnabled="False" SelectedColor="{Binding DataContext.FixedColor, ElementName=userControl, Converter={StaticResource ColorDrawingToMediaConverter}}" />
             <TextBlock Text="Max Total" Grid.Row="2" Grid.Column="0" VerticalAlignment="Center" Margin="10, 0, 0, 0" ToolTip="The maximum total number of particles on the screen." />
             <TextBox Grid.Row="2" Grid.Column="1" Margin="0,5,10,5" Text="{Binding DataContext.MaxParticlesCount, ElementName=userControl, UpdateSourceTrigger=PropertyChanged, ValidatesOnExceptions=true, ValidatesOnDataErrors=true, NotifyOnValidationError=true}" />
             <TextBlock Text="Minimum Spawned" Grid.Row="3" Grid.Column="0" VerticalAlignment="Center" Margin="10, 0, 0, 0" ToolTip="The minimum (randomized) number of particles spawned on input." />
