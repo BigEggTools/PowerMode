@@ -21,7 +21,7 @@ In current version, contains the following features:
 * User Friendly Visual Studio Option. (See [Detail](options))
 * Combo Mode. (See [Detail](combomode))
 * Streak Counter. (See [Detail](streakcounter))
-* Particles. (See Detail)
+* Particles. (See [Detail](particles))
 * Screen Shake. (See Detail)
 
 # Next Features

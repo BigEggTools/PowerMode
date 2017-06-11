@@ -5,6 +5,7 @@ permalink: /streakcounter/
 ---
 
 When *Combo Mode* is enabled, by default the *Streak Counter* will shows.
+
 ![Streak Counter](StreakCounter.gif)
 
 ## **Show** & **Hide** Streak Counter
