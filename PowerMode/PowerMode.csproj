@@ -115,18 +115,18 @@
     <Compile Include="Settings\ComboModeSettings.cs" />
     <Compile Include="Settings\GeneralSettings.cs" />
     <Compile Include="Settings\ScreenShakeSettings.cs" />
-    <Compile Include="Settings\SettingsService.cs" />
-    <Compile Include="Settings\SettingsService.GeneralSettings.cs">
-      <DependentUpon>SettingsService.cs</DependentUpon>
+    <Compile Include="Settings\SettingsRepository.cs" />
+    <Compile Include="Settings\SettingsRepository.GeneralSettings.cs">
+      <DependentUpon>SettingsRepository.cs</DependentUpon>
     </Compile>
-    <Compile Include="Settings\SettingsService.ComboModeSettings.cs">
-      <DependentUpon>SettingsService.cs</DependentUpon>
+    <Compile Include="Settings\SettingsRepository.ComboModeSettings.cs">
+      <DependentUpon>SettingsRepository.cs</DependentUpon>
     </Compile>
-    <Compile Include="Settings\SettingsService.ParticlesSettings.cs">
-      <DependentUpon>SettingsService.cs</DependentUpon>
+    <Compile Include="Settings\SettingsRepository.ParticlesSettings.cs">
+      <DependentUpon>SettingsRepository.cs</DependentUpon>
     </Compile>
-    <Compile Include="Settings\SettingsService.ScreenShakeSettings.cs">
-      <DependentUpon>SettingsService.cs</DependentUpon>
+    <Compile Include="Settings\SettingsRepository.ScreenShakeSettings.cs">
+      <DependentUpon>SettingsRepository.cs</DependentUpon>
     </Compile>
     <Compile Include="Utils\ColorExtensions.cs" />
     <Compile Include="Utils\ImageUtils.cs" />

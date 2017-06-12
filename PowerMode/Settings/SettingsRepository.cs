@@ -7,7 +7,7 @@
     using Microsoft.VisualStudio.Settings;
     using Microsoft.VisualStudio.Shell.Settings;
 
-    public static partial class SettingsService
+    public static partial class SettingsRepository
     {
         private static readonly string COLLECTION_PATH = "PowerMode";
 
