@@ -5,7 +5,7 @@
 
     using Microsoft.VisualStudio.Shell;
 
-    using BigEgg.Tools.PowerMode.Settings;
+    using BigEgg.Tools.PowerMode.Services;
 
     internal sealed class ToggleParticlesCommand : CommandHandler
     {
@@ -26,16 +26,16 @@
 
         protected override void OnQueryStatus(object sender, EventArgs e)
         {
-            var settings = SettingsService.GetGeneralSettings(serviceProvider);
+            var settings = SettingsService.GetGeneralSettings();
             menuCommand.Checked = settings.IsEnableParticles;
             menuCommand.Enabled = settings.IsEnablePowerMode;
         }
 
         protected override void OnExecute(object sender, EventArgs e)
         {
-            var settings = SettingsService.GetGeneralSettings(serviceProvider);
+            var settings = SettingsService.GetGeneralSettings();
             settings.IsEnableParticles = !settings.IsEnableParticles;
-            SettingsService.SaveToStorage(settings, serviceProvider);
+            SettingsService.SaveToStorage(settings);
 
             var command = sender as MenuCommand;
             var menuCommandService = serviceProvider.GetService(typeof(IMenuCommandService)) as OleMenuCommandService;

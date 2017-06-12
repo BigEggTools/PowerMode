@@ -6,6 +6,7 @@
 
     using Microsoft.VisualStudio.Shell;
 
+    using BigEgg.Tools.PowerMode.Services;
     using BigEgg.Tools.PowerMode.Settings;
 
     public class ComboModeOptionPage : UIElementDialogPage
@@ -26,7 +27,7 @@
                 if (settings == null)
                 {
                     settings = new ComboModeSettings();
-                    settings.CloneFrom(SettingsService.GetComboModeSettings(Site));
+                    settings.CloneFrom(SettingsService.GetComboModeSettings());
                     PropertyChangedEventManager.AddHandler(settings, SettingModelPropertyChanged, "");
                 }
 
@@ -48,13 +49,13 @@
                 return;
             }
 
-            SettingsService.SaveToStorage(settings, Site);
+            SettingsService.SaveToStorage(settings);
         }
 
         protected override void OnClosed(EventArgs e)
         {
             base.OnClosed(e);
-            var newSettings = SettingsService.GetComboModeSettings(Site);
+            var newSettings = SettingsService.GetComboModeSettings();
             settings.CloneFrom(newSettings);
         }
 

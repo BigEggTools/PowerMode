@@ -3,10 +3,9 @@
     using System;
     using Task = System.Threading.Tasks.Task;
 
-    using Microsoft.VisualStudio.Shell;
     using Microsoft.VisualStudio.Text.Editor;
 
-    using BigEgg.Tools.PowerMode.Settings;
+    using BigEgg.Tools.PowerMode.Services;
     using BigEgg.Tools.PowerMode.Utils;
 
     public class ScreenShakeAdornment : IAdornment
@@ -14,7 +13,6 @@
         private readonly static int SHAKE_TIMEOUT_MILLISECONDS = 75;
         private readonly static int SHAKE_THROTTLED_MILLISECONDS = 50;
         private DateTime lastShakeTime = DateTime.Now;
-
 
 
         public void Cleanup(IAdornmentLayer adornmentLayer, IWpfTextView view)
@@ -36,7 +34,7 @@
 
         public async Task Shake(IWpfTextView view)
         {
-            var settings = SettingsService.GetScreenShakeSettings(ServiceProvider.GlobalProvider);
+            var settings = SettingsService.GetScreenShakeSettings();
 
             int leftAmount = GetShakeIntensity(settings.MinIntensity, settings.MaxIntensity),
                 topAmount = GetShakeIntensity(settings.MinIntensity, settings.MaxIntensity);

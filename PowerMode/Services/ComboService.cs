@@ -4,8 +4,6 @@
     using System.Collections.Generic;
     using System.Drawing;
 
-    using Microsoft.VisualStudio.Shell;
-
     using BigEgg.Tools.PowerMode.Settings;
     using BigEgg.Tools.PowerMode.Utils;
 
@@ -98,7 +96,7 @@
 
         private static ComboModeSettings GetSettings()
         {
-            return SettingsService.GetComboModeSettings(ServiceProvider.GlobalProvider);
+            return SettingsService.GetComboModeSettings();
         }
     }
 }

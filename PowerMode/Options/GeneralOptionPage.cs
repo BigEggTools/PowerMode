@@ -6,6 +6,7 @@
 
     using Microsoft.VisualStudio.Shell;
 
+    using BigEgg.Tools.PowerMode.Services;
     using BigEgg.Tools.PowerMode.Settings;
 
     public class GeneralOptionPage : UIElementDialogPage
@@ -26,7 +27,7 @@
                 if (settings == null)
                 {
                     settings = new GeneralSettings();
-                    settings.CloneFrom(SettingsService.GetGeneralSettings(Site));
+                    settings.CloneFrom(SettingsService.GetGeneralSettings());
                     PropertyChangedEventManager.AddHandler(settings, SettingModelPropertyChanged, "");
                 }
 
@@ -42,13 +43,13 @@
 
         protected override void SaveSetting(PropertyDescriptor property)
         {
-            SettingsService.SaveToStorage(settings, Site);
+            SettingsService.SaveToStorage(settings);
         }
 
         protected override void OnClosed(EventArgs e)
         {
             base.OnClosed(e);
-            var newSettings = SettingsService.GetGeneralSettings(Site);
+            var newSettings = SettingsService.GetGeneralSettings();
             settings.CloneFrom(newSettings);
         }
 

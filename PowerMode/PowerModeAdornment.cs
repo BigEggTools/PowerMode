@@ -139,8 +139,8 @@
 
         private void RefreshSettings()
         {
-            generalSettings.CloneFrom(SettingsService.GetGeneralSettings(ServiceProvider.GlobalProvider));
-            comboModeSettings.CloneFrom(SettingsService.GetComboModeSettings(ServiceProvider.GlobalProvider));
+            generalSettings.CloneFrom(SettingsService.GetGeneralSettings());
+            comboModeSettings.CloneFrom(SettingsService.GetComboModeSettings());
         }
 
         private void GeneralSettingModelPropertyChanged(object sender, PropertyChangedEventArgs e)

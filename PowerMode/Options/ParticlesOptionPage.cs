@@ -6,6 +6,7 @@
 
     using Microsoft.VisualStudio.Shell;
 
+    using BigEgg.Tools.PowerMode.Services;
     using BigEgg.Tools.PowerMode.Settings;
 
     public class ParticlesOptionPage : UIElementDialogPage
@@ -26,7 +27,7 @@
                 if (settings == null)
                 {
                     settings = new ParticlesSettings();
-                    settings.CloneFrom(SettingsService.GetParticlesSettings(Site));
+                    settings.CloneFrom(SettingsService.GetParticlesSettings());
                     PropertyChangedEventManager.AddHandler(settings, SettingModelPropertyChanged, "");
                 }
 
@@ -48,13 +49,13 @@
                 return;
             }
 
-            SettingsService.SaveToStorage(settings, Site);
+            SettingsService.SaveToStorage(settings);
         }
 
         protected override void OnClosed(EventArgs e)
         {
             base.OnClosed(e);
-            var newSettings = SettingsService.GetParticlesSettings(Site);
+            var newSettings = SettingsService.GetParticlesSettings();
             settings.CloneFrom(newSettings);
         }
 

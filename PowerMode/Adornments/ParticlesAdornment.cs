@@ -1,18 +1,20 @@
-﻿using BigEgg.Tools.PowerMode.Settings;
-using BigEgg.Tools.PowerMode.Utils;
-using Microsoft.VisualStudio.Shell;
-using Microsoft.VisualStudio.Text.Editor;
-using System;
-using System.Collections.Generic;
-using System.Drawing;
-using System.Drawing.Drawing2D;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Media.Animation;
-using Image = System.Windows.Controls.Image;
-
-namespace BigEgg.Tools.PowerMode.Adornments
+﻿namespace BigEgg.Tools.PowerMode.Adornments
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Drawing;
+    using System.Drawing.Drawing2D;
+    using System.Windows;
+    using System.Windows.Controls;
+    using System.Windows.Media.Animation;
+    using Image = System.Windows.Controls.Image;
+
+    using Microsoft.VisualStudio.Text.Editor;
+
+    using BigEgg.Tools.PowerMode.Services;
+    using BigEgg.Tools.PowerMode.Settings;
+    using BigEgg.Tools.PowerMode.Utils;
+
     public class ParticlesAdornment : IAdornment
     {
         private readonly static double PARTICLES_START_ALPHA = 0.9;
@@ -45,7 +47,7 @@ namespace BigEgg.Tools.PowerMode.Adornments
 
         public void OnTextBufferChanged(IAdornmentLayer adornmentLayer, IWpfTextView view, int streakCount)
         {
-            settings = SettingsService.GetParticlesSettings(ServiceProvider.GlobalProvider);
+            settings = SettingsService.GetParticlesSettings();
 
             var spawnedSize = RandomUtils.Random.Next(settings.MinSpawnedParticles, settings.MaxSpawnedParticles);
             if (spawnedSize + particlesList.Count > settings.MaxParticlesCount) { spawnedSize = settings.MaxParticlesCount - particlesList.Count; }

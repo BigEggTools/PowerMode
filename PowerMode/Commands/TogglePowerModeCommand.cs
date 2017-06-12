@@ -5,7 +5,7 @@
 
     using Microsoft.VisualStudio.Shell;
 
-    using BigEgg.Tools.PowerMode.Settings;
+    using BigEgg.Tools.PowerMode.Services;
 
     internal sealed class TogglePowerModeCommand : CommandHandler
     {
@@ -26,18 +26,18 @@
 
         protected override void OnQueryStatus(object sender, EventArgs e)
         {
-            var settings = SettingsService.GetGeneralSettings(serviceProvider);
+            var settings = SettingsService.GetGeneralSettings();
             menuCommand.Checked = settings.IsEnablePowerMode;
         }
 
         protected override void OnExecute(object sender, EventArgs e)
         {
-            var settings = SettingsService.GetGeneralSettings(serviceProvider);
+            var settings = SettingsService.GetGeneralSettings();
             settings.IsEnablePowerMode = !settings.IsEnablePowerMode;
             settings.IsEnableComboMode = settings.IsEnablePowerMode;
             settings.IsEnableParticles = settings.IsEnablePowerMode;
             settings.IsEnableScreenShake = settings.IsEnablePowerMode;
-            SettingsService.SaveToStorage(settings, serviceProvider);
+            SettingsService.SaveToStorage(settings);
 
             menuCommand.Checked = settings.IsEnablePowerMode;
 
