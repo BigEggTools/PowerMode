@@ -180,15 +180,18 @@
 
         private void ComboModeSettingsModelPropertyChanged(object sender, PropertyChangedEventArgs e)
         {
-            if (e.PropertyName == nameof(ComboModeSettings.IsShowStreakCounter) && !comboModeSettings.IsShowStreakCounter)
+            if (e.PropertyName == nameof(ComboModeSettings.IsShowStreakCounter))
             {
-                streakCounterAdornment.Cleanup(adornmentLayer, view);
-            }
-            else
-            {
-                if (generalSettings.IsEnablePowerMode && generalSettings.IsEnableComboMode)
+                if (!comboModeSettings.IsShowStreakCounter)
                 {
-                    streakCounterAdornment.OnSizeChanged(adornmentLayer, view, streakCount);
+                    streakCounterAdornment.Cleanup(adornmentLayer, view);
+                }
+                else
+                {
+                    if (generalSettings.IsEnablePowerMode && generalSettings.IsEnableComboMode)
+                    {
+                        streakCounterAdornment.OnSizeChanged(adornmentLayer, view, streakCount);
+                    }
                 }
             }
         }
