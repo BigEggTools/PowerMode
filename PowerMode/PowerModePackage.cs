@@ -69,7 +69,6 @@
             ToggleScreenShakeCommand.Initialize(this);
             ToggleAudioCommand.Initialize(this);
         }
-
         #endregion
     }
 }

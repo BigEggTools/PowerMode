@@ -41,15 +41,15 @@
             screenShakeAdornment = new ScreenShakeAdornment();
             particlesAdornment = new ParticlesAdornment();
 
-            generalSettings = new GeneralSettings();
-            comboModeSettings = new ComboModeSettings();
+            generalSettings = SettingsService.GetGeneralSettings();
+            comboModeSettings = SettingsService.GetComboModeSettings();
 
             this.view.TextBuffer.Changed += TextBuffer_Changed;
             this.view.ViewportHeightChanged += View_ViewportSizeChanged;
             this.view.ViewportWidthChanged += View_ViewportSizeChanged;
 
-            PropertyChangedEventManager.RemoveHandler(generalSettings, GeneralSettingModelPropertyChanged, "");
-            PropertyChangedEventManager.RemoveHandler(comboModeSettings, ComboModeSettingsModelPropertyChanged, "");
+            PropertyChangedEventManager.AddHandler(generalSettings, GeneralSettingModelPropertyChanged, "");
+            PropertyChangedEventManager.AddHandler(comboModeSettings, ComboModeSettingsModelPropertyChanged, "");
 
         }
 
@@ -145,26 +145,51 @@
 
         private void GeneralSettingModelPropertyChanged(object sender, PropertyChangedEventArgs e)
         {
-            if ((e.PropertyName == nameof(GeneralSettings.IsEnablePowerMode) ||
-                 e.PropertyName == nameof(GeneralSettings.IsEnableComboMode)) &&
-                !generalSettings.IsEnablePowerMode)
+            if (e.PropertyName == nameof(GeneralSettings.IsEnablePowerMode) && !generalSettings.IsEnablePowerMode)
             {
                 streakCounterAdornment.Cleanup(adornmentLayer, view);
+                screenShakeAdornment.Cleanup(adornmentLayer, view);
+                particlesAdornment.Cleanup(adornmentLayer, view);
             }
-            if ((e.PropertyName == nameof(GeneralSettings.IsEnablePowerMode) ||
-                 e.PropertyName == nameof(GeneralSettings.IsEnableScreenShake)) &&
-                !generalSettings.IsEnablePowerMode)
+
+            if (e.PropertyName == nameof(GeneralSettings.IsEnableComboMode))
+            {
+                if (!generalSettings.IsEnableComboMode)
+                {
+                    streakCounterAdornment.Cleanup(adornmentLayer, view);
+                }
+                else
+                {
+                    if (comboModeSettings.IsShowStreakCounter)
+                    {
+                        streakCounterAdornment.OnSizeChanged(adornmentLayer, view, streakCount);
+                    }
+                }
+            }
+
+            if ((e.PropertyName == nameof(GeneralSettings.IsEnableScreenShake) && !generalSettings.IsEnableScreenShake))
             {
                 screenShakeAdornment.Cleanup(adornmentLayer, view);
+            }
+
+            if ((e.PropertyName == nameof(GeneralSettings.IsEnableParticles) && !generalSettings.IsEnableParticles))
+            {
+                particlesAdornment.Cleanup(adornmentLayer, view);
             }
         }
 
         private void ComboModeSettingsModelPropertyChanged(object sender, PropertyChangedEventArgs e)
         {
-            if (e.PropertyName == nameof(ComboModeSettings.IsShowStreakCounter) &&
-                !comboModeSettings.IsShowStreakCounter)
+            if (e.PropertyName == nameof(ComboModeSettings.IsShowStreakCounter) && !comboModeSettings.IsShowStreakCounter)
             {
                 streakCounterAdornment.Cleanup(adornmentLayer, view);
+            }
+            else
+            {
+                if (generalSettings.IsEnablePowerMode && generalSettings.IsEnableComboMode)
+                {
+                    streakCounterAdornment.OnSizeChanged(adornmentLayer, view, streakCount);
+                }
             }
         }
     }
