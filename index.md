@@ -11,9 +11,9 @@ Inspired by the Power Mode Extension for Atom, which can be found [here](https:/
 ![Power Mode](PowerMode.gif)
 
 # Installation
-Soon will publish to [Visual Studio Gallery](https://visualstudiogallery.msdn.microsoft.com/).
+Now the exteransion can be found at [Visual Studio Gallery](https://marketplace.visualstudio.com/items?itemName=BigEgg.PowerMode).
 
-For now, can only download the source code and build the VSIX file to use.
+Also, you can always download the source code and build the VSIX file by yourself.
 
 # Features
 In current version, contains the following features:
