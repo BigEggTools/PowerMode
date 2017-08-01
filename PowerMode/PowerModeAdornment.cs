@@ -5,7 +5,6 @@
     using System.Threading;
     using System.Windows.Threading;
 
-    using Microsoft.VisualStudio.Shell;
     using Microsoft.VisualStudio.Text;
     using Microsoft.VisualStudio.Text.Editor;
 

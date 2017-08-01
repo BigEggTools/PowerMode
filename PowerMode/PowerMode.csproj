@@ -262,6 +262,10 @@
     <VSCTCompile Include="PowerModePackage.vsct">
       <ResourceName>Menus.ctmenu</ResourceName>
     </VSCTCompile>
+    <Content Include="PowerMode.gif">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <IncludeInVSIX>true</IncludeInVSIX>
+    </Content>
     <Content Include="Resources\PowerModePackage.ico" />
   </ItemGroup>
   <ItemGroup>
