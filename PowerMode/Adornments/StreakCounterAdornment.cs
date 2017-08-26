@@ -82,21 +82,26 @@
 
             if (ComboService.ShowExclamation(streakCount))
             {
-                if (exclamationImage == null) { exclamationImage = new Image(); }
-                exclamationImage.UpdateSource(GetExclamationImage(streakCount));
-
-                exclamationImage.BeginAnimation(Canvas.TopProperty, null);
-                exclamationImage.BeginAnimation(UIElement.OpacityProperty, null);
-                exclamationImage.Visibility = Visibility.Visible;
-
-                double exclamationImageTop = view.ViewportTop + TopMargin + ADORNMENT_TITLE_HEIGHT + comboNumberImageTuple.Item2.Height + 5;
-                adornmentLayer.RefreshImage(exclamationImage, view.ViewportRight - RightMargin - ADORNMENT_WIDTH, exclamationImageTop);
-
-                exclamationImage.BeginAnimation(Canvas.TopProperty, GetExclamationTopAnimation(exclamationImageTop));
-                var opacityAnimation = GetExclamationOpacityAnimation();
-                opacityAnimation.Completed += (sender, e) => exclamationImage.Visibility = Visibility.Hidden;
-                exclamationImage.BeginAnimation(UIElement.OpacityProperty, opacityAnimation);
+                ShowExclamation(adornmentLayer, view, GetExclamationImage(streakCount), comboNumberImageTuple.Item2.Height);
             }
+        }
+
+        private void ShowExclamation(IAdornmentLayer adornmentLayer, IWpfTextView view, System.Drawing.Bitmap exclamationBitmap, float streakCounterHeight)
+        {
+            if (exclamationImage == null) { exclamationImage = new Image(); }
+            exclamationImage.UpdateSource(exclamationBitmap);
+
+            exclamationImage.BeginAnimation(Canvas.TopProperty, null);
+            exclamationImage.BeginAnimation(UIElement.OpacityProperty, null);
+            exclamationImage.Visibility = Visibility.Visible;
+
+            double exclamationImageTop = view.ViewportTop + TopMargin + ADORNMENT_TITLE_HEIGHT + streakCounterHeight + 5;
+            adornmentLayer.RefreshImage(exclamationImage, view.ViewportRight - RightMargin - ADORNMENT_WIDTH, exclamationImageTop);
+
+            exclamationImage.BeginAnimation(Canvas.TopProperty, GetExclamationTopAnimation(exclamationImageTop));
+            var opacityAnimation = GetExclamationOpacityAnimation();
+            opacityAnimation.Completed += (sender, e) => exclamationImage.Visibility = Visibility.Hidden;
+            exclamationImage.BeginAnimation(UIElement.OpacityProperty, opacityAnimation);
         }
     }
 }
