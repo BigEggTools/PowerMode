@@ -21,6 +21,7 @@ In current version, contains the following features:
 * User Friendly Visual Studio Option. (See [Detail](options))
 * Combo Mode. (See [Detail](combomode))
 * Streak Counter. (See [Detail](streakcounter))
+  + Max Combo Streak.
 * Particles. (See [Detail](particles))
 * Screen Shake. (See [Detail](screenshake))
 
@@ -30,9 +31,6 @@ The next version of this extension will have the following features:
   + Visual Studio 2010 (low priority)
   + Visual Studio 2012 (middle priority)
   + Visual Studio 2015 (high priority)
-* Store the Max Combo Streak (high priority)
-  + Animation for New Records
-  + Can Reset Max Combo Streak
 * Play Audio Clip (middle priority)
   + Clip can be: Gun, Typewriter or Custom
   + Related Options and Menu

@@ -21,3 +21,6 @@ Streak Counter can show different color while combo level's change.
 
 ## Exclamation
 Exclamation can shows when every certain number of key streak happened.
+
+## New Max Combo Streak Exclamation
+When reached new max combo streak, their will show a celebrate exclamation for it.
