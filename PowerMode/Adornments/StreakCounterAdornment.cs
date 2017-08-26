@@ -20,6 +20,8 @@
         private Image titleImage;
         private Image streakCounterImage;
         private Image exclamationImage;
+        private int newMaxComboStreak = 0;
+        private bool newMaxComboStreakReached = false;
 
 
         public void Cleanup(IAdornmentLayer adornmentLayer, IWpfTextView view)
@@ -39,6 +41,7 @@
                 adornmentLayer.RemoveAdornment(exclamationImage);
                 exclamationImage = null;
             }
+            newMaxComboStreakReached = false;
         }
 
         public void OnSizeChanged(IAdornmentLayer adornmentLayer, IWpfTextView view, int streakCount)
@@ -84,6 +87,21 @@
             {
                 ShowExclamation(adornmentLayer, view, GetExclamationImage(streakCount), comboNumberImageTuple.Item2.Height);
             }
+
+            var achievevments = AchievementsService.GetAchievements();
+            if (streakCount > 0 && achievevments.MaxComboStreak < streakCount && !newMaxComboStreakReached)
+            {
+                ShowExclamation(adornmentLayer, view, GetNewMaxExclamationImage(streakCount), comboNumberImageTuple.Item2.Height);
+                newMaxComboStreakReached = true;
+            }
+
+            if (streakCount == 0 && newMaxComboStreak > 0)
+            {
+                achievevments.MaxComboStreak = newMaxComboStreak;
+                AchievementsService.SaveToStorage(achievevments);
+                newMaxComboStreakReached = false;
+            }
+            newMaxComboStreak = streakCount;
         }
 
         private void ShowExclamation(IAdornmentLayer adornmentLayer, IWpfTextView view, System.Drawing.Bitmap exclamationBitmap, float streakCounterHeight)
