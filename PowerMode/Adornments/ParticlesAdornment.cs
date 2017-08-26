@@ -17,7 +17,7 @@
 
     public class ParticlesAdornment : IAdornment
     {
-        private readonly static double PARTICLES_START_ALPHA = 0.9;
+        private readonly static double PARTICLES_START_ALPHA = 1.0;
         private readonly double iterations;
         private readonly TimeSpan timeSpan;
         private readonly List<Image> particlesList;
