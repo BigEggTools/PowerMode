@@ -22,16 +22,23 @@
                 <RowDefinition Height="30" />
                 <RowDefinition Height="30" />
                 <RowDefinition Height="30" />
+                <RowDefinition Height="*" />
             </Grid.RowDefinitions>
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="150" />
-                <ColumnDefinition Width="*" />
-            </Grid.ColumnDefinitions>
-            <CheckBox Content="Enable Power Model" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" ToolTip="Toggle on start." IsChecked="{Binding DataContext.IsEnablePowerMode, ElementName=userControl}" Style="{DynamicResource ToggleCheckBox}"/>
-            <CheckBox Content="Enable Combo Mode" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" Name="EnableComboMode" ToolTip="When enabled, effects won't appear until reach the activation threshold." IsEnabled="{Binding DataContext.IsEnablePowerMode, ElementName=userControl}" IsChecked="{Binding DataContext.IsEnableComboMode, ElementName=userControl}" Style="{DynamicResource ToggleCheckBox}"/>
-            <CheckBox Content="Enable Particles" Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" Name="EnableParticles" ToolTip="Turn the particles on/off." IsEnabled="{Binding DataContext.IsEnablePowerMode, ElementName=userControl}" IsChecked="{Binding DataContext.IsEnableParticles, ElementName=userControl}" Style="{DynamicResource ToggleCheckBox}"/>
-            <CheckBox Content="Enable Screen Shake" Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2" Name="EnableScreenShake" ToolTip="Turn the shaking on/off." IsEnabled="{Binding DataContext.IsEnablePowerMode, ElementName=userControl}" IsChecked="{Binding DataContext.IsEnableScreenShake, ElementName=userControl}" Style="{DynamicResource ToggleCheckBox}"/>
-            <CheckBox Content="Enable Audio" Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="2" Name="EnableAudio" ToolTip="Play audio clip on/off." IsEnabled="False" IsChecked="{Binding DataContext.IsEnableAudio, ElementName=userControl}" Style="{DynamicResource ToggleCheckBox}"/>
+            <CheckBox Content="Enable Power Model" Grid.Row="0" ToolTip="Toggle on start." IsChecked="{Binding DataContext.Settings.IsEnablePowerMode, ElementName=userControl}" Style="{DynamicResource ToggleCheckBox}"/>
+            <CheckBox Content="Enable Combo Mode" Grid.Row="1" Name="EnableComboMode" ToolTip="When enabled, effects won't appear until reach the activation threshold." IsEnabled="{Binding DataContext.Settings.IsEnablePowerMode, ElementName=userControl}" IsChecked="{Binding DataContext.Settings.IsEnableComboMode, ElementName=userControl}" Style="{DynamicResource ToggleCheckBox}"/>
+            <CheckBox Content="Enable Particles" Grid.Row="2" Name="EnableParticles" ToolTip="Turn the particles on/off." IsEnabled="{Binding DataContext.Settings.IsEnablePowerMode, ElementName=userControl}" IsChecked="{Binding DataContext.Settings.IsEnableParticles, ElementName=userControl}" Style="{DynamicResource ToggleCheckBox}"/>
+            <CheckBox Content="Enable Screen Shake" Grid.Row="3" Name="EnableScreenShake" ToolTip="Turn the shaking on/off." IsEnabled="{Binding DataContext.Settings.IsEnablePowerMode, ElementName=userControl}" IsChecked="{Binding DataContext.Settings.IsEnableScreenShake, ElementName=userControl}" Style="{DynamicResource ToggleCheckBox}"/>
+            <CheckBox Content="Enable Audio" Grid.Row="4" Name="EnableAudio" ToolTip="Play audio clip on/off." IsEnabled="False" IsChecked="{Binding DataContext.Settings.IsEnableAudio, ElementName=userControl}" Style="{DynamicResource ToggleCheckBox}"/>
+            <Grid Grid.Row="5" Margin="5,10,0,0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="125" />
+                    <ColumnDefinition Width="50" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <Label Content="Max Combo Streak :" Grid.Column="0" VerticalAlignment="Top" Height="26"></Label>
+                <Label Content="{Binding Achievements.MaxComboStreak}" Grid.Column="1" Height="26" VerticalAlignment="Top"/>
+                <Button Grid.Column="2" Content="Reset" VerticalAlignment="Top" HorizontalContentAlignment="Center" Height="20" Width="80" HorizontalAlignment="Right" Margin="0,3,10,3" Click="ResetMaxComboStreak"/>
+            </Grid>
         </Grid>
     </ScrollViewer>
 </UserControl>

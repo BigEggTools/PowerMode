@@ -35,6 +35,16 @@
             }
         }
 
+        public AchievementsSettings Achievements { get { return AchievementsService.GetAchievements(); } }
+
+
+        public void ResetMaxComboStreak()
+        {
+            var achievements = AchievementsService.GetAchievements();
+            achievements.MaxComboStreak = 0;
+            AchievementsService.SaveToStorage(achievements);
+        }
+
 
         protected override UIElement Child
         {

@@ -104,6 +104,7 @@
     <Compile Include="Options\ScreenShakeOptionPageUserControl.xaml.cs">
       <DependentUpon>ScreenShakeOptionPageUserControl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Options\ViewModels\GeneralOptionViewModel.cs" />
     <Compile Include="PowerModeAdornment.cs" />
     <Compile Include="PowerModeAdornmentTextViewCreationListener.cs" />
     <Compile Include="Fundations\Model.cs" />
