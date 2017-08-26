@@ -20,9 +20,9 @@ In current version, contains the following features:
 * User Friendly Visual Studio Option. (See [Detail](https://bigeggtools.github.io/PowerMode/options/))
 * Combo Mode. (See [Detail](https://bigeggtools.github.io/PowerMode/combomode/))
 * Streak Counter. (See [Detail](https://bigeggtools.github.io/PowerMode/streakcounter/))
+  + Max Combo Streak.
 * Particles. (See [Detail](https://bigeggtools.github.io/PowerMode/particles/))
 * Screen Shake. (See [Detail](https://bigeggtools.github.io/PowerMode/screenshake/))
-* Max Combo Streak.
 
 # Next Features
 The next version of this extension will have the following features:
