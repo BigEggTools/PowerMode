@@ -35,6 +35,29 @@
             }
         }
 
+        private Bitmap GetNewMaxExclamationImage(int streakCount)
+        {
+            var font = new Font("Tahoma", ComboService.GetPowerLevelExclamationFontSize(streakCount));
+            var color = ComboService.GetPowerLevelColor(streakCount);
+
+            var bitmap = new Bitmap(ADORNMENT_WIDTH, ADORNMENT_EXCLAMATION_HEIGHT);
+            bitmap.MakeTransparent();
+
+            using (var graphics = Graphics.FromImage(bitmap))
+            {
+                graphics.SmoothingMode = SmoothingMode.AntiAlias;
+                graphics.InterpolationMode = InterpolationMode.HighQualityBicubic;
+                graphics.PixelOffsetMode = PixelOffsetMode.HighQuality;
+
+                var exclamation = "New MAX !!!";
+                var size = graphics.MeasureString(exclamation, font);
+                graphics.DrawString(exclamation, font, new SolidBrush(color), new RectangleF(ADORNMENT_WIDTH - size.Width, 0, size.Width, ADORNMENT_EXCLAMATION_HEIGHT));
+
+                graphics.Flush();
+                return bitmap;
+            }
+        }
+
 
         private DoubleAnimation GetExclamationTopAnimation(double top)
         {
