@@ -39,3 +39,7 @@ The **Particles** toggle button will be the toggle to control if show or not sho
 ### **Screen Shake** Toggle Button
 
 The **Screen Shake** toggle button will be the toggle to control if shake or not shake the screen when detect user input.
+
+### **Reset** Button
+
+The **Reset** button is used to reset the max Combo Streak number.
