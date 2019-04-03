@@ -24,12 +24,15 @@ In current version, contains the following features:
 * Particles. (See [Detail](https://bigeggtools.github.io/PowerMode/particles/))
 * Screen Shake. (See [Detail](https://bigeggtools.github.io/PowerMode/screenshake/))
 
+# Visual Studio Supports
+* Now support the following versions
+  + Visual Studio 2017
+  + Visual Studio 2019
+    - [The guidance of upgrading a vsix plugins to VS 2019](https://madskristensen.net/blog/how-to-upgrade-extensions-to-support-visual-studio-2019/)
+
 # Next Features
 The next version of this extension will have the following features:
-* Support multiple version of Visual Studio
-  + Visual Studio 2010 (low priority)
-  + Visual Studio 2012 (middle priority)
-  + Visual Studio 2015 (high priority)
+
 * Play Audio Clip (middle priority)
   + Clip can be: Gun, Typewriter or Custom
   + Related Options and Menu
