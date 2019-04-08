@@ -10,7 +10,7 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("BigEgg")]
 [assembly: AssemblyProduct("BigEgg Tools")]
-[assembly: AssemblyCopyright("Copyright © 2017 BigEgg")]
+[assembly: AssemblyCopyright("Copyright © 2019 BigEgg")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 

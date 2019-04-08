@@ -28,7 +28,6 @@ In current version, contains the following features:
 * Now support the following versions
   + Visual Studio 2017
   + Visual Studio 2019
-    - [The guidance of upgrading a vsix plugins to VS 2019](https://madskristensen.net/blog/how-to-upgrade-extensions-to-support-visual-studio-2019/)
 
 # Next Features
 The next version of this extension will have the following features:
