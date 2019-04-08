@@ -61,30 +61,36 @@
 
         private void NewParticlesImage(IAdornmentLayer adornmentLayer, IWpfTextView view)
         {
-            var particles = new Image();
-            particles.UpdateSource(GetParticlesImage());
-            adornmentLayer.AddAdornment(AdornmentPositioningBehavior.ViewportRelative, null, null, particles, null);
-            particlesList.Add(particles);
-
             try
             {
-                var top = view.Caret.Top;
-                var left = view.Caret.Left;
-                particles.BeginAnimation(Canvas.TopProperty, GetParticlesTopAnimation(top));
-                particles.BeginAnimation(Canvas.LeftProperty, GetParticlesLeftAnimation(left));
-                var opacityAnimation = GetParticlesOpacityAnimation();
-                opacityAnimation.Completed += (sender, e) =>
+                var particles = new Image();
+                particles.UpdateSource(GetParticlesImage());
+                adornmentLayer.AddAdornment(AdornmentPositioningBehavior.ViewportRelative, null, null, particles, null);
+                particlesList.Add(particles);
+
+                try
                 {
-                    particles.Visibility = Visibility.Hidden;
+                    var top = view.Caret.Top;
+                    var left = view.Caret.Left;
+                    particles.BeginAnimation(Canvas.TopProperty, GetParticlesTopAnimation(top));
+                    particles.BeginAnimation(Canvas.LeftProperty, GetParticlesLeftAnimation(left));
+                    var opacityAnimation = GetParticlesOpacityAnimation();
+                    opacityAnimation.Completed += (sender, e) =>
+                    {
+                        particles.Visibility = Visibility.Hidden;
+                        adornmentLayer.RemoveAdornment(particles);
+                        particlesList.Remove(particles);
+                    };
+                    particles.BeginAnimation(UIElement.OpacityProperty, opacityAnimation);
+                }
+                catch
+                {
                     adornmentLayer.RemoveAdornment(particles);
                     particlesList.Remove(particles);
-                };
-                particles.BeginAnimation(UIElement.OpacityProperty, opacityAnimation);
+                }
             }
             catch
             {
-                adornmentLayer.RemoveAdornment(particles);
-                particlesList.Remove(particles);
             }
         }
 
