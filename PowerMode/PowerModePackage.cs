@@ -3,6 +3,7 @@
     using System;
     using System.Diagnostics.CodeAnalysis;
     using System.Runtime.InteropServices;
+    using System.Threading;
 
     using Microsoft.VisualStudio.Shell;
 
@@ -26,7 +27,7 @@
     /// To get loaded into VS, the package must be referred by &lt;Asset Type="Microsoft.VisualStudio.VsPackage" ...&gt; in .vsixmanifest file.
     /// </para>
     /// </remarks>
-    [PackageRegistration(UseManagedResourcesOnly = true)]
+    [PackageRegistration(UseManagedResourcesOnly = true, AllowsBackgroundLoading = true)]
     [InstalledProductRegistration("#110", "#112", "1.0", IconResourceID = 400)] // Info on this package for Help/About
     [Guid(PowerModePackage.PackageGuidString)]
     [SuppressMessage("StyleCop.CSharp.DocumentationRules", "SA1650:ElementDocumentationMustBeSpelledCorrectly", Justification = "pkgdef, VS and vsixmanifest are valid VS terms")]
@@ -36,7 +37,7 @@
     [ProvideOptionPage(typeof(ParticlesOptionPage), "Power Mode", "Particles", 0, 0, true)]
     [ProvideMenuResource("Menus.ctmenu", 1)]
     [ProvideAutoLoad("ADFC4E64-0397-11D1-9F4E-00A0C911004F")]
-    public sealed class PowerModePackage : Package
+    public sealed class PowerModePackage : AsyncPackage
     {
         /// <summary>
         /// PowerModePackage GUID string.
@@ -60,14 +61,33 @@
         /// Initialization of the package; this method is called right after the package is sited, so this is the place
         /// where you can put all the initialization code that rely on services provided by VisualStudio.
         /// </summary>
-        protected override void Initialize()
+        protected override async System.Threading.Tasks.Task InitializeAsync(CancellationToken cancellationToken, IProgress<ServiceProgressData> progress)
         {
-            base.Initialize();
+            progress.Report(new ServiceProgressData("Starting Power Mode", "Initializing...", 0, 6));
+            await base.InitializeAsync(cancellationToken, progress);
+
+            cancellationToken.ThrowIfCancellationRequested();
+            progress.Report(new ServiceProgressData("Starting Power Mode", "Initializing...", 1, 6));
             TogglePowerModeCommand.Initialize(this);
+
+            cancellationToken.ThrowIfCancellationRequested();
+            progress.Report(new ServiceProgressData("Starting Power Mode", "Initializing...", 2, 6));
             ToggleComboModeCommand.Initialize(this);
+
+            cancellationToken.ThrowIfCancellationRequested();
+            progress.Report(new ServiceProgressData("Starting Power Mode", "Initializing...", 3, 6));
             ToggleParticlesCommand.Initialize(this);
+
+            cancellationToken.ThrowIfCancellationRequested();
+            progress.Report(new ServiceProgressData("Starting Power Mode", "Initializing...", 4, 6));
             ToggleScreenShakeCommand.Initialize(this);
+
+            cancellationToken.ThrowIfCancellationRequested();
+            progress.Report(new ServiceProgressData("Starting Power Mode", "Initializing...", 5, 6));
             ToggleAudioCommand.Initialize(this);
+
+            cancellationToken.ThrowIfCancellationRequested();
+            progress.Report(new ServiceProgressData("Starting Power Mode", "Initializing...", 6, 6));
         }
         #endregion
     }
