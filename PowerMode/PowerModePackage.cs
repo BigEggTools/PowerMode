@@ -9,6 +9,7 @@
 
     using BigEgg.Tools.PowerMode.Commands;
     using BigEgg.Tools.PowerMode.Options;
+    using Microsoft.VisualStudio;
 
     /// <summary>
     /// This is the class that implements the package exposed by this assembly.
@@ -36,7 +37,7 @@
     [ProvideOptionPage(typeof(ScreenShakeOptionPage), "Power Mode", "Screen Shake", 0, 0, true)]
     [ProvideOptionPage(typeof(ParticlesOptionPage), "Power Mode", "Particles", 0, 0, true)]
     [ProvideMenuResource("Menus.ctmenu", 1)]
-    [ProvideAutoLoad("ADFC4E64-0397-11D1-9F4E-00A0C911004F")]
+    [ProvideAutoLoad(VSConstants.UICONTEXT.ShellInitialized_string, PackageAutoLoadFlags.BackgroundLoad)]
     public sealed class PowerModePackage : AsyncPackage
     {
         /// <summary>
@@ -63,31 +64,24 @@
         /// </summary>
         protected override async System.Threading.Tasks.Task InitializeAsync(CancellationToken cancellationToken, IProgress<ServiceProgressData> progress)
         {
-            progress.Report(new ServiceProgressData("Starting Power Mode", "Initializing...", 0, 6));
+            progress.Report(new ServiceProgressData("Starting Power Mode", "Initializing...", 0, 2));
             await base.InitializeAsync(cancellationToken, progress);
-
+            progress.Report(new ServiceProgressData("Starting Power Mode", "Initializing...", 1, 2));
             cancellationToken.ThrowIfCancellationRequested();
-            progress.Report(new ServiceProgressData("Starting Power Mode", "Initializing...", 1, 6));
+
+            await JoinableTaskFactory.SwitchToMainThreadAsync(cancellationToken);
+            cancellationToken.ThrowIfCancellationRequested();
             await TogglePowerModeCommand.InitializeAsync(this);
-
             cancellationToken.ThrowIfCancellationRequested();
-            progress.Report(new ServiceProgressData("Starting Power Mode", "Initializing...", 2, 6));
             await ToggleComboModeCommand.InitializeAsync(this);
-
             cancellationToken.ThrowIfCancellationRequested();
-            progress.Report(new ServiceProgressData("Starting Power Mode", "Initializing...", 3, 6));
             await ToggleParticlesCommand.InitializeAsync(this);
-
             cancellationToken.ThrowIfCancellationRequested();
-            progress.Report(new ServiceProgressData("Starting Power Mode", "Initializing...", 4, 6));
             await ToggleScreenShakeCommand.InitializeAsync(this);
-
             cancellationToken.ThrowIfCancellationRequested();
-            progress.Report(new ServiceProgressData("Starting Power Mode", "Initializing...", 5, 6));
             await ToggleAudioCommand.InitializeAsync(this);
-
             cancellationToken.ThrowIfCancellationRequested();
-            progress.Report(new ServiceProgressData("Starting Power Mode", "Initializing...", 6, 6));
+            progress.Report(new ServiceProgressData("Starting Power Mode", "Initializing...", 2, 2));
         }
         #endregion
     }
