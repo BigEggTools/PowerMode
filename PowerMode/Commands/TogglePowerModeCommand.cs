@@ -9,8 +9,8 @@
 
     internal sealed class TogglePowerModeCommand : CommandHandler
     {
-        private TogglePowerModeCommand(Package package)
-            : base(package, CommandData.CommandSet, CommandData.TogglePowerModeCommandId)
+        private TogglePowerModeCommand()
+            : base(CommandData.CommandSet, CommandData.TogglePowerModeCommandId)
         {
         }
 
@@ -18,9 +18,10 @@
         public static TogglePowerModeCommand Instance { get; private set; }
 
 
-        public static void Initialize(Package package)
+        public static async System.Threading.Tasks.Task InitializeAsync(AsyncPackage package)
         {
-            Instance = new TogglePowerModeCommand(package);
+            Instance = new TogglePowerModeCommand();
+            await Instance.InitalizeAsync(package);
         }
 
 
@@ -41,24 +42,20 @@
 
             menuCommand.Checked = settings.IsEnablePowerMode;
 
-            var menuCommandService = serviceProvider.GetService(typeof(IMenuCommandService)) as OleMenuCommandService;
             var newCmdID = new CommandID(CommandData.CommandSet, CommandData.ToggleComboModeCommandId);
-            var otherMenuCommand = menuCommandService.FindCommand(newCmdID);
+            var otherMenuCommand = commandService.FindCommand(newCmdID);
             otherMenuCommand.Enabled = settings.IsEnablePowerMode;
 
-            menuCommandService = serviceProvider.GetService(typeof(IMenuCommandService)) as OleMenuCommandService;
             newCmdID = new CommandID(CommandData.CommandSet, CommandData.ToggleParticlesCommandId);
-            otherMenuCommand = menuCommandService.FindCommand(newCmdID);
+            otherMenuCommand = commandService.FindCommand(newCmdID);
             otherMenuCommand.Enabled = settings.IsEnablePowerMode;
 
-            menuCommandService = serviceProvider.GetService(typeof(IMenuCommandService)) as OleMenuCommandService;
             newCmdID = new CommandID(CommandData.CommandSet, CommandData.ToggleScreenShakeCommandId);
-            otherMenuCommand = menuCommandService.FindCommand(newCmdID);
+            otherMenuCommand = commandService.FindCommand(newCmdID);
             otherMenuCommand.Enabled = settings.IsEnablePowerMode;
 
-            menuCommandService = serviceProvider.GetService(typeof(IMenuCommandService)) as OleMenuCommandService;
             newCmdID = new CommandID(CommandData.CommandSet, CommandData.ToggleAudioCommandId);
-            otherMenuCommand = menuCommandService.FindCommand(newCmdID);
+            otherMenuCommand = commandService.FindCommand(newCmdID);
             otherMenuCommand.Enabled = settings.IsEnablePowerMode;
         }
     }

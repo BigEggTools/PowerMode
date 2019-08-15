@@ -68,23 +68,23 @@
 
             cancellationToken.ThrowIfCancellationRequested();
             progress.Report(new ServiceProgressData("Starting Power Mode", "Initializing...", 1, 6));
-            TogglePowerModeCommand.Initialize(this);
+            await TogglePowerModeCommand.InitializeAsync(this);
 
             cancellationToken.ThrowIfCancellationRequested();
             progress.Report(new ServiceProgressData("Starting Power Mode", "Initializing...", 2, 6));
-            ToggleComboModeCommand.Initialize(this);
+            await ToggleComboModeCommand.InitializeAsync(this);
 
             cancellationToken.ThrowIfCancellationRequested();
             progress.Report(new ServiceProgressData("Starting Power Mode", "Initializing...", 3, 6));
-            ToggleParticlesCommand.Initialize(this);
+            await ToggleParticlesCommand.InitializeAsync(this);
 
             cancellationToken.ThrowIfCancellationRequested();
             progress.Report(new ServiceProgressData("Starting Power Mode", "Initializing...", 4, 6));
-            ToggleScreenShakeCommand.Initialize(this);
+            await ToggleScreenShakeCommand.InitializeAsync(this);
 
             cancellationToken.ThrowIfCancellationRequested();
             progress.Report(new ServiceProgressData("Starting Power Mode", "Initializing...", 5, 6));
-            ToggleAudioCommand.Initialize(this);
+            await ToggleAudioCommand.InitializeAsync(this);
 
             cancellationToken.ThrowIfCancellationRequested();
             progress.Report(new ServiceProgressData("Starting Power Mode", "Initializing...", 6, 6));

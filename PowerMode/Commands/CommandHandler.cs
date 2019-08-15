@@ -7,21 +7,25 @@
 
     internal abstract class CommandHandler : IDisposable
     {
-        protected readonly IServiceProvider serviceProvider;
-        protected readonly OleMenuCommandService commandService;
-        protected readonly OleMenuCommand menuCommand;
+        protected readonly Guid commandSet;
+        protected readonly int commandid;
+
+        protected IMenuCommandService commandService;
+        protected OleMenuCommand menuCommand;
 
 
-        protected CommandHandler(Package package, Guid group, int id)
+        protected CommandHandler(Guid group, int id)
         {
-            if (package == null) { throw new ArgumentNullException("package"); }
+            this.commandSet = group;
+            this.commandid = id;
+        }
 
-            serviceProvider = package;
 
-            commandService = serviceProvider.GetService(typeof(IMenuCommandService)) as OleMenuCommandService;
-            var menuCommandID = new CommandID(group, id);
+        protected async System.Threading.Tasks.Task InitalizeAsync(AsyncPackage package)
+        {
+            commandService = (IMenuCommandService)await package.GetServiceAsync(typeof(IMenuCommandService));
+            var menuCommandID = new CommandID(commandSet, commandid);
             menuCommand = new OleMenuCommand(Invoke, menuCommandID);
-
             menuCommand.BeforeQueryStatus += MenuCommand_BeforeQueryStatus;
 
             commandService.AddCommand(menuCommand);

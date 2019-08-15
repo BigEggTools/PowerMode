@@ -9,8 +9,8 @@
 
     internal sealed class ToggleParticlesCommand : CommandHandler
     {
-        private ToggleParticlesCommand(Package package)
-            : base(package, CommandData.CommandSet, CommandData.ToggleParticlesCommandId)
+        private ToggleParticlesCommand()
+            : base( CommandData.CommandSet, CommandData.ToggleParticlesCommandId)
         {
         }
 
@@ -18,9 +18,10 @@
         public static ToggleParticlesCommand Instance { get; private set; }
 
 
-        public static void Initialize(Package package)
+        public static async System.Threading.Tasks.Task InitializeAsync(AsyncPackage package)
         {
-            Instance = new ToggleParticlesCommand(package);
+            Instance = new ToggleParticlesCommand();
+            await Instance.InitalizeAsync(package);
         }
 
 
@@ -38,9 +39,8 @@
             SettingsService.SaveToStorage(settings);
 
             var command = sender as MenuCommand;
-            var menuCommandService = serviceProvider.GetService(typeof(IMenuCommandService)) as OleMenuCommandService;
             var newCmdID = new CommandID(CommandData.CommandSet, command.CommandID.ID);
-            var menuCommand = menuCommandService.FindCommand(newCmdID);
+            var menuCommand = commandService.FindCommand(newCmdID);
             menuCommand.Checked = settings.IsEnableParticles;
         }
     }
