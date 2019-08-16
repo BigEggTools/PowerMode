@@ -22,6 +22,9 @@
             particlesSettingsCache.MaxSpawnedParticles = GetIntegerOption(store, PARTICLES_SETTINGS_CATELOG, nameof(ParticlesSettings.MaxSpawnedParticles)).GetValueOrDefault(particlesSettingsCache.MaxSpawnedParticles);
             particlesSettingsCache.MinParticlesSize = GetIntegerOption(store, PARTICLES_SETTINGS_CATELOG, nameof(ParticlesSettings.MinParticlesSize)).GetValueOrDefault(particlesSettingsCache.MinParticlesSize);
             particlesSettingsCache.MaxParticlesSize = GetIntegerOption(store, PARTICLES_SETTINGS_CATELOG, nameof(ParticlesSettings.MaxParticlesSize)).GetValueOrDefault(particlesSettingsCache.MaxParticlesSize);
+            particlesSettingsCache.IsEnabledPartyMode = GetBoolOption(store, PARTICLES_SETTINGS_CATELOG, nameof(ParticlesSettings.IsEnabledPartyMode)).GetValueOrDefault(particlesSettingsCache.IsEnabledPartyMode);
+            particlesSettingsCache.PartyModeThreshold = GetIntegerOption(store, PARTICLES_SETTINGS_CATELOG, nameof(ParticlesSettings.PartyModeThreshold)).GetValueOrDefault(particlesSettingsCache.PartyModeThreshold);
+            particlesSettingsCache.PartyModeSpawnedParticles = GetIntegerOption(store, PARTICLES_SETTINGS_CATELOG, nameof(ParticlesSettings.PartyModeSpawnedParticles)).GetValueOrDefault(particlesSettingsCache.PartyModeSpawnedParticles);
 
             return particlesSettingsCache;
         }
@@ -38,7 +41,9 @@
             SetOption(store, PARTICLES_SETTINGS_CATELOG, nameof(ParticlesSettings.MinSpawnedParticles), settings.MinSpawnedParticles);
             SetOption(store, PARTICLES_SETTINGS_CATELOG, nameof(ParticlesSettings.MaxSpawnedParticles), settings.MaxSpawnedParticles);
             SetOption(store, PARTICLES_SETTINGS_CATELOG, nameof(ParticlesSettings.MinParticlesSize), settings.MinParticlesSize);
-            SetOption(store, PARTICLES_SETTINGS_CATELOG, nameof(ParticlesSettings.MaxParticlesSize), settings.MaxParticlesSize);
+            SetOption(store, PARTICLES_SETTINGS_CATELOG, nameof(ParticlesSettings.IsEnabledPartyMode), settings.IsEnabledPartyMode);
+            SetOption(store, PARTICLES_SETTINGS_CATELOG, nameof(ParticlesSettings.PartyModeThreshold), settings.PartyModeThreshold);
+            SetOption(store, PARTICLES_SETTINGS_CATELOG, nameof(ParticlesSettings.PartyModeSpawnedParticles), settings.PartyModeSpawnedParticles);
         }
     }
 }

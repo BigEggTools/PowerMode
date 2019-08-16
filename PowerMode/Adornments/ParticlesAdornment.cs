@@ -48,33 +48,40 @@
         public void OnTextBufferChanged(IAdornmentLayer adornmentLayer, IWpfTextView view, int streakCount)
         {
             settings = SettingsService.GetParticlesSettings();
+            var isPartyMode = settings.IsEnabledPartyMode && settings.PartyModeThreshold <= streakCount;
 
-            var spawnedSize = RandomUtils.Random.Next(settings.MinSpawnedParticles, settings.MaxSpawnedParticles);
-            if (spawnedSize + particlesList.Count > settings.MaxParticlesCount) { spawnedSize = settings.MaxParticlesCount - particlesList.Count; }
+            var spawnedSize = isPartyMode
+                                ? settings.PartyModeSpawnedParticles
+                                : RandomUtils.Random.Next(settings.MinSpawnedParticles, settings.MaxSpawnedParticles);
+            spawnedSize = Math.Min(spawnedSize, settings.MaxParticlesCount - particlesList.Count);
 
             for (int i = 0; i < spawnedSize; i++)
             {
-                NewParticlesImage(adornmentLayer, view);
+                NewParticleImage(adornmentLayer, view, isPartyMode);
             }
         }
 
 
-        private void NewParticlesImage(IAdornmentLayer adornmentLayer, IWpfTextView view)
+        private void NewParticleImage(IAdornmentLayer adornmentLayer, IWpfTextView view, bool isPartyMode)
         {
             try
             {
                 var particles = new Image();
-                particles.UpdateSource(GetParticlesImage());
+                particles.UpdateSource(GetParticleImage());
                 adornmentLayer.AddAdornment(AdornmentPositioningBehavior.ViewportRelative, null, null, particles, null);
                 particlesList.Add(particles);
 
                 try
                 {
-                    var top = view.Caret.Top;
-                    var left = view.Caret.Left;
-                    particles.BeginAnimation(Canvas.TopProperty, GetParticlesTopAnimation(top));
-                    particles.BeginAnimation(Canvas.LeftProperty, GetParticlesLeftAnimation(left));
-                    var opacityAnimation = GetParticlesOpacityAnimation();
+                    var top = isPartyMode 
+                        ? RandomUtils.Random.Next((int)view.ViewportTop, (int)view.ViewportBottom)
+                        : view.Caret.Top;
+                    var left = isPartyMode 
+                        ? RandomUtils.Random.Next((int)view.ViewportLeft, (int)view.ViewportRight)
+                        : view.Caret.Left;
+                    particles.BeginAnimation(Canvas.TopProperty, GetParticleTopAnimation(top));
+                    particles.BeginAnimation(Canvas.LeftProperty, GetParticleLeftAnimation(left));
+                    var opacityAnimation = GetParticleOpacityAnimation();
                     opacityAnimation.Completed += (sender, e) =>
                     {
                         particles.Visibility = Visibility.Hidden;
@@ -94,7 +101,7 @@
             }
         }
 
-        private Bitmap GetParticlesImage()
+        private Bitmap GetParticleImage()
         {
             var color = RandomUtils.NextColor();
             var size = RandomUtils.Random.Next(settings.MinParticlesSize, settings.MaxParticlesSize) * 2;
@@ -117,7 +124,7 @@
         }
 
 
-        private DoubleAnimation GetParticlesTopAnimation(double top)
+        private DoubleAnimation GetParticleTopAnimation(double top)
         {
             return new DoubleAnimation()
             {
@@ -127,7 +134,7 @@
                 Duration = timeSpan
             };
         }
-        private DoubleAnimation GetParticlesLeftAnimation(double left)
+        private DoubleAnimation GetParticleLeftAnimation(double left)
         {
             var leftDelta = RandomUtils.Random.NextDouble() * 40 * RandomUtils.NextSignal();
 
@@ -139,7 +146,7 @@
             };
         }
 
-        private DoubleAnimation GetParticlesOpacityAnimation()
+        private DoubleAnimation GetParticleOpacityAnimation()
         {
             return new DoubleAnimation()
             {

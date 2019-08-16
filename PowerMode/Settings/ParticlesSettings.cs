@@ -12,6 +12,9 @@
         private int maxSpawnedParticles = 15;
         private int minParticlesSize = 2;
         private int maxParticlesSize = 4;
+        private bool isEnabledPartyMode = true;
+        private int partyModeThreshold = 50;
+        private int partyModeSpawnedParticles = 50;
 
 
         public ParticlesColorType ParticlesColorType
@@ -63,6 +66,26 @@
             set { SetPropertyAndValidate(ref maxParticlesSize, value); }
         }
 
+        public bool IsEnabledPartyMode
+        {
+            get { return isEnabledPartyMode; }
+            set { SetPropertyAndValidate(ref isEnabledPartyMode, value); }
+        }
+
+        [Range(10, 200, ErrorMessage = "Party Mode Threshold to determine should show party particles or not.")]
+        public int PartyModeThreshold
+        {
+            get { return partyModeThreshold; }
+            set { SetPropertyAndValidate(ref partyModeThreshold, value); }
+        }
+
+        [Range(1, 200, ErrorMessage = "Spawned Particles during party should be between 1 to 50")]
+        public int PartyModeSpawnedParticles
+        {
+            get { return partyModeSpawnedParticles; }
+            set { SetPropertyAndValidate(ref partyModeSpawnedParticles, value); }
+        }
+
 
         public void CloneFrom(ParticlesSettings other)
         {
@@ -73,6 +96,9 @@
             this.MaxSpawnedParticles = other.MaxSpawnedParticles;
             this.MinParticlesSize = other.MinParticlesSize;
             this.MaxParticlesSize = other.MaxParticlesSize;
+            this.IsEnabledPartyMode = other.IsEnabledPartyMode;
+            this.PartyModeThreshold = other.PartyModeThreshold;
+            this.PartyModeSpawnedParticles = other.PartyModeSpawnedParticles;
         }
     }
 }

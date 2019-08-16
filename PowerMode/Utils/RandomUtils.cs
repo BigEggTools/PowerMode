@@ -6,26 +6,23 @@
 
     public class RandomUtils
     {
-        private static Random random = new Random(DateTime.Now.Millisecond);
-
-
-        public static Random Random { get { return random; } }
+        public static Random Random { get; } = new Random(DateTime.Now.Millisecond);
 
 
         public static string NextString(IList<string> stringList)
         {
-            return stringList[random.Next(0, stringList.Count)];
+            return stringList[Random.Next(0, stringList.Count)];
         }
 
         public static int NextSignal()
         {
-            return random.Next(0, 2) == 1 ? 1 : -1;
+            return Random.Next(0, 2) == 1 ? 1 : -1;
         }
 
         public static Color NextColor()
         {
             var bytes = new byte[3];
-            random.NextBytes(bytes);
+            Random.NextBytes(bytes);
 
             return Color.FromArgb(bytes[0], bytes[1], bytes[2]);
         }
