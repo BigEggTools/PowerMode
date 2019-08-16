@@ -14,7 +14,7 @@
         private int maxParticlesSize = 4;
         private bool isEnabledPartyMode = true;
         private int partyModeThreshold = 50;
-        private int partyModeSpawnedParticles = 200;
+        private int partyModeSpawnedParticles = 50;
 
 
         public ParticlesColorType ParticlesColorType
@@ -79,7 +79,7 @@
             set { SetPropertyAndValidate(ref partyModeThreshold, value); }
         }
 
-        [Range(1, 2000, ErrorMessage = "Spawned Particles during party should be between 1 to 50")]
+        [Range(1, 200, ErrorMessage = "Spawned Particles during party should be between 1 to 50")]
         public int PartyModeSpawnedParticles
         {
             get { return partyModeSpawnedParticles; }
