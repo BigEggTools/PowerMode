@@ -3,6 +3,7 @@
     using System;
     using System.ComponentModel;
     using System.Threading;
+    using System.Threading.Tasks;
     using System.Windows.Threading;
 
     using Microsoft.VisualStudio.Text;
@@ -116,17 +117,23 @@
             {
                 clearStreakCountTimer = new Timer(info =>
                 {
-                    streakCount = 0;
-                    view.VisualElement.Dispatcher.Invoke(
-                        () =>
-                        {
-                            RefreshSettings();
-                            if (generalSettings.IsEnablePowerMode && generalSettings.IsEnableComboMode && comboModeSettings.IsShowStreakCounter)
+                    try
+                    {
+                        streakCount = 0;
+                        view.VisualElement.Dispatcher.Invoke(
+                            () =>
                             {
-                                streakCounterAdornment.OnTextBufferChanged(adornmentLayer, view, streakCount);
-                            }
-                        },
-                        DispatcherPriority.ContextIdle);
+                                RefreshSettings();
+                                if (generalSettings.IsEnablePowerMode && generalSettings.IsEnableComboMode && comboModeSettings.IsShowStreakCounter)
+                                {
+                                    streakCounterAdornment.OnTextBufferChanged(adornmentLayer, view, streakCount);
+                                }
+                            },
+                            DispatcherPriority.ContextIdle);
+                    }
+                    catch (TaskCanceledException)
+                    {
+                    }
                 }, new AutoResetEvent(false), timeout, Timeout.Infinite);
             }
             else
