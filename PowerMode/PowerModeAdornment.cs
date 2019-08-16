@@ -49,7 +49,6 @@
 
             PropertyChangedEventManager.AddHandler(generalSettings, GeneralSettingModelPropertyChanged, "");
             PropertyChangedEventManager.AddHandler(comboModeSettings, ComboModeSettingsModelPropertyChanged, "");
-
         }
 
         private void View_ViewportSizeChanged(object sender, EventArgs e)

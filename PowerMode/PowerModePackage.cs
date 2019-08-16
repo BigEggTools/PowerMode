@@ -3,7 +3,9 @@
     using System;
     using System.Diagnostics.CodeAnalysis;
     using System.Runtime.InteropServices;
+    using System.Threading;
 
+    using Microsoft.VisualStudio;
     using Microsoft.VisualStudio.Shell;
 
     using BigEgg.Tools.PowerMode.Commands;
@@ -26,8 +28,8 @@
     /// To get loaded into VS, the package must be referred by &lt;Asset Type="Microsoft.VisualStudio.VsPackage" ...&gt; in .vsixmanifest file.
     /// </para>
     /// </remarks>
-    [PackageRegistration(UseManagedResourcesOnly = true)]
-    [InstalledProductRegistration("#110", "#112", "1.0", IconResourceID = 400)] // Info on this package for Help/About
+    [PackageRegistration(UseManagedResourcesOnly = true, AllowsBackgroundLoading = true)]
+    [InstalledProductRegistration("#110", "#112", "0.6.2", IconResourceID = 400)] // Info on this package for Help/About
     [Guid(PowerModePackage.PackageGuidString)]
     [SuppressMessage("StyleCop.CSharp.DocumentationRules", "SA1650:ElementDocumentationMustBeSpelledCorrectly", Justification = "pkgdef, VS and vsixmanifest are valid VS terms")]
     [ProvideOptionPage(typeof(GeneralOptionPage), "Power Mode", "General", 0, 0, true)]
@@ -35,8 +37,8 @@
     [ProvideOptionPage(typeof(ScreenShakeOptionPage), "Power Mode", "Screen Shake", 0, 0, true)]
     [ProvideOptionPage(typeof(ParticlesOptionPage), "Power Mode", "Particles", 0, 0, true)]
     [ProvideMenuResource("Menus.ctmenu", 1)]
-    [ProvideAutoLoad("ADFC4E64-0397-11D1-9F4E-00A0C911004F")]
-    public sealed class PowerModePackage : Package
+    [ProvideAutoLoad(VSConstants.UICONTEXT.ShellInitialized_string, PackageAutoLoadFlags.BackgroundLoad)]
+    public sealed class PowerModePackage : AsyncPackage
     {
         /// <summary>
         /// PowerModePackage GUID string.
@@ -55,19 +57,30 @@
         }
 
         #region Package Members
-
         /// <summary>
         /// Initialization of the package; this method is called right after the package is sited, so this is the place
         /// where you can put all the initialization code that rely on services provided by VisualStudio.
         /// </summary>
-        protected override void Initialize()
+        protected override async System.Threading.Tasks.Task InitializeAsync(CancellationToken cancellationToken, IProgress<ServiceProgressData> progress)
         {
-            base.Initialize();
-            TogglePowerModeCommand.Initialize(this);
-            ToggleComboModeCommand.Initialize(this);
-            ToggleParticlesCommand.Initialize(this);
-            ToggleScreenShakeCommand.Initialize(this);
-            ToggleAudioCommand.Initialize(this);
+            progress.Report(new ServiceProgressData("Starting Power Mode", "Initializing...", 0, 2));
+            await base.InitializeAsync(cancellationToken, progress);
+            progress.Report(new ServiceProgressData("Starting Power Mode", "Initializing...", 1, 2));
+            cancellationToken.ThrowIfCancellationRequested();
+
+            await JoinableTaskFactory.SwitchToMainThreadAsync(cancellationToken);
+            cancellationToken.ThrowIfCancellationRequested();
+            await TogglePowerModeCommand.InitializeAsync(this);
+            cancellationToken.ThrowIfCancellationRequested();
+            await ToggleComboModeCommand.InitializeAsync(this);
+            cancellationToken.ThrowIfCancellationRequested();
+            await ToggleParticlesCommand.InitializeAsync(this);
+            cancellationToken.ThrowIfCancellationRequested();
+            await ToggleScreenShakeCommand.InitializeAsync(this);
+            cancellationToken.ThrowIfCancellationRequested();
+            await ToggleAudioCommand.InitializeAsync(this);
+            cancellationToken.ThrowIfCancellationRequested();
+            progress.Report(new ServiceProgressData("Starting Power Mode", "Initializing...", 2, 2));
         }
         #endregion
     }

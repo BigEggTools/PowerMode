@@ -9,8 +9,8 @@
 
     internal sealed class ToggleAudioCommand : CommandHandler
     {
-        private ToggleAudioCommand(Package package)
-            : base(package, CommandData.CommandSet, CommandData.ToggleAudioCommandId)
+        private ToggleAudioCommand()
+            : base(CommandData.CommandSet, CommandData.ToggleAudioCommandId)
         {
         }
 
@@ -18,9 +18,10 @@
         public static ToggleAudioCommand Instance { get; private set; }
 
 
-        public static void Initialize(Package package)
+        public static async System.Threading.Tasks.Task InitializeAsync(AsyncPackage package)
         {
-            Instance = new ToggleAudioCommand(package);
+            Instance = new ToggleAudioCommand();
+            await Instance.InitalizeAsync(package);
         }
 
 
@@ -38,9 +39,8 @@
             SettingsService.SaveToStorage(settings);
 
             var command = sender as MenuCommand;
-            var menuCommandService = serviceProvider.GetService(typeof(IMenuCommandService)) as OleMenuCommandService;
             var newCmdID = new CommandID(CommandData.CommandSet, command.CommandID.ID);
-            var menuCommand = menuCommandService.FindCommand(newCmdID);
+            var menuCommand = commandService.FindCommand(newCmdID);
             menuCommand.Checked = settings.IsEnableAudio;
         }
     }

@@ -9,8 +9,8 @@
 
     internal sealed class ToggleComboModeCommand : CommandHandler
     {
-        private ToggleComboModeCommand(Package package)
-            : base(package, CommandData.CommandSet, CommandData.ToggleComboModeCommandId)
+        private ToggleComboModeCommand()
+            : base(CommandData.CommandSet, CommandData.ToggleComboModeCommandId)
         {
         }
 
@@ -18,9 +18,10 @@
         public static ToggleComboModeCommand Instance { get; private set; }
 
 
-        public static void Initialize(Package package)
+        public static async System.Threading.Tasks.Task InitializeAsync(AsyncPackage package)
         {
-            Instance = new ToggleComboModeCommand(package);
+            Instance = new ToggleComboModeCommand();
+            await Instance.InitalizeAsync(package);
         }
 
 
@@ -38,9 +39,8 @@
             SettingsService.SaveToStorage(settings);
 
             var command = sender as MenuCommand;
-            var menuCommandService = serviceProvider.GetService(typeof(IMenuCommandService)) as OleMenuCommandService;
             var newCmdID = new CommandID(CommandData.CommandSet, command.CommandID.ID);
-            var menuCommand = menuCommandService.FindCommand(newCmdID);
+            var menuCommand = commandService.FindCommand(newCmdID);
             menuCommand.Checked = settings.IsEnableComboMode;
         }
     }

@@ -9,8 +9,8 @@
 
     internal sealed class ToggleScreenShakeCommand : CommandHandler
     {
-        private ToggleScreenShakeCommand(Package package)
-            : base(package, CommandData.CommandSet, CommandData.ToggleScreenShakeCommandId)
+        private ToggleScreenShakeCommand()
+            : base(CommandData.CommandSet, CommandData.ToggleScreenShakeCommandId)
         {
         }
 
@@ -18,9 +18,10 @@
         public static ToggleScreenShakeCommand Instance { get; private set; }
 
 
-        public static void Initialize(Package package)
+        public static async System.Threading.Tasks.Task InitializeAsync(AsyncPackage package)
         {
-            Instance = new ToggleScreenShakeCommand(package);
+            Instance = new ToggleScreenShakeCommand();
+            await Instance.InitalizeAsync(package);
         }
 
 
@@ -38,9 +39,8 @@
             SettingsService.SaveToStorage(settings);
 
             var command = sender as MenuCommand;
-            var menuCommandService = serviceProvider.GetService(typeof(IMenuCommandService)) as OleMenuCommandService;
             var newCmdID = new CommandID(CommandData.CommandSet, command.CommandID.ID);
-            var menuCommand = menuCommandService.FindCommand(newCmdID);
+            var menuCommand = commandService.FindCommand(newCmdID);
             menuCommand.Checked = settings.IsEnableScreenShake;
         }
     }
