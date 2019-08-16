@@ -54,17 +54,17 @@
 
             for (int i = 0; i < spawnedSize; i++)
             {
-                NewParticlesImage(adornmentLayer, view);
+                NewParticleImage(adornmentLayer, view);
             }
         }
 
 
-        private void NewParticlesImage(IAdornmentLayer adornmentLayer, IWpfTextView view)
+        private void NewParticleImage(IAdornmentLayer adornmentLayer, IWpfTextView view)
         {
             try
             {
                 var particles = new Image();
-                particles.UpdateSource(GetParticlesImage());
+                particles.UpdateSource(GetParticleImage());
                 adornmentLayer.AddAdornment(AdornmentPositioningBehavior.ViewportRelative, null, null, particles, null);
                 particlesList.Add(particles);
 
@@ -72,9 +72,9 @@
                 {
                     var top = view.Caret.Top;
                     var left = view.Caret.Left;
-                    particles.BeginAnimation(Canvas.TopProperty, GetParticlesTopAnimation(top));
-                    particles.BeginAnimation(Canvas.LeftProperty, GetParticlesLeftAnimation(left));
-                    var opacityAnimation = GetParticlesOpacityAnimation();
+                    particles.BeginAnimation(Canvas.TopProperty, GetParticleTopAnimation(top));
+                    particles.BeginAnimation(Canvas.LeftProperty, GetParticleLeftAnimation(left));
+                    var opacityAnimation = GetParticleOpacityAnimation();
                     opacityAnimation.Completed += (sender, e) =>
                     {
                         particles.Visibility = Visibility.Hidden;
@@ -94,7 +94,7 @@
             }
         }
 
-        private Bitmap GetParticlesImage()
+        private Bitmap GetParticleImage()
         {
             var color = RandomUtils.NextColor();
             var size = RandomUtils.Random.Next(settings.MinParticlesSize, settings.MaxParticlesSize) * 2;
@@ -117,7 +117,7 @@
         }
 
 
-        private DoubleAnimation GetParticlesTopAnimation(double top)
+        private DoubleAnimation GetParticleTopAnimation(double top)
         {
             return new DoubleAnimation()
             {
@@ -127,7 +127,7 @@
                 Duration = timeSpan
             };
         }
-        private DoubleAnimation GetParticlesLeftAnimation(double left)
+        private DoubleAnimation GetParticleLeftAnimation(double left)
         {
             var leftDelta = RandomUtils.Random.NextDouble() * 40 * RandomUtils.NextSignal();
 
@@ -139,7 +139,7 @@
             };
         }
 
-        private DoubleAnimation GetParticlesOpacityAnimation()
+        private DoubleAnimation GetParticleOpacityAnimation()
         {
             return new DoubleAnimation()
             {
