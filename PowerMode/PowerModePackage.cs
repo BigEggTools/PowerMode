@@ -5,11 +5,11 @@
     using System.Runtime.InteropServices;
     using System.Threading;
 
+    using Microsoft.VisualStudio;
     using Microsoft.VisualStudio.Shell;
 
     using BigEgg.Tools.PowerMode.Commands;
     using BigEgg.Tools.PowerMode.Options;
-    using Microsoft.VisualStudio;
 
     /// <summary>
     /// This is the class that implements the package exposed by this assembly.
@@ -57,7 +57,6 @@
         }
 
         #region Package Members
-
         /// <summary>
         /// Initialization of the package; this method is called right after the package is sited, so this is the place
         /// where you can put all the initialization code that rely on services provided by VisualStudio.
