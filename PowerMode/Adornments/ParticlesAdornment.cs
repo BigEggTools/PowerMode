@@ -48,18 +48,21 @@
         public void OnTextBufferChanged(IAdornmentLayer adornmentLayer, IWpfTextView view, int streakCount)
         {
             settings = SettingsService.GetParticlesSettings();
+            var isPartyMode = settings.IsEnabledPartyMode && settings.PartyModeThreshold <= streakCount;
 
-            var spawnedSize = RandomUtils.Random.Next(settings.MinSpawnedParticles, settings.MaxSpawnedParticles);
-            if (spawnedSize + particlesList.Count > settings.MaxParticlesCount) { spawnedSize = settings.MaxParticlesCount - particlesList.Count; }
+            var spawnedSize = isPartyMode
+                                ? settings.PartyModeSpawnedParticles
+                                : RandomUtils.Random.Next(settings.MinSpawnedParticles, settings.MaxSpawnedParticles);
+            spawnedSize = Math.Min(spawnedSize, settings.MaxParticlesCount - particlesList.Count);
 
             for (int i = 0; i < spawnedSize; i++)
             {
-                NewParticleImage(adornmentLayer, view);
+                NewParticleImage(adornmentLayer, view, isPartyMode);
             }
         }
 
 
-        private void NewParticleImage(IAdornmentLayer adornmentLayer, IWpfTextView view)
+        private void NewParticleImage(IAdornmentLayer adornmentLayer, IWpfTextView view, bool isPartyMode)
         {
             try
             {
@@ -70,8 +73,12 @@
 
                 try
                 {
-                    var top = view.Caret.Top;
-                    var left = view.Caret.Left;
+                    var top = isPartyMode 
+                        ? RandomUtils.Random.Next((int)view.ViewportTop, (int)view.ViewportBottom)
+                        : view.Caret.Top;
+                    var left = isPartyMode 
+                        ? RandomUtils.Random.Next((int)view.ViewportLeft, (int)view.ViewportRight)
+                        : view.Caret.Left;
                     particles.BeginAnimation(Canvas.TopProperty, GetParticleTopAnimation(top));
                     particles.BeginAnimation(Canvas.LeftProperty, GetParticleLeftAnimation(left));
                     var opacityAnimation = GetParticleOpacityAnimation();
