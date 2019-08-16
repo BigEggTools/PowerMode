@@ -1,8 +1,9 @@
-﻿[![Visual Studio Market Installs](https://img.shields.io/visual-studio-marketplace/azure-devops/installs/total/BigEgg.PowerMode?logo=visual-studio-code&logoColor=68217A&label=Installs&style=flat-square)](https://marketplace.visualstudio.com/items?itemName=BigEgg.PowerMode)
+﻿[![Visual Studio Market Installs](https://img.shields.io/visual-studio-marketplace/v/BigEgg.PowerMode?logo=visual-studio-code&logoColor=68217A&label=Latest%20Version&style=flat-square)](https://marketplace.visualstudio.com/items?itemName=BigEgg.PowerMode)
+[![Visual Studio Market Installs](https://img.shields.io/visual-studio-marketplace/azure-devops/installs/total/BigEgg.PowerMode?logo=visual-studio-code&logoColor=68217A&label=Installs&style=flat-square)](https://marketplace.visualstudio.com/items?itemName=BigEgg.PowerMode)
 [![Visual Studio Market Installs](https://img.shields.io/visual-studio-marketplace/d/BigEgg.PowerMode?logo=visual-studio-code&logoColor=68217A&label=Downloads&style=flat-square)](https://marketplace.visualstudio.com/items?itemName=BigEgg.PowerMode)
-[![GitHub Stars](https://img.shields.io/github/stars/BigEggTools/PowerMode?style=social)](https://github.com/BigEggTools/PowerMode)
 
 [![Code Climate Maintainability](https://img.shields.io/codeclimate/maintainability/BigEggTools/PowerMode?label=Maintainability&logo=code-climate&style=flat-square)](https://codeclimate.com/github/BigEggTools/PowerMode)
+[![GitHub Stars](https://img.shields.io/github/stars/BigEggTools/PowerMode?style=social)](https://github.com/BigEggTools/PowerMode)
 
 # PowerMode
 This is the Power Mode extension for Visual Studio to replicate the effects from [codeinthedark/editor](https://github.com/codeinthedark/editor).
@@ -28,6 +29,7 @@ In current version, contains the following features:
 * Streak Counter. (See [Detail](https://bigeggtools.github.io/PowerMode/streakcounter/))
   + Max Combo Streak.
 * Particles. (See [Detail](https://bigeggtools.github.io/PowerMode/particles/))
+  + Party Mode.
 * Screen Shake. (See [Detail](https://bigeggtools.github.io/PowerMode/screenshake/))
 
 # Visual Studio Supports
@@ -38,9 +40,7 @@ In current version, contains the following features:
 # Next Features
 The next version of this extension will have the following features:
 
+* [Excluded File Types](https://github.com/BigEggTools/PowerMode/issues/8) (high priority)
 * Play Audio Clip (middle priority)
   + Clip can be: Gun, Typewriter or Custom
   + Related Options and Menu
-* Party Mode. When have so many text changed. (high priority)
-  + Related Options and Menu
-* Excluded File Types (high priority)
