@@ -73,10 +73,10 @@
 
                 try
                 {
-                    var top = isPartyMode 
+                    var top = isPartyMode
                         ? RandomUtils.Random.Next((int)view.ViewportTop, (int)view.ViewportBottom)
                         : view.Caret.Top;
-                    var left = isPartyMode 
+                    var left = isPartyMode
                         ? RandomUtils.Random.Next((int)view.ViewportLeft, (int)view.ViewportRight)
                         : view.Caret.Left;
                     particles.BeginAnimation(Canvas.TopProperty, GetParticleTopAnimation(top));
@@ -103,7 +103,9 @@
 
         private Bitmap GetParticleImage()
         {
-            var color = RandomUtils.NextColor();
+            var color = settings.ParticlesColorType == ParticlesColorType.Random
+                ? RandomUtils.NextColor()
+                : settings.FixedColor;
             var size = RandomUtils.Random.Next(settings.MinParticlesSize, settings.MaxParticlesSize) * 2;
 
             var bitmap = new Bitmap(size, size);

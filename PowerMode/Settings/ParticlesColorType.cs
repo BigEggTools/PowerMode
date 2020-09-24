@@ -2,7 +2,6 @@
 {
     public enum ParticlesColorType
     {
-        Cursor,
         Random,
         Fixed
     }

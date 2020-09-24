@@ -6,6 +6,7 @@
     public class ParticlesSettings : ValidatableModel
     {
         private ParticlesColorType particlesColorType = ParticlesColorType.Random;
+        private bool canUpdateFixedColor = false;
         private Color fixedColor = Color.FromArgb(78, 255, 161);
         private int maxParticlesCount = 500;
         private int minSpawnedParticles = 5;
@@ -20,7 +21,16 @@
         public ParticlesColorType ParticlesColorType
         {
             get { return particlesColorType; }
-            set { SetPropertyAndValidate(ref particlesColorType, value); }
+            set
+            {
+                SetPropertyAndValidate(ref particlesColorType, value);
+                SetPropertyAndValidate(ref canUpdateFixedColor, value == ParticlesColorType.Fixed, nameof(CanUpdateFixedColor));
+            }
+        }
+
+        public bool CanUpdateFixedColor
+        {
+            get { return canUpdateFixedColor; }
         }
 
         public Color FixedColor
