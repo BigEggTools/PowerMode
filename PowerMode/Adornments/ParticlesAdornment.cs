@@ -103,7 +103,9 @@
 
         private Bitmap GetParticleImage()
         {
-            var color = RandomUtils.NextColor();
+            var color = settings.ParticlesColorType == ParticlesColorType.Random
+                ? RandomUtils.NextColor()
+                : settings.FixedColor;
             var size = RandomUtils.Random.Next(settings.MinParticlesSize, settings.MaxParticlesSize) * 2;
 
             var bitmap = new Bitmap(size, size);
