@@ -45,9 +45,9 @@
                 <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
             <TextBlock Text="Color Type" Grid.Row="0" Grid.Column="0" VerticalAlignment="Center" Margin="10, 0, 0, 0" ToolTip="The color type of particles" />
-            <ComboBox Grid.Row="0" Grid.Column="1" Margin="0,5,10,5" SelectedItem="{Binding DataContext.ParticlesColorType, ElementName=userControl}" ItemsSource="{Binding Source={StaticResource particlesColorTypes}}" IsEnabled="False" />
+            <ComboBox Grid.Row="0" Grid.Column="1" Margin="0,5,10,5" SelectedItem="{Binding DataContext.ParticlesColorType, ElementName=userControl}" ItemsSource="{Binding Source={StaticResource particlesColorTypes}}" />
             <TextBlock Text="Particles Color" Grid.Row="1" Grid.Column="0" VerticalAlignment="Center" Margin="10, 0, 0, 0" ToolTip="Color of particles when fixed color is selected." />
-            <controls:ColorPicker Grid.Row="1" Grid.Column="1" Margin="0,5,10,5" IsEnabled="False" SelectedColor="{Binding DataContext.FixedColor, ElementName=userControl, Converter={StaticResource ColorDrawingToMediaConverter}}" />
+            <controls:ColorPicker Grid.Row="1" Grid.Column="1" Margin="0,5,10,5" IsEnabled="{Binding DataContext.CanUpdateFixedColor, ElementName=userControl}" SelectedColor="{Binding DataContext.FixedColor, ElementName=userControl, Converter={StaticResource ColorDrawingToMediaConverter}}" />
             <TextBlock Text="Max Total" Grid.Row="2" Grid.Column="0" VerticalAlignment="Center" Margin="10, 0, 0, 0" ToolTip="The maximum total number of particles on the screen." />
             <TextBox Grid.Row="2" Grid.Column="1" Margin="0,5,10,5" Text="{Binding DataContext.MaxParticlesCount, ElementName=userControl, UpdateSourceTrigger=PropertyChanged, ValidatesOnExceptions=true, ValidatesOnDataErrors=true, NotifyOnValidationError=true}" />
             <TextBlock Text="Minimum Spawned" Grid.Row="3" Grid.Column="0" VerticalAlignment="Center" Margin="10, 0, 0, 0" ToolTip="The minimum (randomized) number of particles spawned on input." />
