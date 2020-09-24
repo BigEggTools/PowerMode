@@ -62,6 +62,7 @@
             <TextBlock Text="Party Mode Threshold" Grid.Row="8" Grid.Column="0" VerticalAlignment="Center" Margin="10, 0, 0, 0" ToolTip="Threshold of the Party Mode." />
             <TextBox Grid.Row="8" Grid.Column="1" Margin="0,5,10,5" Text="{Binding DataContext.PartyModeThreshold, ElementName=userControl, UpdateSourceTrigger=PropertyChanged, ValidatesOnExceptions=true, ValidatesOnDataErrors=true, NotifyOnValidationError=true}" />
             <TextBlock Text="Party Mode Spawned" Grid.Row="9" Grid.Column="0" VerticalAlignment="Center" Margin="10, 0, 0, 0" ToolTip="The maximum number of particles spawned in Party Mode on input." />
-            <TextBox Grid.Row="9" Grid.Column="1" Margin="0,5,10,5" Text="{Binding DataContext.PartyModeSpawnedParticles, ElementName=userControl, UpdateSourceTrigger=PropertyChanged, ValidatesOnExceptions=true, ValidatesOnDataErrors=true, NotifyOnValidationError=true}" />    </Grid>
+            <TextBox Grid.Row="9" Grid.Column="1" Margin="0,5,10,5" Text="{Binding DataContext.PartyModeSpawnedParticles, ElementName=userControl, UpdateSourceTrigger=PropertyChanged, ValidatesOnExceptions=true, ValidatesOnDataErrors=true, NotifyOnValidationError=true}" />
+        </Grid>
     </ScrollViewer>
 </UserControl>
