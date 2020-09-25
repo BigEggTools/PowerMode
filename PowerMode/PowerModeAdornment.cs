@@ -64,6 +64,14 @@
             if (textDocument == null && textDocumentFactory.TryGetTextDocument(view.TextBuffer, out textDocument))
             {
                 fileExtension = Path.GetExtension(textDocument.FilePath);
+
+                RefreshSettings();
+                if (generalSettings.ExcludedFileTypesList.Contains(fileExtension))
+                {
+                    streakCounterAdornment.Cleanup(adornmentLayer, view);
+                    screenShakeAdornment.Cleanup(adornmentLayer, view);
+                    particlesAdornment.Cleanup(adornmentLayer, view);
+                }
             }
         }
 
@@ -71,7 +79,10 @@
         {
             RefreshSettings();
 
-            if (!generalSettings.IsEnablePowerMode) { return; }
+            if (!generalSettings.IsEnablePowerMode || generalSettings.ExcludedFileTypesList.Contains(fileExtension))
+            {
+                return;
+            }
 
             if (generalSettings.IsEnableComboMode && comboModeSettings.IsShowStreakCounter)
             {
@@ -89,7 +100,10 @@
 
             RefreshSettings();
 
-            if (!generalSettings.IsEnablePowerMode) { return; }
+            if (!generalSettings.IsEnablePowerMode || generalSettings.ExcludedFileTypesList.Contains(fileExtension))
+            {
+                return;
+            }
 
             if (generalSettings.IsEnableComboMode)
             {
@@ -139,7 +153,8 @@
                             () =>
                             {
                                 RefreshSettings();
-                                if (generalSettings.IsEnablePowerMode && generalSettings.IsEnableComboMode && comboModeSettings.IsShowStreakCounter)
+                                if (generalSettings.IsEnablePowerMode && generalSettings.IsEnableComboMode && comboModeSettings.IsShowStreakCounter
+                                    && !generalSettings.ExcludedFileTypesList.Contains(fileExtension))
                                 {
                                     streakCounterAdornment.OnTextBufferChanged(adornmentLayer, view, streakCount);
                                 }
@@ -166,6 +181,13 @@
         private void GeneralSettingModelPropertyChanged(object sender, PropertyChangedEventArgs e)
         {
             if (e.PropertyName == nameof(GeneralSettings.IsEnablePowerMode) && !generalSettings.IsEnablePowerMode)
+            {
+                streakCounterAdornment.Cleanup(adornmentLayer, view);
+                screenShakeAdornment.Cleanup(adornmentLayer, view);
+                particlesAdornment.Cleanup(adornmentLayer, view);
+            }
+
+            if (e.PropertyName == nameof(GeneralSettings.ExcludedFileTypesString) && generalSettings.ExcludedFileTypesList.Contains(fileExtension))
             {
                 streakCounterAdornment.Cleanup(adornmentLayer, view);
                 screenShakeAdornment.Cleanup(adornmentLayer, view);
