@@ -2,6 +2,7 @@
 {
     using System;
     using System.Collections.Generic;
+    using System.Linq;
 
     public class GeneralSettings : Model
     {
@@ -10,8 +11,8 @@
         private bool isEnableParticles = true;
         private bool isEnableScreenShake = true;
         private bool isEnableAudio = false;
-        private string excludedFileTypesString = string.Empty;
-        private List<string> excludedFileTypesList = new List<string>() { ".xml" };
+        private string excludedFileTypesString = ".xml;.json";
+        private List<string> excludedFileTypesList = new List<string>() { ".xml", ".json" };
 
 
         public bool IsEnablePowerMode
