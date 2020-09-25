@@ -50,8 +50,6 @@
             get { return excludedFileTypesString; }
             set
             {
-                SetProperty(ref excludedFileTypesString, value);
-
                 excludedFileTypesList.Clear();
                 excludedFileTypesList.AddRange(
                     value.Split(new char[] { ';', ',', '|' }, StringSplitOptions.RemoveEmptyEntries)
@@ -60,6 +58,8 @@
                              str = str.Trim();
                              return str.StartsWith(".") ? str : $".{str}";
                          }));
+
+                SetProperty(ref excludedFileTypesString, value);
             }
         }
 
@@ -76,6 +76,7 @@
             this.IsEnableParticles = other.IsEnableParticles;
             this.IsEnableScreenShake = other.IsEnableScreenShake;
             this.IsEnableAudio = other.IsEnableAudio;
+            this.ExcludedFileTypesString = other.ExcludedFileTypesString;
         }
     }
 }
