@@ -52,7 +52,9 @@
                 SetProperty(ref excludedFileTypesString, value);
 
                 excludedFileTypesList.Clear();
-                excludedFileTypesList.AddRange(excludedFileTypesString.Split(new char[] { ';', ',', '|' }, StringSplitOptions.RemoveEmptyEntries));
+                excludedFileTypesList.AddRange(
+                    value.Split(new char[] { ';', ',', '|' }, StringSplitOptions.RemoveEmptyEntries)
+                         .Select(str => str.Trim()));
             }
         }
 
