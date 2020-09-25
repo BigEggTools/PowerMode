@@ -61,7 +61,7 @@
 
         private void View_LayoutChanged(object sender, TextViewLayoutChangedEventArgs e)
         {
-            if (textDocumentFactory.TryGetTextDocument(view.TextBuffer, out textDocument))
+            if (textDocument == null && textDocumentFactory.TryGetTextDocument(view.TextBuffer, out textDocument))
             {
                 fileExtension = Path.GetExtension(textDocument.FilePath);
             }
