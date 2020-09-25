@@ -19,6 +19,9 @@
             generalSettingsCache.IsEnableScreenShake = GetBoolOption(store, GENERAL_SETTINGS_CATELOG, nameof(GeneralSettings.IsEnableScreenShake)).GetValueOrDefault(generalSettingsCache.IsEnableScreenShake);
             generalSettingsCache.IsEnableComboMode = GetBoolOption(store, GENERAL_SETTINGS_CATELOG, nameof(GeneralSettings.IsEnableComboMode)).GetValueOrDefault(generalSettingsCache.IsEnableComboMode);
             generalSettingsCache.IsEnableAudio = GetBoolOption(store, GENERAL_SETTINGS_CATELOG, nameof(GeneralSettings.IsEnableAudio)).GetValueOrDefault(generalSettingsCache.IsEnableAudio);
+            var types = GetStringOption(store, GENERAL_SETTINGS_CATELOG, nameof(GeneralSettings.ExcludedFileTypesString));
+            if (types != null)
+                generalSettingsCache.ExcludedFileTypesString = GetStringOption(store, GENERAL_SETTINGS_CATELOG, nameof(GeneralSettings.ExcludedFileTypesString));
 
             return generalSettingsCache;
         }
@@ -34,6 +37,7 @@
             SetOption(store, GENERAL_SETTINGS_CATELOG, nameof(GeneralSettings.IsEnableScreenShake), settings.IsEnableScreenShake);
             SetOption(store, GENERAL_SETTINGS_CATELOG, nameof(GeneralSettings.IsEnableComboMode), settings.IsEnableComboMode);
             SetOption(store, GENERAL_SETTINGS_CATELOG, nameof(GeneralSettings.IsEnableAudio), settings.IsEnableAudio);
+            SetOption(store, GENERAL_SETTINGS_CATELOG, nameof(GeneralSettings.ExcludedFileTypesString), settings.ExcludedFileTypesString);
         }
     }
 }
