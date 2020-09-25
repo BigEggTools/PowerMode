@@ -39,7 +39,7 @@
         public void TextViewCreated(IWpfTextView textView)
         {
             // The adornment will get wired to the text view events
-            new PowerModeAdornment(textView);
+            new PowerModeAdornment(textView, textDocumentFactory);
         }
     }
 }
