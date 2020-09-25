@@ -187,11 +187,18 @@
                 particlesAdornment.Cleanup(adornmentLayer, view);
             }
 
-            if (e.PropertyName == nameof(GeneralSettings.ExcludedFileTypesString) && generalSettings.ExcludedFileTypesList.Contains(fileExtension))
+            if (e.PropertyName == nameof(GeneralSettings.ExcludedFileTypesString))
             {
-                streakCounterAdornment.Cleanup(adornmentLayer, view);
-                screenShakeAdornment.Cleanup(adornmentLayer, view);
-                particlesAdornment.Cleanup(adornmentLayer, view);
+                if (generalSettings.ExcludedFileTypesList.Contains(fileExtension))
+                {
+                    streakCounterAdornment.Cleanup(adornmentLayer, view);
+                    screenShakeAdornment.Cleanup(adornmentLayer, view);
+                    particlesAdornment.Cleanup(adornmentLayer, view);
+                }
+                else if (generalSettings.IsEnableComboMode && comboModeSettings.IsShowStreakCounter)
+                {
+                    streakCounterAdornment.OnSizeChanged(adornmentLayer, view, streakCount);
+                }
             }
 
             if (e.PropertyName == nameof(GeneralSettings.IsEnableComboMode))
