@@ -54,7 +54,11 @@
                 excludedFileTypesList.Clear();
                 excludedFileTypesList.AddRange(
                     value.Split(new char[] { ';', ',', '|' }, StringSplitOptions.RemoveEmptyEntries)
-                         .Select(str => str.Trim()));
+                         .Select(str =>
+                         {
+                             str = str.Trim();
+                             return str.StartsWith(".") ? str : $".{str}";
+                         }));
             }
         }
 
