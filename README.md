@@ -1,6 +1,6 @@
-﻿[![Visual Studio Market Installs](https://img.shields.io/visual-studio-marketplace/v/BigEgg.PowerMode?logo=visual-studio-code&logoColor=68217A&label=Latest%20Version&style=flat-square)](https://marketplace.visualstudio.com/items?itemName=BigEgg.PowerMode)
-[![Visual Studio Market Installs](https://img.shields.io/visual-studio-marketplace/azure-devops/installs/total/BigEgg.PowerMode?logo=visual-studio-code&logoColor=68217A&label=Installs&style=flat-square)](https://marketplace.visualstudio.com/items?itemName=BigEgg.PowerMode)
-[![Visual Studio Market Installs](https://img.shields.io/visual-studio-marketplace/d/BigEgg.PowerMode?logo=visual-studio-code&logoColor=68217A&label=Downloads&style=flat-square)](https://marketplace.visualstudio.com/items?itemName=BigEgg.PowerMode)
+﻿[![Visual Studio Market Version](https://img.shields.io/visual-studio-marketplace/v/BigEgg.PowerMode?logo=visual-studio-code&logoColor=68217A&label=Latest%20Version&style=flat-square)](https://marketplace.visualstudio.com/items?itemName=BigEgg.PowerMode)
+[![Visual Studio Market Installs](https://img.shields.io/visual-studio-marketplace/i/BigEgg.PowerMode?logo=visual-studio-code&logoColor=68217A&label=Installs&style=flat-square)](https://marketplace.visualstudio.com/items?itemName=BigEgg.PowerMode)
+[![Visual Studio Market Download](https://img.shields.io/visual-studio-marketplace/d/BigEgg.PowerMode?logo=visual-studio-code&logoColor=68217A&label=Downloads&style=flat-square)](https://marketplace.visualstudio.com/items?itemName=BigEgg.PowerMode)
 
 [![Code Climate Maintainability](https://img.shields.io/codeclimate/maintainability/BigEggTools/PowerMode?label=Maintainability&logo=code-climate&style=flat-square)](https://codeclimate.com/github/BigEggTools/PowerMode)
 [![GitHub Stars](https://img.shields.io/github/stars/BigEggTools/PowerMode?style=social)](https://github.com/BigEggTools/PowerMode)
