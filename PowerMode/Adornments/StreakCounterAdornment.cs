@@ -44,12 +44,12 @@
             newMaxComboStreakReached = false;
         }
 
-        public void OnSizeChanged(IAdornmentLayer adornmentLayer, IWpfTextView view, int streakCount)
+        public void OnSizeChanged(IAdornmentLayer adornmentLayer, IWpfTextView view, int streakCount, bool backgroundColorChanged = false)
         {
-            if (titleImage == null)
+            if (titleImage == null || backgroundColorChanged)
             {
                 titleImage = new Image();
-                titleImage.UpdateSource(GetTitleImage());
+                titleImage.UpdateSource(GetTitleImage(IsDarkMode(view.Background)));
             }
             adornmentLayer.RefreshImage(titleImage, view.ViewportRight - RightMargin - ADORNMENT_WIDTH, view.ViewportTop + TopMargin);
 
@@ -65,7 +65,7 @@
             if (titleImage == null)
             {
                 titleImage = new Image();
-                titleImage.UpdateSource(GetTitleImage());
+                titleImage.UpdateSource(GetTitleImage(IsDarkMode(view.Background)));
                 adornmentLayer.RefreshImage(titleImage, view.ViewportRight - RightMargin - ADORNMENT_WIDTH, view.ViewportTop + TopMargin);
             }
 
@@ -120,6 +120,18 @@
             var opacityAnimation = GetExclamationOpacityAnimation();
             opacityAnimation.Completed += (sender, e) => exclamationImage.Visibility = Visibility.Hidden;
             exclamationImage.BeginAnimation(UIElement.OpacityProperty, opacityAnimation);
+        }
+
+        private bool IsDarkMode(Brush background)
+        {
+            if (background is SolidColorBrush)
+            {
+                var c = ((SolidColorBrush)background).Color.ToDrawingColor();
+                var i = ((int)c.R + (int)c.G + (int)c.B) / 3;
+                return i <= 128;
+            }
+
+            return true;
         }
     }
 }

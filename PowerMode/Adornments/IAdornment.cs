@@ -4,7 +4,7 @@
 
     public interface IAdornment
     {
-        void OnSizeChanged(IAdornmentLayer adornmentLayer, IWpfTextView view, int streakCount);
+        void OnSizeChanged(IAdornmentLayer adornmentLayer, IWpfTextView view, int streakCount, bool backgroundColorChanged = false);
 
         void OnTextBufferChanged(IAdornmentLayer adornmentLayer, IWpfTextView view, int streakCount);
 

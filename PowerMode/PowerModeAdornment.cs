@@ -34,7 +34,6 @@
         private string fileExtension;
 
 
-
         public PowerModeAdornment(IWpfTextView view, ITextDocumentFactoryService textDocumentFactory)
         {
             if (view == null) { throw new ArgumentNullException("view"); }
@@ -53,10 +52,16 @@
             this.view.TextBuffer.Changed += TextBuffer_Changed;
             this.view.ViewportHeightChanged += View_ViewportSizeChanged;
             this.view.ViewportWidthChanged += View_ViewportSizeChanged;
+            this.view.BackgroundBrushChanged += View_BackgroundBrushChanged;
             this.view.LayoutChanged += View_LayoutChanged;
 
             PropertyChangedEventManager.AddHandler(generalSettings, GeneralSettingModelPropertyChanged, "");
             PropertyChangedEventManager.AddHandler(comboModeSettings, ComboModeSettingsModelPropertyChanged, "");
+        }
+
+        private void View_BackgroundBrushChanged(object sender, BackgroundBrushChangedEventArgs e)
+        {
+            streakCounterAdornment.OnSizeChanged(adornmentLayer, view, streakCount, true);
         }
 
         private void View_LayoutChanged(object sender, TextViewLayoutChangedEventArgs e)
