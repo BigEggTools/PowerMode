@@ -121,5 +121,17 @@
             opacityAnimation.Completed += (sender, e) => exclamationImage.Visibility = Visibility.Hidden;
             exclamationImage.BeginAnimation(UIElement.OpacityProperty, opacityAnimation);
         }
+
+        private bool IsDarkMode(Brush background)
+        {
+            if (background is SolidColorBrush)
+            {
+                var c = ((SolidColorBrush)background).Color.ToDrawingColor();
+                var i = ((int)c.R + (int)c.G + (int)c.B) / 3;
+                return i <= 128;
+            }
+
+            return true;
+        }
     }
 }
