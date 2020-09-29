@@ -54,6 +54,7 @@
           If you do not want an image next to your command, remove the Icon node /> -->
       <Button guid="guidPowerModePackageCmdSet" id="TogglePowerModeCommandId" priority="0x0000" type="Button">
         <Parent guid="guidPowerModePackageCmdSet" id="PowerModeSubMenuGroup" />
+        <CommandFlag>DefaultDisabled</CommandFlag>
         <Strings>
           <CommandName>togglePowerModeCommand</CommandName>
           <ButtonText>Enabled</ButtonText>
@@ -62,6 +63,7 @@
 
       <Button guid="guidPowerModePackageCmdSet" id="ToggleComboModeCommandId" priority="0x0100" type="Button">
         <Parent guid="guidPowerModePackageCmdSet" id="PowerModeSubMenuGroup" />
+        <CommandFlag>DefaultDisabled</CommandFlag>
         <Strings>
           <CommandName>toggleComboModeCommand</CommandName>
           <ButtonText>Combo Mode</ButtonText>
@@ -70,6 +72,7 @@
 
       <Button guid="guidPowerModePackageCmdSet" id="ToggleParticlesCommandId" priority="0x0200" type="Button">
         <Parent guid="guidPowerModePackageCmdSet" id="PowerModeSubMenuGroup" />
+        <CommandFlag>DefaultDisabled</CommandFlag>
         <Strings>
           <CommandName>toggleParticlesCommand</CommandName>
           <ButtonText>Particles</ButtonText>
@@ -78,6 +81,7 @@
 
       <Button guid="guidPowerModePackageCmdSet" id="ToggleScreenShakeCommandId" priority="0x0300" type="Button">
         <Parent guid="guidPowerModePackageCmdSet" id="PowerModeSubMenuGroup" />
+        <CommandFlag>DefaultDisabled</CommandFlag>
         <Strings>
           <CommandName>toggleScreenShakeCommand</CommandName>
           <ButtonText>Screen Shake</ButtonText>
@@ -86,6 +90,7 @@
 
       <Button guid="guidPowerModePackageCmdSet" id="ToggleAudioCommandId" priority="0x0400" type="Button">
         <Parent guid="guidPowerModePackageCmdSet" id="PowerModeSubMenuGroup" />
+        <CommandFlag>DefaultDisabled</CommandFlag>
         <Strings>
           <CommandName>toggleAudioCommand</CommandName>
           <ButtonText>Audio</ButtonText>
