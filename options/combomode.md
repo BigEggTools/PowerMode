@@ -54,7 +54,7 @@ Default color of the streak counter.
 
 Opacity of the streak counter. Should be 0 - 255.
 
-#### ** Every** Textbox
+#### **Exclamation Every** Textbox
 
 Shows an exclamation every streak count. Should be 10 - 100.
 
