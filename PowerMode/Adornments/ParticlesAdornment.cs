@@ -39,7 +39,7 @@
             particlesList.Clear();
         }
 
-        public void OnSizeChanged(IAdornmentLayer adornmentLayer, IWpfTextView view, int streakCount)
+        public void OnSizeChanged(IAdornmentLayer adornmentLayer, IWpfTextView view, int streakCount, bool backgroundColorChanged = false)
         {
             particlesList.ForEach(image => { adornmentLayer.RemoveAdornment(image); });
             particlesList.Clear();

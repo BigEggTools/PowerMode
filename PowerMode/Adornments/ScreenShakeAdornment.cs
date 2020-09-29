@@ -20,7 +20,7 @@
             lastShakeTime = DateTime.Now;
         }
 
-        public void OnSizeChanged(IAdornmentLayer adornmentLayer, IWpfTextView view, int streakCount)
+        public void OnSizeChanged(IAdornmentLayer adornmentLayer, IWpfTextView view, int streakCount, bool backgroundColorChanged = false)
         {
             lastShakeTime = DateTime.Now;
         }

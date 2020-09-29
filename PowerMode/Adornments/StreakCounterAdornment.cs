@@ -44,9 +44,9 @@
             newMaxComboStreakReached = false;
         }
 
-        public void OnSizeChanged(IAdornmentLayer adornmentLayer, IWpfTextView view, int streakCount)
+        public void OnSizeChanged(IAdornmentLayer adornmentLayer, IWpfTextView view, int streakCount, bool backgroundColorChanged = false)
         {
-            if (titleImage == null)
+            if (titleImage == null || backgroundColorChanged)
             {
                 titleImage = new Image();
                 titleImage.UpdateSource(GetTitleImage(IsDarkMode(view.Background)));
