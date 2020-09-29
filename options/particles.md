@@ -20,13 +20,12 @@ The "Particles" page have all the settings related with the *Particles*.
 
 **Note:**
 
-> When *Combo Mode* is enabled, effects, *Particles*, won't appear until reach the activation threshold.
+> When *Combo Mode* is enabled, effects *Particles* won't appear until reach the activation threshold.
 
 ### **Color Type** Selector
 
-The color type of particles. Have 3 values:
+The color type of particles. Currently support 2 values:
 * **Random**: use random color for each particle
-* **Cursor**: use current cursor color for particles 
 * **Fixed**: use a fixed color for particles
 
 Default is *Random*.
