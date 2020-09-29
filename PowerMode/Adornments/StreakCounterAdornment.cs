@@ -49,7 +49,7 @@
             if (titleImage == null)
             {
                 titleImage = new Image();
-                titleImage.UpdateSource(GetTitleImage());
+                titleImage.UpdateSource(GetTitleImage(IsDarkMode(view.Background)));
             }
             adornmentLayer.RefreshImage(titleImage, view.ViewportRight - RightMargin - ADORNMENT_WIDTH, view.ViewportTop + TopMargin);
 
@@ -65,7 +65,7 @@
             if (titleImage == null)
             {
                 titleImage = new Image();
-                titleImage.UpdateSource(GetTitleImage());
+                titleImage.UpdateSource(GetTitleImage(IsDarkMode(view.Background)));
                 adornmentLayer.RefreshImage(titleImage, view.ViewportRight - RightMargin - ADORNMENT_WIDTH, view.ViewportTop + TopMargin);
             }
 
