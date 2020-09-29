@@ -22,14 +22,21 @@
                 <RowDefinition Height="30" />
                 <RowDefinition Height="30" />
                 <RowDefinition Height="30" />
+                <RowDefinition Height="30" />
                 <RowDefinition Height="*" />
             </Grid.RowDefinitions>
-            <CheckBox Content="Enable Power Model" Grid.Row="0" ToolTip="Toggle on start." IsChecked="{Binding DataContext.Settings.IsEnablePowerMode, ElementName=userControl}" Style="{DynamicResource ToggleCheckBox}"/>
-            <CheckBox Content="Enable Combo Mode" Grid.Row="1" Name="EnableComboMode" ToolTip="When enabled, effects won't appear until reach the activation threshold." IsEnabled="{Binding DataContext.Settings.IsEnablePowerMode, ElementName=userControl}" IsChecked="{Binding DataContext.Settings.IsEnableComboMode, ElementName=userControl}" Style="{DynamicResource ToggleCheckBox}"/>
-            <CheckBox Content="Enable Particles" Grid.Row="2" Name="EnableParticles" ToolTip="Turn the particles on/off." IsEnabled="{Binding DataContext.Settings.IsEnablePowerMode, ElementName=userControl}" IsChecked="{Binding DataContext.Settings.IsEnableParticles, ElementName=userControl}" Style="{DynamicResource ToggleCheckBox}"/>
-            <CheckBox Content="Enable Screen Shake" Grid.Row="3" Name="EnableScreenShake" ToolTip="Turn the shaking on/off." IsEnabled="{Binding DataContext.Settings.IsEnablePowerMode, ElementName=userControl}" IsChecked="{Binding DataContext.Settings.IsEnableScreenShake, ElementName=userControl}" Style="{DynamicResource ToggleCheckBox}"/>
-            <CheckBox Content="Enable Audio" Grid.Row="4" Name="EnableAudio" ToolTip="Play audio clip on/off." IsEnabled="False" IsChecked="{Binding DataContext.Settings.IsEnableAudio, ElementName=userControl}" Style="{DynamicResource ToggleCheckBox}"/>
-            <Grid Grid.Row="5" Margin="5,10,0,0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="200" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <CheckBox Content="Enable Power Model" Grid.Row="0" Grid.ColumnSpan="2" ToolTip="Toggle on start." IsChecked="{Binding DataContext.Settings.IsEnablePowerMode, ElementName=userControl}" Style="{DynamicResource ToggleCheckBox}"/>
+            <CheckBox Content="Enable Combo Mode" Grid.Row="1" Grid.ColumnSpan="2" Name="EnableComboMode" ToolTip="When enabled, effects won't appear until reach the activation threshold." IsEnabled="{Binding DataContext.Settings.IsEnablePowerMode, ElementName=userControl}" IsChecked="{Binding DataContext.Settings.IsEnableComboMode, ElementName=userControl}" Style="{DynamicResource ToggleCheckBox}"/>
+            <CheckBox Content="Enable Particles" Grid.Row="2" Grid.ColumnSpan="2" Name="EnableParticles" ToolTip="Turn the particles on/off." IsEnabled="{Binding DataContext.Settings.IsEnablePowerMode, ElementName=userControl}" IsChecked="{Binding DataContext.Settings.IsEnableParticles, ElementName=userControl}" Style="{DynamicResource ToggleCheckBox}"/>
+            <CheckBox Content="Enable Screen Shake" Grid.Row="3" Grid.ColumnSpan="2" Name="EnableScreenShake" ToolTip="Turn the shaking on/off." IsEnabled="{Binding DataContext.Settings.IsEnablePowerMode, ElementName=userControl}" IsChecked="{Binding DataContext.Settings.IsEnableScreenShake, ElementName=userControl}" Style="{DynamicResource ToggleCheckBox}"/>
+            <CheckBox Content="Enable Audio" Grid.Row="4" Grid.ColumnSpan="2" Name="EnableAudio" ToolTip="Play audio clip on/off." IsEnabled="False" IsChecked="{Binding DataContext.Settings.IsEnableAudio, ElementName=userControl}" Style="{DynamicResource ToggleCheckBox}"/>
+            <TextBlock Text="Excluded File Types" Grid.Row="5" Grid.Column="0" VerticalAlignment="Center" Margin="10, 0, 0, 0" ToolTip="The file types that don't want to enable Power Model. Use ',', ';', '|' as seperator." />
+            <TextBox Grid.Row="5" Grid.Column="1" Margin="0,5,10,5" Text="{Binding DataContext.Settings.ExcludedFileTypesString, ElementName=userControl, UpdateSourceTrigger=PropertyChanged, ValidatesOnExceptions=true, ValidatesOnDataErrors=true, NotifyOnValidationError=true}" />
+            <Grid Grid.Row="6" Grid.ColumnSpan="2" Margin="5,10,0,0">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="125" />
                     <ColumnDefinition Width="50" />

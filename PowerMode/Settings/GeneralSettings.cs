@@ -1,5 +1,9 @@
 ﻿namespace BigEgg.Tools.PowerMode.Settings
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+
     public class GeneralSettings : Model
     {
         private bool isEnablePowerMode = true;
@@ -7,6 +11,8 @@
         private bool isEnableParticles = true;
         private bool isEnableScreenShake = true;
         private bool isEnableAudio = false;
+        private string excludedFileTypesString = ".xml;.json";
+        private List<string> excludedFileTypesList = new List<string>() { ".xml", ".json" };
 
 
         public bool IsEnablePowerMode
@@ -39,6 +45,29 @@
             set { SetProperty(ref isEnableAudio, value); }
         }
 
+        public string ExcludedFileTypesString
+        {
+            get { return excludedFileTypesString; }
+            set
+            {
+                excludedFileTypesList.Clear();
+                excludedFileTypesList.AddRange(
+                    value.Split(new char[] { ';', ',', '|' }, StringSplitOptions.RemoveEmptyEntries)
+                         .Select(str =>
+                         {
+                             str = str.Trim();
+                             return str.StartsWith(".") ? str : $".{str}";
+                         }));
+
+                SetProperty(ref excludedFileTypesString, value);
+            }
+        }
+
+        public IList<string> ExcludedFileTypesList
+        {
+            get { return excludedFileTypesList; }
+        }
+
 
         public void CloneFrom(GeneralSettings other)
         {
@@ -47,6 +76,7 @@
             this.IsEnableParticles = other.IsEnableParticles;
             this.IsEnableScreenShake = other.IsEnableScreenShake;
             this.IsEnableAudio = other.IsEnableAudio;
+            this.ExcludedFileTypesString = other.ExcludedFileTypesString;
         }
     }
 }

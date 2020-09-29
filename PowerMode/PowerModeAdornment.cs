@@ -2,6 +2,7 @@
 {
     using System;
     using System.ComponentModel;
+    using System.IO;
     using System.Threading;
     using System.Threading.Tasks;
     using System.Windows.Threading;
@@ -15,8 +16,9 @@
 
     internal sealed class PowerModeAdornment
     {
-        private readonly IAdornmentLayer adornmentLayer;
         private readonly IWpfTextView view;
+        private readonly ITextDocumentFactoryService textDocumentFactory;
+        private readonly IAdornmentLayer adornmentLayer;
         private readonly IAdornment streakCounterAdornment;
         private readonly IAdornment screenShakeAdornment;
         private readonly IAdornment particlesAdornment;
@@ -28,14 +30,18 @@
         private DateTime lastTextChangeTime = DateTime.Now;
         private Timer clearStreakCountTimer;
         private int streakCount = 0;
+        private ITextDocument textDocument;
+        private string fileExtension;
 
 
-        public PowerModeAdornment(IWpfTextView view)
+
+        public PowerModeAdornment(IWpfTextView view, ITextDocumentFactoryService textDocumentFactory)
         {
             if (view == null) { throw new ArgumentNullException("view"); }
 
             this.view = view;
             adornmentLayer = view.GetAdornmentLayer("PowerModeAdornment");
+            this.textDocumentFactory = textDocumentFactory;
 
             streakCounterAdornment = new StreakCounterAdornment();
             screenShakeAdornment = new ScreenShakeAdornment();
@@ -47,16 +53,36 @@
             this.view.TextBuffer.Changed += TextBuffer_Changed;
             this.view.ViewportHeightChanged += View_ViewportSizeChanged;
             this.view.ViewportWidthChanged += View_ViewportSizeChanged;
+            this.view.LayoutChanged += View_LayoutChanged;
 
             PropertyChangedEventManager.AddHandler(generalSettings, GeneralSettingModelPropertyChanged, "");
             PropertyChangedEventManager.AddHandler(comboModeSettings, ComboModeSettingsModelPropertyChanged, "");
+        }
+
+        private void View_LayoutChanged(object sender, TextViewLayoutChangedEventArgs e)
+        {
+            if (textDocument == null && textDocumentFactory.TryGetTextDocument(view.TextBuffer, out textDocument))
+            {
+                fileExtension = Path.GetExtension(textDocument.FilePath);
+
+                RefreshSettings();
+                if (generalSettings.ExcludedFileTypesList.Contains(fileExtension))
+                {
+                    streakCounterAdornment.Cleanup(adornmentLayer, view);
+                    screenShakeAdornment.Cleanup(adornmentLayer, view);
+                    particlesAdornment.Cleanup(adornmentLayer, view);
+                }
+            }
         }
 
         private void View_ViewportSizeChanged(object sender, EventArgs e)
         {
             RefreshSettings();
 
-            if (!generalSettings.IsEnablePowerMode) { return; }
+            if (!generalSettings.IsEnablePowerMode || generalSettings.ExcludedFileTypesList.Contains(fileExtension))
+            {
+                return;
+            }
 
             if (generalSettings.IsEnableComboMode && comboModeSettings.IsShowStreakCounter)
             {
@@ -74,7 +100,10 @@
 
             RefreshSettings();
 
-            if (!generalSettings.IsEnablePowerMode) { return; }
+            if (!generalSettings.IsEnablePowerMode || generalSettings.ExcludedFileTypesList.Contains(fileExtension))
+            {
+                return;
+            }
 
             if (generalSettings.IsEnableComboMode)
             {
@@ -124,7 +153,8 @@
                             () =>
                             {
                                 RefreshSettings();
-                                if (generalSettings.IsEnablePowerMode && generalSettings.IsEnableComboMode && comboModeSettings.IsShowStreakCounter)
+                                if (generalSettings.IsEnablePowerMode && generalSettings.IsEnableComboMode && comboModeSettings.IsShowStreakCounter
+                                    && !generalSettings.ExcludedFileTypesList.Contains(fileExtension))
                                 {
                                     streakCounterAdornment.OnTextBufferChanged(adornmentLayer, view, streakCount);
                                 }
@@ -155,6 +185,20 @@
                 streakCounterAdornment.Cleanup(adornmentLayer, view);
                 screenShakeAdornment.Cleanup(adornmentLayer, view);
                 particlesAdornment.Cleanup(adornmentLayer, view);
+            }
+
+            if (e.PropertyName == nameof(GeneralSettings.ExcludedFileTypesString))
+            {
+                if (generalSettings.ExcludedFileTypesList.Contains(fileExtension))
+                {
+                    streakCounterAdornment.Cleanup(adornmentLayer, view);
+                    screenShakeAdornment.Cleanup(adornmentLayer, view);
+                    particlesAdornment.Cleanup(adornmentLayer, view);
+                }
+                else if (generalSettings.IsEnableComboMode && comboModeSettings.IsShowStreakCounter)
+                {
+                    streakCounterAdornment.OnSizeChanged(adornmentLayer, view, streakCount);
+                }
             }
 
             if (e.PropertyName == nameof(GeneralSettings.IsEnableComboMode))

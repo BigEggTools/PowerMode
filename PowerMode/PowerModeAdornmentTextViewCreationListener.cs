@@ -2,6 +2,7 @@
 {
     using System.ComponentModel.Composition;
 
+    using Microsoft.VisualStudio.Text;
     using Microsoft.VisualStudio.Text.Editor;
     using Microsoft.VisualStudio.Utilities;
 
@@ -28,6 +29,9 @@
 
 #pragma warning restore 649, 169
 
+        [Import]
+        public ITextDocumentFactoryService textDocumentFactory { get; set; }
+
         /// <summary>
         /// Instantiates a PowerModeAdornment manager when a textView is created.
         /// </summary>
@@ -35,7 +39,7 @@
         public void TextViewCreated(IWpfTextView textView)
         {
             // The adornment will get wired to the text view events
-            new PowerModeAdornment(textView);
+            new PowerModeAdornment(textView, textDocumentFactory);
         }
     }
 }
