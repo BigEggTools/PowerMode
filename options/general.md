@@ -40,6 +40,10 @@ The **Particles** toggle button will be the toggle to control if show or not sho
 
 The **Screen Shake** toggle button will be the toggle to control if shake or not shake the screen when detect user input.
 
+### **Excluded File Types** Textbox
+
+The file types that not enable Power Mode effect. Use `','`, `';'`, `'|'` as the separator and extension must start with `'.'`. The space surround the extension will be ignored.
+
 ### **Reset** Button
 
 The **Reset** button is used to reset the max Combo Streak number.
