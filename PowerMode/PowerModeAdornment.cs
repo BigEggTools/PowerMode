@@ -47,9 +47,15 @@
             this.view.TextBuffer.Changed += TextBuffer_Changed;
             this.view.ViewportHeightChanged += View_ViewportSizeChanged;
             this.view.ViewportWidthChanged += View_ViewportSizeChanged;
+            this.view.BackgroundBrushChanged += View_BackgroundBrushChanged;
 
             PropertyChangedEventManager.AddHandler(generalSettings, GeneralSettingModelPropertyChanged, "");
             PropertyChangedEventManager.AddHandler(comboModeSettings, ComboModeSettingsModelPropertyChanged, "");
+        }
+
+        private void View_BackgroundBrushChanged(object sender, BackgroundBrushChangedEventArgs e)
+        {
+            streakCounterAdornment.OnSizeChanged(adornmentLayer, view, streakCount, true);
         }
 
         private void View_ViewportSizeChanged(object sender, EventArgs e)
