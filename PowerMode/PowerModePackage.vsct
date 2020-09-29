@@ -103,6 +103,11 @@
       </Menu>
     </Menus>
   </Commands>
+  
+  <KeyBindings>
+    <KeyBinding guid="guidPowerModePackageCmdSet" id="TogglePowerModeCommandId"
+        editor="guidVSStd97" key1="M" mod1="CONTROL SHIFT ALT" key2="P" mod2="CONTROL SHIFT ALT" />
+  </KeyBindings>
 
   <Symbols>
     <!-- This is the package guid. -->
