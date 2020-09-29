@@ -58,3 +58,18 @@ The minimum (randomized) size of the particles. Should be 1 - 50. Also should le
 ### **Maximum Size** Textbox
 
 The maximum (randomized) size of the particles. Should be 1 - 50.
+
+### **Show Party Mode Particles** Toggle Button
+
+The "Show Party Mode Particles"" toggle button will be the toggle to control if show or not show the party mode.
+
+### **Party Mode Threshold** Textbox
+
+Threshold of when to show the party mode. Should be 10 - 200.
+
+### **Party Mode Spawned** Textbox
+
+The number of new particles spawned on the screen when party model threshold reached. Should be 1 - 200.
+
+**Note:**
+> Don't set this value larger than 50 unless your machine have lot of power and memory...
