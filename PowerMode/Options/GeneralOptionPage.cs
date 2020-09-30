@@ -51,6 +51,20 @@
             get { return new GeneralOptionPageUserControl(this); }
         }
 
+        protected override void OnActivate(CancelEventArgs e)
+        {
+            if (settings == null)
+            {
+                settings = new GeneralSettings();
+                settings.CloneFrom(SettingsService.GetGeneralSettings());
+                PropertyChangedEventManager.AddHandler(settings, SettingModelPropertyChanged, "");
+            }
+            else
+            {
+                settings.CloneFrom(SettingsService.GetGeneralSettings());
+            }
+        }
+
         protected override void SaveSetting(PropertyDescriptor property)
         {
             SettingsService.SaveToStorage(settings);
