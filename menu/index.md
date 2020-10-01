@@ -13,6 +13,8 @@ The **Enabled** menu will be the main toggle to control if the Power Mode is ena
 
 Same as the option page, when disabled the Power Mode, all other feature will be disabled.
 
+Default key binding for this menu is **Ctrl+Shift+Alt+M**, **Ctrl+Shift+Alt+P**. You can change it in the *Tools -> Options -> Environment -> Keyboard*.
+
 ## **Combo Mode** Menu
 The **Combo Mode** menu will be the toggle to control if the *Combo Mode* is enabled or not.
 

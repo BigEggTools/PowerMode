@@ -8,6 +8,10 @@ When *Combo Mode* is enabled, by default the *Streak Counter* will shows.
 
 ![Streak Counter](StreakCounter.gif)
 
+> When the background color is not dark enough (like in *Blue* or *Light* color theme), the tile "combo" will show like this:
+>
+> ![Title support light background](support-light-background.jpg)
+
 ## **Show** & **Hide** Streak Counter
 To show or hide the *Streak Counter*:
 * Use **Show Streak Counter** toggle button in [Combo Mode Option Page](../options/combomode/).

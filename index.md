@@ -3,6 +3,12 @@ title: Power Mode
 layout: default
 ---
 
+[![Visual Studio Market Version](https://img.shields.io/visual-studio-marketplace/v/BigEgg.PowerMode?logo=visual-studio-code&logoColor=68217A&label=Latest%20Version&style=flat-square)](https://marketplace.visualstudio.com/items?itemName=BigEgg.PowerMode)
+[![Visual Studio Market Installs](https://img.shields.io/visual-studio-marketplace/i/BigEgg.PowerMode?logo=visual-studio-code&logoColor=68217A&label=Installs&style=flat-square)](https://marketplace.visualstudio.com/items?itemName=BigEgg.PowerMode)
+[![Visual Studio Market Download](https://img.shields.io/visual-studio-marketplace/d/BigEgg.PowerMode?logo=visual-studio-code&logoColor=68217A&label=Downloads&style=flat-square)](https://marketplace.visualstudio.com/items?itemName=BigEgg.PowerMode)
+
+[![GitHub Stars](https://img.shields.io/github/stars/BigEggTools/PowerMode?style=social)](https://github.com/BigEggTools/PowerMode)
+
 This is the Power Mode extension for Visual Studio to replicate the effects from [codeinthedark/editor](https://github.com/codeinthedark/editor).
 
 Inspired by the Power Mode Extension for Atom, which can be found [here](https://atom.io/packages/activate-power-mode).
@@ -11,19 +17,24 @@ Inspired by the Power Mode Extension for Atom, which can be found [here](https:/
 ![Power Mode](PowerMode.gif)
 
 # Installation
-Now the exteransion can be found at [Visual Studio Gallery](https://marketplace.visualstudio.com/items?itemName=BigEgg.PowerMode).
+Now the extension can be found at [Visual Studio Gallery](https://marketplace.visualstudio.com/items?itemName=BigEgg.PowerMode).
 
 Also, you can always download the source code and build the VSIX file by yourself.
 
 # Features
 In current version, contains the following features:
+
 * Visual Studio menu to toggle the features. (See [Detail](menu))
+  + HotKey Binding.
 * User Friendly Visual Studio Option. (See [Detail](options))
 * Combo Mode. (See [Detail](combomode))
 * Streak Counter. (See [Detail](streakcounter))
   + Max Combo Streak.
+  + Support Light Background.
 * Particles. (See [Detail](particles))
+  + Party Mode.
 * Screen Shake. (See [Detail](screenshake))
+* Excluded File Types. (See [Detail](options/general/))
 
 # Visual Studio Supports
 
@@ -33,9 +44,7 @@ In current version, contains the following features:
 
 # Next Features
 The next version of this extension will have the following features:
-* Play Audio Clip (middle priority)
+
+* Play Audio Clip
   + Clip can be: Gun, Typewriter or Custom
   + Related Options and Menu
-* Party Mode. When have so many text changed. (high priority)
-  + Related Options and Menu
-* Excluded File Types (high priority)
