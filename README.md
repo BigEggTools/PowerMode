@@ -23,14 +23,18 @@ Can go to [GitHub Page](https://bigeggtools.github.io/PowerMode/) to find more i
 
 # Features
 In current version, contains the following features:
+
 * Visual Studio menu to toggle the features. (See [Detail](https://bigeggtools.github.io/PowerMode/menu/))
+  + Hotkey Binding
 * User Friendly Visual Studio Option. (See [Detail](https://bigeggtools.github.io/PowerMode/options/))
 * Combo Mode. (See [Detail](https://bigeggtools.github.io/PowerMode/combomode/))
 * Streak Counter. (See [Detail](https://bigeggtools.github.io/PowerMode/streakcounter/))
   + Max Combo Streak.
+  + Support Light Background.
 * Particles. (See [Detail](https://bigeggtools.github.io/PowerMode/particles/))
   + Party Mode.
 * Screen Shake. (See [Detail](https://bigeggtools.github.io/PowerMode/screenshake/))
+* Excluded File Types. (See [Detail](https://bigeggtools.github.io/PowerMode/options/general/))
 
 # Visual Studio Supports
 * Now support the following versions
@@ -40,7 +44,6 @@ In current version, contains the following features:
 # Next Features
 The next version of this extension will have the following features:
 
-* [Excluded File Types](https://github.com/BigEggTools/PowerMode/issues/8) (high priority)
 * Play Audio Clip (middle priority)
   + Clip can be: Gun, Typewriter or Custom
   + Related Options and Menu
