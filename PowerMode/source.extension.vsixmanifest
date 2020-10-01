@@ -2,7 +2,7 @@
 <PackageManifest Version="2.0.0" xmlns="http://schemas.microsoft.com/developer/vsx-schema/2011" xmlns:d="http://schemas.microsoft.com/developer/vsx-schema-design/2011">
     <Metadata>
         <Identity Id="PowerMode.BigEgg.da608ebd-fb4a-4cf7-8b94-bd63bbe4ffed" Version="1.0.0" Language="en-US" Publisher="BigEgg" />
-        <DisplayName>PowerMode</DisplayName>
+        <DisplayName>Power Mode</DisplayName>
         <Description xml:space="preserve">This is the Power Mode extension for Visual Studio to replicate the effects from https://github.com/codeinthedark/editor.</Description>
         <MoreInfo>https://bigeggtools.github.io/PowerMode/</MoreInfo>
         <License>LICENSE.txt</License>
