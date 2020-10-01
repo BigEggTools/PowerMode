@@ -3,6 +3,12 @@ title: Power Mode
 layout: default
 ---
 
+[![Visual Studio Market Version](https://img.shields.io/visual-studio-marketplace/v/BigEgg.PowerMode?logo=visual-studio-code&logoColor=68217A&label=Latest%20Version&style=flat-square)](https://marketplace.visualstudio.com/items?itemName=BigEgg.PowerMode)
+[![Visual Studio Market Installs](https://img.shields.io/visual-studio-marketplace/i/BigEgg.PowerMode?logo=visual-studio-code&logoColor=68217A&label=Installs&style=flat-square)](https://marketplace.visualstudio.com/items?itemName=BigEgg.PowerMode)
+[![Visual Studio Market Download](https://img.shields.io/visual-studio-marketplace/d/BigEgg.PowerMode?logo=visual-studio-code&logoColor=68217A&label=Downloads&style=flat-square)](https://marketplace.visualstudio.com/items?itemName=BigEgg.PowerMode)
+
+[![GitHub Stars](https://img.shields.io/github/stars/BigEggTools/PowerMode?style=social)](https://github.com/BigEggTools/PowerMode)
+
 This is the Power Mode extension for Visual Studio to replicate the effects from [codeinthedark/editor](https://github.com/codeinthedark/editor).
 
 Inspired by the Power Mode Extension for Atom, which can be found [here](https://atom.io/packages/activate-power-mode).
