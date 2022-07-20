@@ -40,6 +40,7 @@ In current version, contains the following features:
 * Now support the following versions
   + Visual Studio 2017
   + Visual Studio 2019
+  + Visual Studio 2022
 
 # Next Features
 The next version of this extension will have the following features:
