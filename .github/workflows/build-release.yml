@@ -1,5 +1,6 @@
 name: build-release
 on:
+  workflow_dispatch:
   push:
     branches: [ "master" ]
 jobs:
@@ -26,17 +27,27 @@ jobs:
       id: MsBuildSetup
     - name: Restore NuGet Packages
       run: nuget restore $env:SolutionPath
-    - name: Build extension
+    - name: Build Extension
       run: msbuild $env:SolutionPath /t:Rebuild
       env: 
         DeployExtension: False
 #     - name: Test extension
 #       run: dotnet test --no-build --verbosity normal $env:SolutionPath
-    - name: Generate release note
+    - name: Generate Release Note
       run: |
         git fetch --prune --unshallow
         $commitLog = git log "$(git describe --tags --abbrev=0)..HEAD" --pretty=format:"- %s"
         "What's new: `r`n`r`n$([string]::Join("`r`n",$commitLog))" | Out-File release_note.md -Encoding utf8
+    - name: Create Github Release
+      id: create_release
+      uses: actions/create-release@v1
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        tag_name: ${{ github.ref }}
+        release_name: Release ${{ github.ref }}
+        draft: true
+        prerelease: false
     - name: Upload Release Asset - VSIX
       uses: actions/upload-release-asset@v1
       env:
