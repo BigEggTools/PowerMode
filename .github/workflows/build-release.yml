@@ -1,9 +1,7 @@
-name: release
+name: build-release
 on:
   push:
     branches: [ "master" ]
-    paths:
-      - 'src/**'
 jobs:
   build-extension:
     runs-on: windows-latest
