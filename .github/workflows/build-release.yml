@@ -1,8 +1,6 @@
 name: build-release
 on:
   workflow_dispatch:
-  push:
-    branches: [ "master" ]
 jobs:
   build-extension:
     runs-on: windows-latest
