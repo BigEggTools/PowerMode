@@ -12,9 +12,9 @@ jobs:
         RepositoryBranch: '${{ github.ref }}'
         SourceRevisionId: '${{ github.sha }}'
         Configuration: Release
-        SolutionPath: src\PowerMode.sln
-        VsixManifestPath: src\PowerMode\source.extension.vsixmanifest
-        VsixPath: src\PowerMode\bin\Release\PowerMode.vsix
+        SolutionPath: PowerMode.sln
+        VsixManifestPath: PowerMode\source.extension.vsixmanifest
+        VsixPath: PowerMode\bin\Release\PowerMode.vsix
     steps:
     - uses: actions/checkout@v3
     - name: Setup .NET
