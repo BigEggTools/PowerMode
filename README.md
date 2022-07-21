@@ -39,8 +39,8 @@ In current version, contains the following features:
 # Visual Studio Supports
 * Now support the following versions
   + Visual Studio 2017
-  + Visual Studio 2019 (@AlohaWorld)
-  + Visual Studio 2022 (@tomfrenzel)
+  + Visual Studio 2019 ([@AlohaWorld](https://github.com/AlohaWorld))
+  + Visual Studio 2022 ([@tomfrenzel](https://github.com/tomfrenzel))
 
 # Next Features
 The next version of this extension will have the following features:
